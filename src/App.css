@@ -589,6 +589,45 @@
   gap: 4px;
 }
 
+/* Target-size pages */
+.target-badge {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--good);
+}
+
+.size-links {
+  margin-top: 36px;
+}
+
+.size-links h2 {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+}
+
+.size-links__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.size-links__chip {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  text-decoration: none;
+}
+
+.size-links__chip:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  text-decoration: none;
+}
+
 /* FAQ */
 .faq {
   margin-top: 44px;

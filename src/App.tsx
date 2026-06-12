@@ -5,6 +5,8 @@ import QrPage from "./pages/QrPage";
 import PalettePage from "./pages/PalettePage";
 import PdfPage from "./pages/PdfPage";
 import PrivacyPage from "./pages/PrivacyPage";
+import TargetSizePage from "./pages/TargetSizePage";
+import { TARGET_PAGES } from "./lib/targetPages";
 import "./App.css";
 
 export default function App() {
@@ -44,6 +46,9 @@ export default function App() {
           <Route path="/color-palette" element={<PalettePage />} />
           <Route path="/image-to-pdf" element={<PdfPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
+          {TARGET_PAGES.map((p) => (
+            <Route key={p.slug} path={`/${p.slug}`} element={<TargetSizePage config={p} />} />
+          ))}
         </Routes>
       </main>
 

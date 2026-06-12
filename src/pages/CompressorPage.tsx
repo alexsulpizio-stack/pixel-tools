@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import JSZip from "jszip";
+import { TARGET_PAGES, formatTargetLabel } from "../lib/targetPages";
 import { Dropzone } from "../components/Dropzone";
 import { SettingsPanel } from "../components/SettingsPanel";
 import { ResultCard } from "../components/ResultCard";
@@ -171,6 +173,17 @@ export default function CompressorPage() {
           </div>
         </section>
       )}
+
+      <section className="size-links">
+        <h2>Need an exact file size?</h2>
+        <div className="size-links__row">
+          {TARGET_PAGES.map((p) => (
+            <Link key={p.slug} to={`/${p.slug}`} className="size-links__chip">
+              {p.output === "webp" ? "Image" : p.output.toUpperCase()} → {formatTargetLabel(p.targetKB)}
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <section className="faq" id="faq">
         <h2>Frequently asked questions</h2>
