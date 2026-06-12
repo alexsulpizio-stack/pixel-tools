@@ -4,6 +4,7 @@ import FaviconPage from "./pages/FaviconPage";
 import QrPage from "./pages/QrPage";
 import PalettePage from "./pages/PalettePage";
 import PdfPage from "./pages/PdfPage";
+import PrivacyPage from "./pages/PrivacyPage";
 import "./App.css";
 
 export default function App() {
@@ -42,11 +43,15 @@ export default function App() {
           <Route path="/qr-code-generator" element={<QrPage />} />
           <Route path="/color-palette" element={<PalettePage />} />
           <Route path="/image-to-pdf" element={<PdfPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
         </Routes>
       </main>
 
       <footer className="footer">
-        <p>© {new Date().getFullYear()} PixelTools · Images are processed locally and never leave your device.</p>
+        <p>
+          © {new Date().getFullYear()} PixelTools · Images are processed locally and never leave your device ·{" "}
+          <NavLink to="/privacy">Privacy</NavLink>
+        </p>
       </footer>
     </div>
   );

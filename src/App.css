@@ -616,6 +616,26 @@
   margin: 10px 0 2px;
 }
 
+/* Prose pages */
+.prose {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 12px 0;
+}
+
+.prose h1 {
+  font-size: 1.7rem;
+}
+
+.prose h2 {
+  font-size: 1.15rem;
+  margin-top: 28px;
+}
+
+.prose p {
+  color: var(--text-dim);
+}
+
 /* Footer */
 .footer {
   margin-top: 40px;
