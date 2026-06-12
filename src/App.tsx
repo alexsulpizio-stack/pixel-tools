@@ -1,6 +1,8 @@
 import { NavLink, Route, Routes } from "react-router-dom";
 import CompressorPage from "./pages/CompressorPage";
 import FaviconPage from "./pages/FaviconPage";
+import QrPage from "./pages/QrPage";
+import PalettePage from "./pages/PalettePage";
 import "./App.css";
 
 export default function App() {
@@ -17,6 +19,12 @@ export default function App() {
           <NavLink to="/favicon-generator" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
             Favicon
           </NavLink>
+          <NavLink to="/qr-code-generator" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
+            QR Code
+          </NavLink>
+          <NavLink to="/color-palette" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
+            Palette
+          </NavLink>
           <a href="https://www.buymeacoffee.com/" target="_blank" rel="noreferrer" className="btn btn--ghost btn--sm">
             ☕ Support
           </a>
@@ -27,6 +35,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<CompressorPage />} />
           <Route path="/favicon-generator" element={<FaviconPage />} />
+          <Route path="/qr-code-generator" element={<QrPage />} />
+          <Route path="/color-palette" element={<PalettePage />} />
         </Routes>
       </main>
 
