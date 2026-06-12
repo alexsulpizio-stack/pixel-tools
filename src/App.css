@@ -29,6 +29,24 @@
   gap: 18px;
 }
 
+.nav-link {
+  color: var(--text-dim);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.nav-link:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav-link--on {
+  color: var(--accent);
+  background: rgba(108, 140, 255, 0.1);
+}
+
 /* Hero */
 .hero {
   text-align: center;
@@ -324,6 +342,120 @@
   max-width: 336px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Favicon generator */
+.textfield {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font: inherit;
+  padding: 8px 12px;
+  width: 120px;
+}
+
+.textfield:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.colorrow {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.colorrow label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.colorrow input[type="color"] {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  padding: 2px;
+  cursor: pointer;
+}
+
+.favicon-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 14px;
+}
+
+.favicon-preview__hero img {
+  width: 128px;
+  height: 128px;
+  border-radius: 12px;
+}
+
+.favicon-preview__sizes {
+  display: flex;
+  gap: 14px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.favicon-preview__sizes figure {
+  margin: 0;
+  text-align: center;
+}
+
+.favicon-preview__sizes figcaption {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.favicon-preview__tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px 8px 0 0;
+  padding: 7px 14px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.favicon-preview__tab img {
+  width: 16px;
+  height: 16px;
+}
+
+.snippet {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+
+.snippet__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.snippet pre {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  overflow-x: auto;
 }
 
 /* FAQ */
