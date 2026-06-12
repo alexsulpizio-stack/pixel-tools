@@ -538,6 +538,57 @@
   opacity: 0.75;
 }
 
+/* Image to PDF */
+.pdf-pages {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.pdf-page {
+  position: relative;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px;
+  text-align: center;
+}
+
+.pdf-page__num {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  background: var(--accent-strong);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 99px;
+  padding: 1px 7px;
+}
+
+.pdf-page img {
+  width: 100%;
+  height: 110px;
+  object-fit: contain;
+  background: var(--bg);
+  border-radius: 6px;
+}
+
+.pdf-page__name {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin: 6px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pdf-page__actions {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
 /* FAQ */
 .faq {
   margin-top: 44px;

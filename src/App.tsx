@@ -3,6 +3,7 @@ import CompressorPage from "./pages/CompressorPage";
 import FaviconPage from "./pages/FaviconPage";
 import QrPage from "./pages/QrPage";
 import PalettePage from "./pages/PalettePage";
+import PdfPage from "./pages/PdfPage";
 import "./App.css";
 
 export default function App() {
@@ -25,6 +26,9 @@ export default function App() {
           <NavLink to="/color-palette" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
             Palette
           </NavLink>
+          <NavLink to="/image-to-pdf" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
+            PDF
+          </NavLink>
           <a href="https://www.buymeacoffee.com/" target="_blank" rel="noreferrer" className="btn btn--ghost btn--sm">
             ☕ Support
           </a>
@@ -37,6 +41,7 @@ export default function App() {
           <Route path="/favicon-generator" element={<FaviconPage />} />
           <Route path="/qr-code-generator" element={<QrPage />} />
           <Route path="/color-palette" element={<PalettePage />} />
+          <Route path="/image-to-pdf" element={<PdfPage />} />
         </Routes>
       </main>
 
