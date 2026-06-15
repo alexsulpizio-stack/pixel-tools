@@ -1,10 +1,8 @@
 import { usePageMeta } from "../lib/usePageMeta";
+import { ROUTE_META } from "../lib/routeMeta";
 
 export default function PrivacyPage() {
-  usePageMeta(
-    "Privacy Policy | PixelTools",
-    "PixelTools privacy policy: your files are processed locally in your browser and never uploaded. Details on cookies and advertising."
-  );
+  usePageMeta(ROUTE_META["/privacy"].title, ROUTE_META["/privacy"].description);
 
   return (
     <article className="prose">

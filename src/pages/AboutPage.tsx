@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
 import { usePageMeta } from "../lib/usePageMeta";
+import { ROUTE_META } from "../lib/routeMeta";
 
 export default function AboutPage() {
-  usePageMeta(
-    "About PixelTools — Free, Private, In-Browser Image Tools",
-    "Learn about PixelTools: a collection of free image utilities that run entirely in your browser, so your files are never uploaded. Our mission and how it works."
-  );
+  usePageMeta(ROUTE_META["/about"].title, ROUTE_META["/about"].description);
 
   return (
     <article className="prose">

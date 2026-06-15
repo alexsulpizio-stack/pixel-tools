@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
 import { usePageMeta } from "../lib/usePageMeta";
+import { ROUTE_META } from "../lib/routeMeta";
 
 const CONTACT_EMAIL = "alex.sulpizio@gmail.com";
 
 export default function ContactPage() {
-  usePageMeta(
-    "Contact PixelTools — Questions, Feedback & Bug Reports",
-    "Get in touch with PixelTools. Send questions, feedback, feature requests, or bug reports by email or via GitHub."
-  );
+  usePageMeta(ROUTE_META["/contact"].title, ROUTE_META["/contact"].description);
 
   return (
     <article className="prose">

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AdSlot } from "../components/AdSlot";
 import { usePageMeta } from "../lib/usePageMeta";
+import { ROUTE_META } from "../lib/routeMeta";
 import {
   contrastColor,
   extractPalette,
@@ -27,10 +28,7 @@ const FAQ: { q: string; a: string }[] = [
 ];
 
 export default function PalettePage() {
-  usePageMeta(
-    "Color Palette Extractor — Get Colors from Any Image | PixelTools",
-    "Extract the dominant color palette from any image. Click to copy hex codes, export as CSS variables or JSON. Free and private — runs in your browser."
-  );
+  usePageMeta(ROUTE_META["/color-palette"].title, ROUTE_META["/color-palette"].description);
 
   const [file, setFile] = useState<File | null>(null);
   const [count, setCount] = useState(6);

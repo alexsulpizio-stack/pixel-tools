@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Dropzone } from "../components/Dropzone";
 import { AdSlot } from "../components/AdSlot";
 import { usePageMeta } from "../lib/usePageMeta";
+import { ROUTE_META } from "../lib/routeMeta";
 import type { PageFormat } from "../lib/pdfBuilder";
 import { formatBytes } from "../lib/imageProcessor";
 
@@ -43,10 +44,7 @@ interface Item {
 }
 
 export default function PdfPage() {
-  usePageMeta(
-    "Image to PDF Converter — JPG & PNG to PDF Free | PixelTools",
-    "Convert JPG, PNG, and WebP images to PDF for free. Combine multiple images into one PDF, choose page size and margins. Private — runs entirely in your browser."
-  );
+  usePageMeta(ROUTE_META["/image-to-pdf"].title, ROUTE_META["/image-to-pdf"].description);
 
   const [items, setItems] = useState<Item[]>([]);
   const [format, setFormat] = useState<PageFormat>("fit");

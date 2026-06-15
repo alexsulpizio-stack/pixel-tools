@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import JSZip from "jszip";
 import { TARGET_PAGES, formatTargetLabel } from "../lib/targetPages";
+import { ROUTE_META } from "../lib/routeMeta";
 import { Dropzone } from "../components/Dropzone";
 import { SettingsPanel } from "../components/SettingsPanel";
 import { ResultCard } from "../components/ResultCard";
@@ -41,10 +42,7 @@ const FAQ: { q: string; a: string }[] = [
 ];
 
 export default function CompressorPage() {
-  usePageMeta(
-    "PixelTools — Free Online Image Compressor, Resizer & Converter",
-    "Compress, resize, and convert images (JPG, PNG, WebP) for free — right in your browser. No uploads, no sign-up, 100% private."
-  );
+  usePageMeta(ROUTE_META["/"].title, ROUTE_META["/"].description);
 
   const [settings, setSettings] = useState<ProcessSettings>(DEFAULT_SETTINGS);
   const [results, setResults] = useState<ProcessedImage[]>([]);

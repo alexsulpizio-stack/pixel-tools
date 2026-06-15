@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import JSZip from "jszip";
 import { AdSlot } from "../components/AdSlot";
 import { usePageMeta } from "../lib/usePageMeta";
+import { ROUTE_META } from "../lib/routeMeta";
 import {
   generateFromImage,
   generateFromText,
@@ -41,10 +42,7 @@ const FAQ: { q: string; a: string }[] = [
 ];
 
 export default function FaviconPage() {
-  usePageMeta(
-    "Free Favicon Generator — Create favicon.ico from Image, Text or Emoji | PixelTools",
-    "Generate a complete favicon set (favicon.ico, apple-touch-icon, Android icons) from any image, letter, or emoji. Free, private, in-browser — no uploads."
-  );
+  usePageMeta(ROUTE_META["/favicon-generator"].title, ROUTE_META["/favicon-generator"].description);
 
   const [mode, setMode] = useState<Mode>("text");
   const [sourceFile, setSourceFile] = useState<File | null>(null);

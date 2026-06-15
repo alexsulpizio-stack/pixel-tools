@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import QRCode from "qrcode";
 import { AdSlot } from "../components/AdSlot";
 import { usePageMeta } from "../lib/usePageMeta";
+import { ROUTE_META } from "../lib/routeMeta";
 
 type EcLevel = "L" | "M" | "Q" | "H";
 
@@ -34,10 +35,7 @@ const FAQ: { q: string; a: string }[] = [
 ];
 
 export default function QrPage() {
-  usePageMeta(
-    "Free QR Code Generator — PNG & SVG, No Expiry, No Tracking | PixelTools",
-    "Create QR codes for URLs, Wi-Fi, text and more. Custom colors, high-res PNG and SVG download. Free, no sign-up, no expiry, generated privately in your browser."
-  );
+  usePageMeta(ROUTE_META["/qr-code-generator"].title, ROUTE_META["/qr-code-generator"].description);
 
   const [value, setValue] = useState("https://usepixeltools.com");
   const [dark, setDark] = useState("#000000");
