@@ -5,6 +5,8 @@ import QrPage from "./pages/QrPage";
 import PalettePage from "./pages/PalettePage";
 import PdfPage from "./pages/PdfPage";
 import PrivacyPage from "./pages/PrivacyPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 import TargetSizePage from "./pages/TargetSizePage";
 import { TARGET_PAGES } from "./lib/targetPages";
 import "./App.css";
@@ -46,6 +48,8 @@ export default function App() {
           <Route path="/color-palette" element={<PalettePage />} />
           <Route path="/image-to-pdf" element={<PdfPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           {TARGET_PAGES.map((p) => (
             <Route key={p.slug} path={`/${p.slug}`} element={<TargetSizePage config={p} />} />
           ))}
@@ -53,8 +57,10 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        <p>
-          © {new Date().getFullYear()} PixelTools · Images are processed locally and never leave your device ·{" "}
+        <p>© {new Date().getFullYear()} PixelTools · Images are processed locally and never leave your device.</p>
+        <p className="footer__links">
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
           <NavLink to="/privacy">Privacy</NavLink>
         </p>
       </footer>

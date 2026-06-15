@@ -675,6 +675,22 @@
   color: var(--text-dim);
 }
 
+.prose ul {
+  color: var(--text-dim);
+  padding-left: 20px;
+}
+
+.prose li {
+  margin: 6px 0;
+}
+
+.footer__links {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 6px;
+}
+
 /* Footer */
 .footer {
   margin-top: 40px;
