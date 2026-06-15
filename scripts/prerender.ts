@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
-import { join } from "node:path";
+import { join, dirname } from "node:path";
 import { STATIC_ROUTE_META, type RouteMeta } from "../src/lib/routeMeta";
 import { TARGET_PAGES } from "../src/lib/targetPages";
 
@@ -59,9 +59,12 @@ for (const meta of routes) {
   if (meta.path === "/") {
     writeFileSync(join(DIST, "index.html"), html);
   } else {
-    const dir = join(DIST, meta.path.replace(/^\//, ""));
-    mkdirSync(dir, { recursive: true });
-    writeFileSync(join(dir, "index.html"), html);
+    // Flat <route>.html (not <route>/index.html) so Cloudflare Pages serves
+    // /about at 200 with no trailing-slash 308 redirect, matching our canonical.
+    const slug = meta.path.replace(/^\//, "");
+    const dir = join(DIST, dirname(slug));
+    if (dir !== DIST) mkdirSync(dir, { recursive: true });
+    writeFileSync(join(DIST, `${slug}.html`), html);
   }
   count++;
 }
