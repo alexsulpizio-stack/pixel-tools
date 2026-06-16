@@ -34,4 +34,4 @@ Property: `sc-domain:usepixeltools.com`
 _Nothing in the page-2 sweet spot yet._
 
 ---
-_Generated 2026-06-16T00:02:58.867Z • window 2026-05-17 → 2026-06-13 (data lags ~3 days)._
+_Generated 2026-06-16T00:04:11.064Z • window 2026-05-17 → 2026-06-13 (data lags ~3 days)._
