@@ -59,6 +59,12 @@ export const STATIC_ROUTE_META: RouteMeta[] = [
     description:
       "Get in touch with PixelTools. Send questions, feedback, feature requests, or bug reports by email or via GitHub.",
   },
+  {
+    path: "/guides",
+    title: "Image & QR Code Guides — Tips, Formats & How-tos | PixelTools",
+    description:
+      "Practical, no-fluff guides on compressing and converting images, choosing formats, favicon sizes, and QR codes — from the team behind the PixelTools utilities.",
+  },
 ];
 
 export const ROUTE_META: Record<string, RouteMeta> = Object.fromEntries(

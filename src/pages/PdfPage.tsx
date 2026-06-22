@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Dropzone } from "../components/Dropzone";
 import { AdSlot } from "../components/AdSlot";
 import { usePageMeta } from "../lib/usePageMeta";
@@ -195,6 +196,31 @@ export default function PdfPage() {
       )}
 
       {error && <p className="error">{error}</p>}
+
+      <section className="prose tool-prose">
+        <h2>Combine images into a single PDF</h2>
+        <p>
+          Turning images into a PDF is the easiest way to share a set of photos, scans, or screenshots
+          as one tidy document — for a job application, an expense report, a portfolio, or printing.
+          This tool assembles JPG, PNG, WebP, GIF, BMP, and AVIF images into a multi-page PDF entirely
+          in your browser, so nothing is uploaded.
+        </p>
+        <ul>
+          <li><strong>1.</strong> Add your images — each one becomes a page.</li>
+          <li><strong>2.</strong> Drag the arrows to reorder pages into the sequence you want.</li>
+          <li><strong>3.</strong> Choose a page size: "Fit to image" matches each page to its image (ideal for screenshots), while A4 and Letter center images on a standard page for printing.</li>
+          <li><strong>4.</strong> Download the finished PDF.</li>
+        </ul>
+        <p>
+          If the source photos are large, it's worth{" "}
+          <Link to="/">compressing them first</Link> to keep the PDF small and easy to email — see our
+          guide on{" "}
+          <Link to="/guides/reduce-image-file-size-for-email-and-web">
+            reducing image file size for email and web
+          </Link>
+          .
+        </p>
+      </section>
 
       <section className="faq" id="faq">
         <h2>Frequently asked questions</h2>

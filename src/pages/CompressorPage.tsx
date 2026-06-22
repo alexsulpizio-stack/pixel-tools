@@ -183,6 +183,30 @@ export default function CompressorPage() {
         </div>
       </section>
 
+      <section className="prose tool-prose">
+        <h2>How to compress, resize, and convert images</h2>
+        <ul>
+          <li><strong>1.</strong> Drag your images onto the box above, or click to browse. Add as many as you like — they're processed in a batch.</li>
+          <li><strong>2.</strong> Pick an output format. WebP gives the smallest files at great quality; JPEG is best for maximum compatibility; PNG keeps lossless quality and transparency.</li>
+          <li><strong>3.</strong> Set a quality level and an optional maximum dimension. The preview and file-size savings update instantly so you can find the smallest size that still looks perfect.</li>
+          <li><strong>4.</strong> Download a single image, or grab everything as a ZIP.</li>
+        </ul>
+        <p>
+          Every step happens locally in your browser using the Canvas API — your images are never
+          uploaded to a server, which keeps even sensitive photos private and makes processing
+          instant. There's no sign-up, no watermark, and no limit on how many images you convert.
+        </p>
+        <p>
+          New to image optimization? Start with{" "}
+          <Link to="/guides/how-to-compress-images-without-losing-quality">
+            how to compress images without losing quality
+          </Link>{" "}
+          and{" "}
+          <Link to="/guides/jpeg-vs-png-vs-webp">JPEG vs PNG vs WebP</Link>, or browse all{" "}
+          <Link to="/guides">PixelTools guides</Link>.
+        </p>
+      </section>
+
       <section className="faq" id="faq">
         <h2>Frequently asked questions</h2>
         {FAQ.map((item) => (

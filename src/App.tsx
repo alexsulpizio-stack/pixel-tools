@@ -8,6 +8,8 @@ import PrivacyPage from "./pages/PrivacyPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import TargetSizePage from "./pages/TargetSizePage";
+import GuidesIndexPage from "./pages/GuidesIndexPage";
+import GuidePage from "./pages/GuidePage";
 import { TARGET_PAGES } from "./lib/targetPages";
 import "./App.css";
 
@@ -34,6 +36,9 @@ export default function App() {
           <NavLink to="/image-to-pdf" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
             PDF
           </NavLink>
+          <NavLink to="/guides" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
+            Guides
+          </NavLink>
           <a href="https://www.buymeacoffee.com/" target="_blank" rel="noreferrer" className="btn btn--ghost btn--sm">
             ☕ Support
           </a>
@@ -50,6 +55,8 @@ export default function App() {
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/guides" element={<GuidesIndexPage />} />
+          <Route path="/guides/:slug" element={<GuidePage />} />
           {TARGET_PAGES.map((p) => (
             <Route key={p.slug} path={`/${p.slug}`} element={<TargetSizePage config={p} />} />
           ))}
@@ -59,6 +66,7 @@ export default function App() {
       <footer className="footer">
         <p>© {new Date().getFullYear()} PixelTools · Images are processed locally and never leave your device.</p>
         <p className="footer__links">
+          <NavLink to="/guides">Guides</NavLink>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/contact">Contact</NavLink>
           <NavLink to="/privacy">Privacy</NavLink>

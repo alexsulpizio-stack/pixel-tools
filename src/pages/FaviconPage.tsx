@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import JSZip from "jszip";
 import { AdSlot } from "../components/AdSlot";
 import { usePageMeta } from "../lib/usePageMeta";
@@ -238,6 +239,28 @@ export default function FaviconPage() {
           </div>
         </section>
       )}
+
+      <section className="prose tool-prose">
+        <h2>What this favicon generator creates</h2>
+        <p>
+          A favicon is the small icon that represents your site in browser tabs, bookmarks, search
+          results, and on phone home screens. Doing it properly in 2026 means a handful of files, not
+          just one. From a single image, letter, or emoji this tool produces a real multi-resolution{" "}
+          <code>favicon.ico</code> (16, 32, and 48px), a 180px Apple touch icon for iOS home screens,
+          192 and 512px PNGs for Android and Progressive Web Apps, a <code>site.webmanifest</code>, and
+          a ready-to-paste <code>&lt;head&gt;</code> snippet.
+        </p>
+        <ul>
+          <li><strong>1.</strong> Choose a source: type a letter or emoji, or upload a square logo.</li>
+          <li><strong>2.</strong> Pick a shape and colors, and watch the live tab preview.</li>
+          <li><strong>3.</strong> Download the ZIP, drop the files in your site root, and paste the snippet into your <code>&lt;head&gt;</code>.</li>
+        </ul>
+        <p>
+          Want to know exactly which sizes matter and how to design an icon that stays legible at
+          16px? Read our{" "}
+          <Link to="/guides/favicon-sizes-guide">complete guide to favicon sizes in 2026</Link>.
+        </p>
+      </section>
 
       <section className="faq" id="faq">
         <h2>Frequently asked questions</h2>

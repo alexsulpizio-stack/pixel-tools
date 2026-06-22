@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { STATIC_ROUTE_META, type RouteMeta } from "../src/lib/routeMeta";
 import { TARGET_PAGES } from "../src/lib/targetPages";
+import { GUIDES_META } from "../src/content/guides";
 
 const DIST = "dist";
 const ORIGIN = "https://usepixeltools.com";
@@ -14,7 +15,13 @@ const targetMeta: RouteMeta[] = TARGET_PAGES.map((p) => ({
   description: p.description,
 }));
 
-const routes: RouteMeta[] = [...STATIC_ROUTE_META, ...targetMeta];
+const guideMeta: RouteMeta[] = GUIDES_META.map((g) => ({
+  path: `/guides/${g.slug}`,
+  title: g.title,
+  description: g.description,
+}));
+
+const routes: RouteMeta[] = [...STATIC_ROUTE_META, ...targetMeta, ...guideMeta];
 
 function escapeAttr(value: string): string {
   return value.replace(/&/g, "&amp;").replace(/"/g, "&quot;");

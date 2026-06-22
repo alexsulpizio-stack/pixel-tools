@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import QRCode from "qrcode";
 import { AdSlot } from "../components/AdSlot";
 import { usePageMeta } from "../lib/usePageMeta";
@@ -169,6 +170,25 @@ export default function QrPage() {
             </button>
           </div>
         </div>
+      </section>
+
+      <section className="prose tool-prose">
+        <h2>How to make a QR code that actually scans</h2>
+        <p>
+          This generator creates <strong>static</strong> QR codes: your text or URL is encoded directly
+          into the pattern, with no link shortener or tracking service in between. That means the code
+          works forever and can never be disabled by a third party — unlike "dynamic" codes from many
+          online services, which stop working if the service shuts down or you stop paying.
+        </p>
+        <ul>
+          <li><strong>Content:</strong> paste a URL, or use prefixes for other types — <code>tel:</code> for phone, <code>mailto:</code> for email, or a <code>WIFI:</code> string to share network credentials.</li>
+          <li><strong>Error correction:</strong> M (15%) is a good default; choose H (30%) if the code will be printed small or have a logo over it.</li>
+          <li><strong>Format:</strong> download PNG for screens and documents, or SVG for print, since it scales to any size without blurring.</li>
+        </ul>
+        <p>
+          For sizing rules, contrast tips, and how error correction really works, see{" "}
+          <Link to="/guides/qr-codes-explained">QR codes explained</Link>.
+        </p>
       </section>
 
       <section className="faq" id="faq">

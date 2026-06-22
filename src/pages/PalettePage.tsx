@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { AdSlot } from "../components/AdSlot";
 import { usePageMeta } from "../lib/usePageMeta";
 import { ROUTE_META } from "../lib/routeMeta";
@@ -164,6 +165,27 @@ export default function PalettePage() {
           </div>
         </section>
       )}
+
+      <section className="prose tool-prose">
+        <h2>Turn any image into a usable color palette</h2>
+        <p>
+          Designers, developers, and marketers constantly need colors pulled straight from a photo,
+          logo, screenshot, or piece of artwork — to match a brand, build a theme, or find an accent
+          that fits. This tool analyzes your image with median-cut quantization, the same family of
+          algorithm used by professional design software, to find the most representative colors and
+          rank them by how much of the image they cover.
+        </p>
+        <ul>
+          <li><strong>1.</strong> Drop in an image — it's analyzed locally and never uploaded.</li>
+          <li><strong>2.</strong> Choose how many colors you want (4 to 12).</li>
+          <li><strong>3.</strong> Click any swatch to copy its hex code, or export the whole palette as CSS custom properties or a JSON array.</li>
+        </ul>
+        <p>
+          Building a website with the result? You may also want to{" "}
+          <Link to="/">resize and compress the source image</Link> before publishing, and a matching{" "}
+          <Link to="/favicon-generator">favicon</Link> to complete the look.
+        </p>
+      </section>
 
       <section className="faq" id="faq">
         <h2>Frequently asked questions</h2>
