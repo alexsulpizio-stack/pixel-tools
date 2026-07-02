@@ -17,6 +17,10 @@ import CircleCropPage from "./pages/CircleCropPage";
 import RotateImagePage from "./pages/RotateImagePage";
 import RemoveExifPage from "./pages/RemoveExifPage";
 import ImageBase64Page from "./pages/ImageBase64Page";
+import HeicToJpgPage from "./pages/HeicToJpgPage";
+import ImageConverterPage from "./pages/ImageConverterPage";
+import WatermarkPage from "./pages/WatermarkPage";
+import BlurImagePage from "./pages/BlurImagePage";
 import { TARGET_PAGES } from "./lib/targetPages";
 import "./App.css";
 
@@ -33,6 +37,9 @@ export default function App() {
           </NavLink>
           <NavLink to="/tools" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
             Tools
+          </NavLink>
+          <NavLink to="/heic-to-jpg" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
+            HEIC→JPG
           </NavLink>
           <NavLink to="/favicon-generator" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
             Favicon
@@ -63,6 +70,10 @@ export default function App() {
           <Route path="/rotate-image" element={<RotateImagePage />} />
           <Route path="/remove-exif" element={<RemoveExifPage />} />
           <Route path="/image-to-base64" element={<ImageBase64Page />} />
+          <Route path="/heic-to-jpg" element={<HeicToJpgPage />} />
+          <Route path="/image-converter" element={<ImageConverterPage />} />
+          <Route path="/watermark-image" element={<WatermarkPage />} />
+          <Route path="/blur-image" element={<BlurImagePage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />

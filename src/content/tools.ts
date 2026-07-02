@@ -8,11 +8,15 @@ export interface ToolMeta {
 /** All tools, used by the /tools hub and cross-links. */
 export const TOOLS_META: ToolMeta[] = [
   { path: "/", name: "Image Compressor", blurb: "Compress, resize & convert JPG, PNG, WebP in batches.", emoji: "🗜️" },
+  { path: "/heic-to-jpg", name: "HEIC to JPG", blurb: "Convert iPhone HEIC photos to JPG or PNG.", emoji: "📱" },
+  { path: "/image-converter", name: "Image Converter", blurb: "Convert between JPG, PNG & WebP in batches.", emoji: "🔁" },
   { path: "/resize-image", name: "Resize Image", blurb: "Resize to exact pixels or by percentage, ratio locked.", emoji: "📐" },
   { path: "/crop-image", name: "Crop Image", blurb: "Drag to crop, with 1:1, 4:3 and 16:9 presets.", emoji: "✂️" },
   { path: "/circle-crop", name: "Circle Crop", blurb: "Round profile pictures with a transparent background.", emoji: "⭕" },
   { path: "/rotate-image", name: "Rotate & Flip", blurb: "Fix sideways or mirrored photos in one click.", emoji: "🔄" },
   { path: "/remove-exif", name: "Remove EXIF Data", blurb: "Strip GPS location & metadata before you share.", emoji: "🛡️" },
+  { path: "/watermark-image", name: "Watermark Image", blurb: "Add a text watermark with position & opacity.", emoji: "💧" },
+  { path: "/blur-image", name: "Blur / Pixelate", blurb: "Hide faces, plates or text by blurring a region.", emoji: "🌫️" },
   { path: "/favicon-generator", name: "Favicon Generator", blurb: "Full favicon set from an image, letter, or emoji.", emoji: "⭐" },
   { path: "/qr-code-generator", name: "QR Code Generator", blurb: "PNG & SVG codes that never expire, no tracking.", emoji: "🔳" },
   { path: "/color-palette", name: "Color Palette Extractor", blurb: "Pull dominant colors from any image as hex/CSS.", emoji: "🎨" },

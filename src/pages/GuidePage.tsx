@@ -12,6 +12,10 @@ import ResizeGuide from "../content/guides/resize-image-to-exact-dimensions";
 import CircleCropGuide from "../content/guides/crop-photo-into-a-circle";
 import RemoveExifGuide from "../content/guides/remove-exif-location-data-from-photos";
 import DataUriGuide from "../content/guides/data-uri-base64-images-explained";
+import WhatIsHeicGuide from "../content/guides/what-is-heic-and-how-to-convert-it";
+import WatermarkGuide from "../content/guides/how-to-watermark-your-photos";
+import BlurGuide from "../content/guides/how-to-blur-part-of-an-image";
+import ConvertPngToWebpGuide from "../content/guides/convert-png-to-webp";
 
 const ARTICLES: Record<string, ComponentType> = {
   "how-to-compress-images-without-losing-quality": HowToCompress,
@@ -23,6 +27,10 @@ const ARTICLES: Record<string, ComponentType> = {
   "crop-photo-into-a-circle": CircleCropGuide,
   "remove-exif-location-data-from-photos": RemoveExifGuide,
   "data-uri-base64-images-explained": DataUriGuide,
+  "what-is-heic-and-how-to-convert-it": WhatIsHeicGuide,
+  "how-to-watermark-your-photos": WatermarkGuide,
+  "how-to-blur-part-of-an-image": BlurGuide,
+  "convert-png-to-webp": ConvertPngToWebpGuide,
 };
 
 export default function GuidePage() {

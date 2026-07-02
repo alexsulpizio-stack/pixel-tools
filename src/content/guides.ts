@@ -108,6 +108,46 @@ export const GUIDES_META: GuideMeta[] = [
     updated: "2026-07-01",
     readingMinutes: 5,
   },
+  {
+    slug: "what-is-heic-and-how-to-convert-it",
+    title: "What Is HEIC and How to Convert It to JPG | PixelTools",
+    description:
+      "Why iPhones save photos as HEIC, why Windows and many apps can't open them, and how to convert HEIC to JPG or PNG privately without uploading your photos.",
+    excerpt:
+      "The reason your iPhone photos won't open on a PC — what HEIC is, its pros and cons, and the safest way to convert it to JPG.",
+    updated: "2026-07-01",
+    readingMinutes: 5,
+  },
+  {
+    slug: "how-to-watermark-your-photos",
+    title: "How to Watermark Your Photos (Without Ruining Them) | PixelTools",
+    description:
+      "Watermarks that protect your work without wrecking the image: text vs logo, placement, opacity, and why a tiled watermark is far harder to remove.",
+    excerpt:
+      "Where to place a watermark, how transparent it should be, and why tiling beats a single corner mark for protecting your images.",
+    updated: "2026-07-01",
+    readingMinutes: 4,
+  },
+  {
+    slug: "how-to-blur-part-of-an-image",
+    title: "How to Blur Out Faces, Plates & Text in a Photo | PixelTools",
+    description:
+      "Hide sensitive details in a photo before sharing: blur vs pixelate, how strong it needs to be to be irreversible, and how to do it privately in your browser.",
+    excerpt:
+      "How to properly hide a face, license plate, or private text in an image — and why a light blur isn't always enough.",
+    updated: "2026-07-01",
+    readingMinutes: 4,
+  },
+  {
+    slug: "convert-png-to-webp",
+    title: "How to Convert PNG to WebP (and When You Shouldn't) | PixelTools",
+    description:
+      "WebP can shrink PNGs by 25–80% with transparency intact. Here's how to convert, the quality trade-offs, browser support, and when to stick with PNG.",
+    excerpt:
+      "WebP usually beats PNG on size while keeping transparency. When it's worth switching, and the few cases where PNG still wins.",
+    updated: "2026-07-01",
+    readingMinutes: 5,
+  },
 ];
 
 export const GUIDES_BY_SLUG: Record<string, GuideMeta> = Object.fromEntries(

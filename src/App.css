@@ -883,6 +883,55 @@
 .crop-handle--sw { bottom: -8px; left: -8px; cursor: nesw-resize; }
 .crop-handle--se { bottom: -8px; right: -8px; cursor: nwse-resize; }
 
+/* Clear selection box (blur tool) — no dark shade over the image */
+.crop-shade--clear {
+  box-shadow: none;
+}
+
+/* Watermark position grid */
+.posgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  width: 108px;
+}
+
+.posgrid__btn {
+  aspect-ratio: 1;
+  border: 1px solid var(--border);
+  background: var(--bg-raised);
+  color: var(--text);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.posgrid__btn:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.posgrid__btn--on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.posgrid__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.colorpick {
+  width: 48px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+}
+
 /* Tool hub cards */
 .tool-card {
   padding-top: 20px;

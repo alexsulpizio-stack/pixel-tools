@@ -107,6 +107,30 @@ export const STATIC_ROUTE_META: RouteMeta[] = [
     description:
       "Convert an image to a Base64 data URI for CSS or HTML, or decode a Base64 string back into an image. Fast, free, and private — everything runs in your browser.",
   },
+  {
+    path: "/heic-to-jpg",
+    title: "HEIC to JPG Converter — Free, Private, No Upload | PixelTools",
+    description:
+      "Convert iPhone HEIC photos to JPG or PNG right in your browser. Batch convert, keep full quality, and download — nothing is uploaded, so your photos stay private.",
+  },
+  {
+    path: "/image-converter",
+    title: "Free Image Converter — JPG, PNG & WebP, No Upload | PixelTools",
+    description:
+      "Convert images between JPG, PNG, and WebP in batches, directly in your browser. Adjust quality, keep transparency, and download a ZIP. No uploads, no sign-up.",
+  },
+  {
+    path: "/watermark-image",
+    title: "Add a Watermark to Photos Online Free — No Upload | PixelTools",
+    description:
+      "Add a text watermark to your images with control over position, size, color, and opacity. Batch-friendly and fully private — everything runs in your browser.",
+  },
+  {
+    path: "/blur-image",
+    title: "Blur or Pixelate Part of an Image — Free & Private | PixelTools",
+    description:
+      "Blur or pixelate faces, license plates, or sensitive text in a photo by dragging a box over the area. Runs entirely in your browser, so images are never uploaded.",
+  },
 ];
 
 export const ROUTE_META: Record<string, RouteMeta> = Object.fromEntries(
