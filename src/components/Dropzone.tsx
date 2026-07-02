@@ -3,10 +3,10 @@ import { ACCEPTED_TYPES } from "../lib/imageProcessor";
 
 interface DropzoneProps {
   onFiles: (files: File[]) => void;
-  busy: boolean;
+  busy?: boolean;
 }
 
-export function Dropzone({ onFiles, busy }: DropzoneProps) {
+export function Dropzone({ onFiles, busy = false }: DropzoneProps) {
   const [dragging, setDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 

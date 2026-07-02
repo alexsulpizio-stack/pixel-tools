@@ -68,6 +68,46 @@ export const GUIDES_META: GuideMeta[] = [
     updated: "2026-06-21",
     readingMinutes: 6,
   },
+  {
+    slug: "resize-image-to-exact-dimensions",
+    title: "How to Resize an Image to Exact Pixel Dimensions | PixelTools",
+    description:
+      "Resize images to exact width and height without stretching: how aspect ratio works, when upscaling hurts, and the right dimensions for web, social, and print.",
+    excerpt:
+      "Why images stretch, how to keep the aspect ratio, when upscaling goes wrong, and a cheat sheet of good dimensions for the web and social platforms.",
+    updated: "2026-07-01",
+    readingMinutes: 5,
+  },
+  {
+    slug: "crop-photo-into-a-circle",
+    title: "How to Crop a Photo Into a Circle for a Profile Picture | PixelTools",
+    description:
+      "Make a round profile picture with a transparent background: why PNG matters, how to frame a face, and the ideal avatar sizes for common platforms.",
+    excerpt:
+      "The transparent-background trick that makes circular avatars work everywhere, how to frame the shot, and recommended profile-picture sizes.",
+    updated: "2026-07-01",
+    readingMinutes: 4,
+  },
+  {
+    slug: "remove-exif-location-data-from-photos",
+    title: "How to Remove Location & EXIF Data From Photos | PixelTools",
+    description:
+      "Photos can reveal where you live via hidden GPS metadata. Learn what EXIF stores, the privacy risk, and how to strip it before sharing — without uploading anything.",
+    excerpt:
+      "What EXIF metadata quietly records (including your GPS location), why it's a real privacy risk, and how to remove it locally before you post.",
+    updated: "2026-07-01",
+    readingMinutes: 5,
+  },
+  {
+    slug: "data-uri-base64-images-explained",
+    title: "Data URIs Explained: When to Use Base64 Images | PixelTools",
+    description:
+      "What a Base64 data URI is, how to inline images in HTML and CSS, the ~33% size overhead, and when inlining actually speeds up your site versus slowing it down.",
+    excerpt:
+      "Inlining images as Base64 can cut requests — or bloat your CSS. Here's how data URIs work and the simple rule for when to use them.",
+    updated: "2026-07-01",
+    readingMinutes: 5,
+  },
 ];
 
 export const GUIDES_BY_SLUG: Record<string, GuideMeta> = Object.fromEntries(

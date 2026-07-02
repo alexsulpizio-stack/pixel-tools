@@ -65,6 +65,48 @@ export const STATIC_ROUTE_META: RouteMeta[] = [
     description:
       "Practical, no-fluff guides on compressing and converting images, choosing formats, favicon sizes, and QR codes — from the team behind the PixelTools utilities.",
   },
+  {
+    path: "/tools",
+    title: "Free Online Image Tools — Compress, Resize, Crop & More | PixelTools",
+    description:
+      "A full set of free, private, in-browser image tools: compress, resize, crop, rotate, circle-crop, favicon and QR generators, remove EXIF, image to Base64, and more. No uploads.",
+  },
+  {
+    path: "/resize-image",
+    title: "Resize Image Online — Exact Pixels or Percent, Free | PixelTools",
+    description:
+      "Resize any image to exact width and height in pixels, or by percentage, right in your browser. Lock the aspect ratio, keep quality, and download instantly. No uploads.",
+  },
+  {
+    path: "/crop-image",
+    title: "Crop Image Online Free — Drag to Crop, No Upload | PixelTools",
+    description:
+      "Crop photos online for free by dragging a selection box, with handy aspect-ratio presets (1:1, 4:3, 16:9). Runs entirely in your browser — nothing is uploaded.",
+  },
+  {
+    path: "/circle-crop",
+    title: "Circle Crop — Make a Round Profile Picture (PNG) | PixelTools",
+    description:
+      "Crop any image into a perfect circle with a transparent background — ideal for profile pictures and avatars. Free, private, and downloads as a PNG. No uploads.",
+  },
+  {
+    path: "/rotate-image",
+    title: "Rotate & Flip Image Online Free — Fix Sideways Photos | PixelTools",
+    description:
+      "Rotate images 90°, 180°, or 270° and flip them horizontally or vertically. Fix sideways or mirrored photos in your browser for free. Nothing is uploaded.",
+  },
+  {
+    path: "/remove-exif",
+    title: "Remove EXIF & Metadata from Photos — Free & Private | PixelTools",
+    description:
+      "Strip EXIF metadata — including GPS location, camera model, and timestamps — from your photos. Runs entirely in your browser, so images are never uploaded.",
+  },
+  {
+    path: "/image-to-base64",
+    title: "Image to Base64 & Base64 to Image — Free Encoder | PixelTools",
+    description:
+      "Convert an image to a Base64 data URI for CSS or HTML, or decode a Base64 string back into an image. Fast, free, and private — everything runs in your browser.",
+  },
 ];
 
 export const ROUTE_META: Record<string, RouteMeta> = Object.fromEntries(

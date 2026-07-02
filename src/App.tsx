@@ -10,6 +10,13 @@ import ContactPage from "./pages/ContactPage";
 import TargetSizePage from "./pages/TargetSizePage";
 import GuidesIndexPage from "./pages/GuidesIndexPage";
 import GuidePage from "./pages/GuidePage";
+import ToolsIndexPage from "./pages/ToolsIndexPage";
+import ResizeImagePage from "./pages/ResizeImagePage";
+import CropImagePage from "./pages/CropImagePage";
+import CircleCropPage from "./pages/CircleCropPage";
+import RotateImagePage from "./pages/RotateImagePage";
+import RemoveExifPage from "./pages/RemoveExifPage";
+import ImageBase64Page from "./pages/ImageBase64Page";
 import { TARGET_PAGES } from "./lib/targetPages";
 import "./App.css";
 
@@ -24,17 +31,14 @@ export default function App() {
           <NavLink to="/" end className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
             Compress
           </NavLink>
+          <NavLink to="/tools" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
+            Tools
+          </NavLink>
           <NavLink to="/favicon-generator" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
             Favicon
           </NavLink>
           <NavLink to="/qr-code-generator" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
             QR Code
-          </NavLink>
-          <NavLink to="/color-palette" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
-            Palette
-          </NavLink>
-          <NavLink to="/image-to-pdf" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
-            PDF
           </NavLink>
           <NavLink to="/guides" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
             Guides
@@ -48,10 +52,17 @@ export default function App() {
       <main className="main">
         <Routes>
           <Route path="/" element={<CompressorPage />} />
+          <Route path="/tools" element={<ToolsIndexPage />} />
           <Route path="/favicon-generator" element={<FaviconPage />} />
           <Route path="/qr-code-generator" element={<QrPage />} />
           <Route path="/color-palette" element={<PalettePage />} />
           <Route path="/image-to-pdf" element={<PdfPage />} />
+          <Route path="/resize-image" element={<ResizeImagePage />} />
+          <Route path="/crop-image" element={<CropImagePage />} />
+          <Route path="/circle-crop" element={<CircleCropPage />} />
+          <Route path="/rotate-image" element={<RotateImagePage />} />
+          <Route path="/remove-exif" element={<RemoveExifPage />} />
+          <Route path="/image-to-base64" element={<ImageBase64Page />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
@@ -66,6 +77,7 @@ export default function App() {
       <footer className="footer">
         <p>© {new Date().getFullYear()} PixelTools · Images are processed locally and never leave your device.</p>
         <p className="footer__links">
+          <NavLink to="/tools">All tools</NavLink>
           <NavLink to="/guides">Guides</NavLink>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/contact">Contact</NavLink>

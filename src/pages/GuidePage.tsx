@@ -8,6 +8,10 @@ import Formats from "../content/guides/jpeg-vs-png-vs-webp";
 import FaviconSizes from "../content/guides/favicon-sizes-guide";
 import ReduceFileSize from "../content/guides/reduce-image-file-size-for-email-and-web";
 import QrCodes from "../content/guides/qr-codes-explained";
+import ResizeGuide from "../content/guides/resize-image-to-exact-dimensions";
+import CircleCropGuide from "../content/guides/crop-photo-into-a-circle";
+import RemoveExifGuide from "../content/guides/remove-exif-location-data-from-photos";
+import DataUriGuide from "../content/guides/data-uri-base64-images-explained";
 
 const ARTICLES: Record<string, ComponentType> = {
   "how-to-compress-images-without-losing-quality": HowToCompress,
@@ -15,6 +19,10 @@ const ARTICLES: Record<string, ComponentType> = {
   "favicon-sizes-guide": FaviconSizes,
   "reduce-image-file-size-for-email-and-web": ReduceFileSize,
   "qr-codes-explained": QrCodes,
+  "resize-image-to-exact-dimensions": ResizeGuide,
+  "crop-photo-into-a-circle": CircleCropGuide,
+  "remove-exif-location-data-from-photos": RemoveExifGuide,
+  "data-uri-base64-images-explained": DataUriGuide,
 };
 
 export default function GuidePage() {
