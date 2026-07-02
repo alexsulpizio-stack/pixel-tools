@@ -14,7 +14,7 @@
  */
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
-import { JWT } from "google-auth-library";
+import { JWT, OAuth2Client } from "google-auth-library";
 
 const SITE = process.env.GSC_SITE_URL ?? "https://usepixeltools.com/";
 const REPORTS_DIR = "reports";
@@ -57,6 +57,53 @@ function pos(n: number): string {
 
 function num(n: number): string {
   return Math.round(n).toLocaleString("en-US");
+}
+
+const ADSENSE_STATE_LABELS: Record<string, string> = {
+  READY: "✅ Ready — approved, ads can serve",
+  GETTING_READY: "⏳ Getting ready — in review",
+  REQUIRES_REVIEW: "📝 Requires review — request a review in AdSense",
+  NEEDS_ATTENTION: "⚠️ Needs attention — a policy issue needs fixing",
+  STATE_UNSPECIFIED: "Unknown",
+};
+
+/**
+ * Fetches AdSense site approval status via the AdSense Management API.
+ * Uses an OAuth refresh token (service accounts are not supported by AdSense).
+ * Returns null when AdSense credentials are not configured, and a short list
+ * of human-readable lines otherwise (including a friendly error on failure).
+ */
+async function fetchAdSenseStatus(): Promise<string[] | null> {
+  const clientId = process.env.ADSENSE_OAUTH_CLIENT_ID;
+  const clientSecret = process.env.ADSENSE_OAUTH_CLIENT_SECRET;
+  const refreshToken = process.env.ADSENSE_REFRESH_TOKEN;
+  if (!clientId || !clientSecret || !refreshToken) return null;
+
+  try {
+    const oauth = new OAuth2Client({ clientId, clientSecret });
+    oauth.setCredentials({ refresh_token: refreshToken });
+
+    const accountsRes = await oauth.request<{ accounts?: { name: string }[] }>({
+      url: "https://adsense.googleapis.com/v2/accounts",
+    });
+    const account = accountsRes.data.accounts?.[0]?.name;
+    if (!account) return ["No AdSense account found for these credentials."];
+
+    const sitesRes = await oauth.request<{
+      sites?: { domain?: string; state?: string; autoAdsEnabled?: boolean }[];
+    }>({ url: `https://adsense.googleapis.com/v2/${account}/sites?pageSize=50` });
+
+    const sites = sitesRes.data.sites ?? [];
+    if (sites.length === 0) return ["No sites are attached to this AdSense account yet."];
+
+    return sites.map((s) => {
+      const label = ADSENSE_STATE_LABELS[s.state ?? "STATE_UNSPECIFIED"] ?? s.state ?? "Unknown";
+      return `**${s.domain ?? "(unknown domain)"}** — ${label}`;
+    });
+  } catch (err) {
+    const e = err as { message?: string };
+    return [`Could not read AdSense status (${e.message ?? "unknown error"}).`];
+  }
 }
 
 async function main() {
@@ -115,11 +162,21 @@ async function main() {
   const t28 = totals28[0];
   const t7 = totals7[0];
 
+  const adsense = await fetchAdSenseStatus();
+
   const lines: string[] = [];
   lines.push(`# Search Console report — ${end}`);
   lines.push("");
   lines.push(`Property: \`${SITE}\``);
   lines.push("");
+
+  if (adsense) {
+    lines.push("## AdSense approval status");
+    lines.push("");
+    for (const line of adsense) lines.push(`- ${line}`);
+    lines.push("");
+  }
+
   lines.push("## Totals");
   lines.push("");
   lines.push("| Window | Clicks | Impressions | CTR | Avg position |");

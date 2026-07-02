@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build && tsx scripts/prerender.ts",
     "lint": "eslint .",
     "preview": "vite preview",
-    "gsc:report": "tsx scripts/search-console-report.ts"
+    "gsc:report": "tsx scripts/search-console-report.ts",
+    "adsense:auth": "tsx scripts/adsense-auth.ts"
   },
   "dependencies": {
     "jspdf": "^4.2.1",
