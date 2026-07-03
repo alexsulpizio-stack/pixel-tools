@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
+import { pathToFileURL } from "node:url";
 import { STATIC_ROUTE_META, type RouteMeta } from "../src/lib/routeMeta";
 import { TARGET_PAGES } from "../src/lib/targetPages";
 import { GUIDES_META } from "../src/content/guides";
@@ -8,6 +9,11 @@ const DIST = "dist";
 const ORIGIN = "https://usepixeltools.com";
 
 const template = readFileSync(join(DIST, "index.html"), "utf8");
+
+// Server-render function, produced by the SSR build (vite build --ssr).
+const { render } = (await import(
+  pathToFileURL(join("dist-server", "entry-server.js")).href
+)) as { render: (url: string) => string };
 
 const targetMeta: RouteMeta[] = TARGET_PAGES.map((p) => ({
   path: `/${p.slug}`,
@@ -31,12 +37,12 @@ function escapeHtml(value: string): string {
   return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function renderHead(meta: RouteMeta): string {
+function renderPage(meta: RouteMeta): string {
   const canonical = `${ORIGIN}${meta.path}`;
   const title = escapeHtml(meta.title);
   const desc = escapeAttr(meta.description);
 
-  return template
+  const withHead = template
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${title}</title>`)
     .replace(
       /<meta\s+name="description"\s+content="[\s\S]*?"\s*\/>/,
@@ -58,11 +64,19 @@ function renderHead(meta: RouteMeta): string {
       /<link rel="canonical" href="[\s\S]*?" \/>/,
       `<link rel="canonical" href="${canonical}" />`
     );
+
+  // Inject the server-rendered app so crawlers receive real, unique content
+  // in the initial HTML (not an empty <div id="root">).
+  const body = render(meta.path);
+  return withHead.replace(
+    /<div id="root">\s*<\/div>/,
+    `<div id="root">${body}</div>`
+  );
 }
 
 let count = 0;
 for (const meta of routes) {
-  const html = renderHead(meta);
+  const html = renderPage(meta);
   if (meta.path === "/") {
     writeFileSync(join(DIST, "index.html"), html);
   } else {
