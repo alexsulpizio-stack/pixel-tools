@@ -127,6 +127,24 @@ export default function TargetSizePage({ config }: TargetSizePageProps) {
         </section>
       )}
 
+      <section className="prose tool-prose">
+        {config.body.map((section) => (
+          <div key={section.heading}>
+            <h2>{section.heading}</h2>
+            {section.paragraphs?.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+            {section.bullets && (
+              <ul>
+                {section.bullets.map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+      </section>
+
       <section className="size-links">
         <h2>Other target sizes</h2>
         <div className="size-links__row">
