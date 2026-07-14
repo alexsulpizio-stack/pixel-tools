@@ -2,6 +2,10 @@
 
 Property: `sc-domain:usepixeltools.com`
 
+## AdSense approval status
+
+- **usepixeltools.com** — ⚠️ Needs attention — a policy issue needs fixing
+
 ## Totals
 
 | Window | Clicks | Impressions | CTR | Avg position |
@@ -56,4 +60,4 @@ Property: `sc-domain:usepixeltools.com`
 _Nothing in the page-2 sweet spot yet._
 
 ---
-_Generated 2026-07-14T15:58:16.991Z • window 2026-06-14 → 2026-07-11 (data lags ~3 days)._
+_Generated 2026-07-14T16:35:00.792Z • window 2026-06-14 → 2026-07-11 (data lags ~3 days)._
