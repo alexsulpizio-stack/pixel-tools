@@ -106,6 +106,61 @@ async function fetchAdSenseStatus(): Promise<string[] | null> {
   }
 }
 
+interface SitemapEntry {
+  path: string;
+  lastSubmitted?: string;
+  lastDownloaded?: string;
+  errors?: string | number;
+  warnings?: string | number;
+  contents?: { submitted?: string | number; indexed?: string | number }[];
+}
+
+/** Days after which a sitemap that Google hasn't re-downloaded is flagged stale. */
+const SITEMAP_STALE_DAYS = 14;
+
+/**
+ * Reports sitemap discovery health. A stale lastDownloaded means Google hasn't
+ * re-read the sitemap, so newly added pages stay invisible — the exact failure
+ * that once left most of the site undiscovered. Flags that loudly.
+ */
+async function fetchSitemapHealth(client: JWT): Promise<string[]> {
+  const url = `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(
+    SITE
+  )}/sitemaps`;
+  try {
+    const res = await client.request<{ sitemap?: SitemapEntry[] }>({ url });
+    const sitemaps = res.data.sitemap ?? [];
+    if (sitemaps.length === 0) {
+      return [
+        "⚠️ **No sitemap submitted.** Submit `sitemap.xml` in Search Console so Google can discover your pages.",
+      ];
+    }
+    return sitemaps.map((s) => {
+      const submitted = s.contents?.[0]?.submitted ?? "—";
+      let flag = "✅";
+      let note: string;
+      if (!s.lastDownloaded) {
+        flag = "⚠️";
+        note = "never downloaded by Google yet";
+      } else {
+        const days = Math.floor((Date.now() - new Date(s.lastDownloaded).getTime()) / 86_400_000);
+        if (days > SITEMAP_STALE_DAYS) {
+          flag = "⚠️";
+          note = `last downloaded ${days} days ago — **stale, resubmit it in Search Console**`;
+        } else {
+          note = `last downloaded ${days} day${days === 1 ? "" : "s"} ago`;
+        }
+      }
+      const errs = Number(s.errors ?? 0);
+      const errNote = errs > 0 ? ` · ${errs} error(s)` : "";
+      return `${flag} \`${s.path}\` — ${submitted} URLs submitted · ${note}${errNote}`;
+    });
+  } catch (err) {
+    const e = err as { message?: string };
+    return [`Could not read sitemap status (${e.message ?? "unknown error"}).`];
+  }
+}
+
 async function main() {
   const creds = loadCredentials();
   const client = new JWT({
@@ -163,6 +218,7 @@ async function main() {
   const t7 = totals7[0];
 
   const adsense = await fetchAdSenseStatus();
+  const sitemap = await fetchSitemapHealth(client);
 
   const lines: string[] = [];
   lines.push(`# Search Console report — ${end}`);
@@ -176,6 +232,11 @@ async function main() {
     for (const line of adsense) lines.push(`- ${line}`);
     lines.push("");
   }
+
+  lines.push("## Sitemap health");
+  lines.push("");
+  for (const line of sitemap) lines.push(`- ${line}`);
+  lines.push("");
 
   lines.push("## Totals");
   lines.push("");
