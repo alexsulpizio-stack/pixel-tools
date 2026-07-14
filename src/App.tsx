@@ -21,6 +21,7 @@ import HeicToJpgPage from "./pages/HeicToJpgPage";
 import ImageConverterPage from "./pages/ImageConverterPage";
 import WatermarkPage from "./pages/WatermarkPage";
 import BlurImagePage from "./pages/BlurImagePage";
+import { RelatedLinks } from "./components/RelatedLinks";
 import { TARGET_PAGES } from "./lib/targetPages";
 import "./App.css";
 
@@ -83,6 +84,7 @@ export default function App() {
             <Route key={p.slug} path={`/${p.slug}`} element={<TargetSizePage config={p} />} />
           ))}
         </Routes>
+        <RelatedLinks />
       </main>
 
       <footer className="footer">

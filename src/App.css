@@ -943,6 +943,52 @@
   margin-bottom: 8px;
 }
 
+/* Related tools / guides block (shared layout, foot of content pages) */
+.related {
+  margin-top: 52px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.related__section + .related__section {
+  margin-top: 32px;
+}
+
+.related__title {
+  font-size: 1.15rem;
+  margin: 0 0 4px;
+}
+
+.related__guides {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: grid;
+  gap: 14px;
+}
+
+.related__guides li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.related__guides a {
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.related__guides a:hover {
+  text-decoration: underline;
+}
+
+.related__excerpt {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
 /* Footer */
 .footer {
   margin-top: 40px;
