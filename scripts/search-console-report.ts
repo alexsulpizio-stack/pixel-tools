@@ -161,6 +161,75 @@ async function fetchSitemapHealth(client: JWT): Promise<string[]> {
   }
 }
 
+interface InspectResult {
+  url: string;
+  verdict: string;
+  state: string;
+}
+
+/** Indexed-page count at which requesting an AdSense review is worthwhile. */
+const INDEXED_GREENLIGHT = 15;
+
+/**
+ * Inspects every sitemap URL via the URL Inspection API and summarizes how many
+ * are actually indexed vs discovered/unknown. This is the real "is the site
+ * populated enough for AdSense" signal, and surfaces which URLs still need a
+ * manual indexing nudge. Adds ~1-2 min to the run (rate-limited on purpose).
+ */
+async function fetchIndexCoverage(client: JWT): Promise<string[]> {
+  try {
+    const xml = await (await fetch("https://usepixeltools.com/sitemap.xml")).text();
+    const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+    if (urls.length === 0) return ["Could not read sitemap URLs to inspect."];
+
+    const inspect = async (inspectionUrl: string): Promise<InspectResult> => {
+      try {
+        const res = await client.request<{
+          inspectionResult?: { indexStatusResult?: { verdict?: string; coverageState?: string } };
+        }>({
+          url: "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
+          method: "POST",
+          data: { inspectionUrl, siteUrl: SITE },
+        });
+        const r = res.data.inspectionResult?.indexStatusResult ?? {};
+        return { url: inspectionUrl, verdict: r.verdict ?? "?", state: r.coverageState ?? "?" };
+      } catch {
+        return { url: inspectionUrl, verdict: "ERROR", state: "inspection failed" };
+      }
+    };
+
+    const results: InspectResult[] = [];
+    const CONC = 4;
+    for (let i = 0; i < urls.length; i += CONC) {
+      results.push(...(await Promise.all(urls.slice(i, i + CONC).map(inspect))));
+    }
+
+    const indexed = results.filter((r) => r.verdict === "PASS");
+    const byState: Record<string, string[]> = {};
+    for (const r of results.filter((x) => x.verdict !== "PASS")) {
+      (byState[r.state] ??= []).push(r.url.replace(/^https?:\/\/[^/]+/, "") || "/");
+    }
+
+    const light = indexed.length >= INDEXED_GREENLIGHT ? "🟢" : "🔴";
+    const out: string[] = [
+      `${light} **Indexed: ${indexed.length} / ${results.length}** — AdSense-review green light at ${INDEXED_GREENLIGHT}+ indexed`,
+    ];
+    for (const [state, list] of Object.entries(byState).sort((a, b) => b[1].length - a[1].length)) {
+      out.push(`- ${state}: **${list.length}**`);
+    }
+    const unknown = byState["URL is unknown to Google"];
+    if (unknown?.length) {
+      out.push("");
+      out.push("_Still unknown to Google — request indexing on these first:_");
+      for (const p of unknown) out.push(`- \`${p}\``);
+    }
+    return out;
+  } catch (err) {
+    const e = err as { message?: string };
+    return [`Could not compute index coverage (${e.message ?? "unknown error"}).`];
+  }
+}
+
 async function main() {
   const creds = loadCredentials();
   const client = new JWT({
@@ -219,6 +288,7 @@ async function main() {
 
   const adsense = await fetchAdSenseStatus();
   const sitemap = await fetchSitemapHealth(client);
+  const coverage = await fetchIndexCoverage(client);
 
   const lines: string[] = [];
   lines.push(`# Search Console report — ${end}`);
@@ -236,6 +306,11 @@ async function main() {
   lines.push("## Sitemap health");
   lines.push("");
   for (const line of sitemap) lines.push(`- ${line}`);
+  lines.push("");
+
+  lines.push("## Index coverage");
+  lines.push("");
+  for (const line of coverage) lines.push(line);
   lines.push("");
 
   lines.push("## Totals");
