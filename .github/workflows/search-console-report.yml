@@ -56,7 +56,18 @@ jobs:
             echo "No report changes to commit."
           else
             git commit -m "chore: weekly Search Console report"
-            git push
+            # GitHub occasionally returns a transient 500 on push; retry with a
+            # rebase in case another commit landed meanwhile.
+            pushed=false
+            for i in 1 2 3 4 5; do
+              if git push origin HEAD:master; then pushed=true; break; fi
+              echo "Push attempt $i failed; rebasing and retrying..."
+              git pull --rebase origin master || true
+              sleep $((i * 5))
+            done
+            if [ "$pushed" != "true" ]; then
+              echo "::error::Failed to push report after 5 attempts."; exit 1
+            fi
           fi
 
       - name: Open summary issue
