@@ -706,6 +706,28 @@
   font-size: 0.85em;
 }
 
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose th {
+  background: var(--bg-raised);
+  color: var(--text);
+  font-weight: 600;
+}
+
 .prose__meta {
   margin-top: 28px;
   font-size: 0.82rem;

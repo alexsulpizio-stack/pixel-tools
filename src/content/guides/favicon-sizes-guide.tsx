@@ -11,6 +11,66 @@ export default function FaviconSizesGuide() {
         generators still produce.
       </p>
 
+      <h2>What size should a favicon be?</h2>
+      <p>
+        Short answer: a favicon isn't a single size — it's a small set. The most important dimension
+        is <strong>32×32 pixels</strong> for modern browser tabs, with <strong>16×16</strong> for
+        legacy displays; both live inside one <code>favicon.ico</code>. For phones and installable web
+        apps you also want a <strong>180×180</strong> Apple touch icon and <strong>192×192</strong> and{" "}
+        <strong>512×512</strong> PNGs. Here are the favicon dimensions that actually matter in 2026:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Size (px)</th>
+            <th>File</th>
+            <th>Where it's used</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>16×16</td>
+            <td><code>favicon.ico</code></td>
+            <td>Legacy browser tabs and the address bar</td>
+          </tr>
+          <tr>
+            <td>32×32</td>
+            <td><code>favicon.ico</code></td>
+            <td>Modern browser tabs and bookmarks — the key size</td>
+          </tr>
+          <tr>
+            <td>48×48</td>
+            <td><code>favicon.ico</code></td>
+            <td>Windows site shortcuts and taskbar</td>
+          </tr>
+          <tr>
+            <td>180×180</td>
+            <td><code>apple-touch-icon.png</code></td>
+            <td>iOS home-screen icon</td>
+          </tr>
+          <tr>
+            <td>192×192</td>
+            <td><code>icon-192.png</code></td>
+            <td>Android home screen (via web manifest)</td>
+          </tr>
+          <tr>
+            <td>512×512</td>
+            <td><code>icon-512.png</code></td>
+            <td>PWA install and splash screens</td>
+          </tr>
+          <tr>
+            <td>Scalable</td>
+            <td><code>icon.svg</code></td>
+            <td>Modern browsers, any size, light/dark variants</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        You don't have to make these by hand — our{" "}
+        <Link to="/favicon-generator">favicon generator</Link> exports every size above (plus the{" "}
+        <code>.ico</code>, manifest, and HTML snippet) from a single image, letter, or emoji.
+      </p>
+
       <h2>The files that matter today</h2>
       <ul>
         <li>

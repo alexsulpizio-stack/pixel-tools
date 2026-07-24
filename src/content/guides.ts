@@ -42,10 +42,10 @@ export const GUIDES_META: GuideMeta[] = [
     slug: "favicon-sizes-guide",
     title: "Favicon Sizes in 2026: Every File You Actually Need | PixelTools",
     description:
-      "Which favicon sizes and files modern browsers, iOS, Android, and PWAs require in 2026, the HTML to add, and common mistakes that leave a blurry or missing icon.",
+      "What size should a favicon be? The exact favicon dimensions (16, 32, 48, 180, 192, 512px) modern browsers, iOS, Android, and PWAs need in 2026, the HTML to add, and common mistakes.",
     excerpt:
-      "favicon.ico, apple-touch-icon, Android and PWA icons — the complete, no-nonsense list of sizes that matter today and the exact <head> markup to install them.",
-    updated: "2026-06-21",
+      "favicon.ico, apple-touch-icon, Android and PWA icons — a sizes table of the favicon dimensions that matter today and the exact <head> markup to install them.",
+    updated: "2026-07-24",
     readingMinutes: 6,
   },
   {
