@@ -124,12 +124,79 @@ export default function FaviconSizesGuide() {
         good favicon — the generator can build one in seconds.
       </p>
 
+      <h2>What format should a favicon be?</h2>
+      <p>
+        The practical answer in 2026 is <strong>ICO + PNG + (optional) SVG</strong>, not one format alone:
+      </p>
+      <ul>
+        <li>
+          <strong>ICO</strong> — still the most compatible file for tabs and bookmarks. Put 16, 32, and 48px
+          frames in one <code>favicon.ico</code>.
+        </li>
+        <li>
+          <strong>PNG</strong> — use for Apple (180px) and Android/PWA (192 and 512px). PNG keeps edges clean
+          and supports transparency when you need it.
+        </li>
+        <li>
+          <strong>SVG</strong> — best for crisp scaling and light/dark variants in modern browsers. Keep ICO/PNG
+          as fallbacks; don't rely on SVG alone.
+        </li>
+      </ul>
+      <p>
+        Avoid serving only a random <code>favicon.png</code> with no ICO and no Apple icon — that's the most
+        common reason a site looks fine on a laptop and broken on a phone.
+      </p>
+
+      <h2>WordPress favicon size</h2>
+      <p>
+        In WordPress (Appearance → Customize → Site Identity, or your theme's Site Icon control), upload a{" "}
+        <strong>square image at least 512×512 pixels</strong>. WordPress generates the smaller sizes from that
+        master file. A 512×512 PNG is the safest source: sharp enough for PWA icons, and WordPress can
+        downscale cleanly for tabs.
+      </p>
+      <p>
+        If the customizer crops oddly or your theme ignores Site Icon, drop a hand-built set from the{" "}
+        <Link to="/favicon-generator">favicon generator</Link> into your theme/root and add the{" "}
+        <code>&lt;link&gt;</code> tags above in your header template (or via a small plugin that injects head
+        markup).
+      </p>
+
+      <h2>Wix favicon size</h2>
+      <p>
+        Wix asks for a site icon under Settings → Website Settings → Favicon. Use a{" "}
+        <strong>square PNG, ideally 256×256 or larger</strong> (512×512 is fine). Wix resizes it for the tab;
+        a blurry result usually means the upload was tiny or heavily compressed. Generate a clean square
+        master first, then upload — don't stretch a wide logo into the square crop.
+      </p>
+
       <h2>Common mistakes</h2>
       <ul>
         <li><strong>Only providing a PNG named favicon.png.</strong> Some browsers still expect <code>favicon.ico</code>; provide both.</li>
         <li><strong>Forgetting the apple-touch-icon.</strong> Without it, iOS generates a blurry screenshot of your page instead of your icon.</li>
         <li><strong>Caching.</strong> Browsers cache favicons aggressively. After updating, hard-refresh or test in a private window.</li>
+        <li><strong>Uploading a full logo with tiny text.</strong> At 16px the words vanish — use a monogram or simple mark.</li>
       </ul>
+
+      <h2>Quick FAQ</h2>
+      <ul>
+        <li>
+          <strong>What size is a favicon?</strong> For the tab icon, think 32×32 (with 16×16 in the same ICO).
+          For phones and installs, also ship 180, 192, and 512px PNGs.
+        </li>
+        <li>
+          <strong>What size should a favicon.ico be?</strong> The <code>.ico</code> itself is multi-size —
+          include 16, 32, and 48px frames in one file.
+        </li>
+        <li>
+          <strong>What's the best favicon image size to start from?</strong> Design or export a square at
+          512×512, then generate the smaller files from it.
+        </li>
+      </ul>
+      <p>
+        Ready to export the full package? Use the free{" "}
+        <Link to="/favicon-generator">online favicon generator</Link> — it builds the ICO, Apple icon,
+        Android icons, manifest, and HTML snippet in your browser.
+      </p>
     </>
   );
 }

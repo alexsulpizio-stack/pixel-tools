@@ -103,11 +103,21 @@ export const TARGET_PAGES: TargetPageConfig[] = [
           "If your result looks soft, it usually means the source was very large or highly detailed. Cropping to just the important part before compressing, or accepting slightly smaller dimensions, will sharpen things up. The live preview shows the exact result before you download, so you can judge it yourself.",
         ],
       },
+      {
+        heading: "JPG-only forms vs this page",
+        paragraphs: [
+          "This page optimizes for size and defaults to an efficient web-friendly output. If the upload field literally requires a .jpg/.jpeg extension, use Compress JPEG to 50 KB instead — that tool always emits a genuine JPEG under 50 KB so picky validators don't reject the file.",
+        ],
+      },
     ],
     faq: [
       {
         q: "Will a 50 KB photo still look good?",
         a: "For on-screen use at small-to-medium sizes, yes — 50 KB is plenty for a sharp thumbnail or signature image. It won't hold print quality or full-screen detail.",
+      },
+      {
+        q: "How do I compress an image to 50kb online?",
+        a: "Drop it on this page. The tool shrinks the file under 50 KB in your browser and shows a preview before you download — no account and no upload to our servers.",
       },
       ...SHARED_FAQ(50),
     ],
@@ -289,11 +299,32 @@ export const TARGET_PAGES: TargetPageConfig[] = [
           "If your JPEG looks blocky, the source was probably very large. Resizing it closer to its display size before compressing gives the encoder more room to keep quality within the 50 KB budget.",
         ],
       },
+      {
+        heading: "Step-by-step: JPG under 50 KB",
+        paragraphs: [
+          "Drop your photo on this page. The compressor searches for the highest JPEG quality that still lands under 50 KB, then reduces dimensions only if quality alone isn't enough. You get a real .jpg file — not a renamed PNG or WebP — so extension-strict forms accept it.",
+          "Check the on-page preview before downloading. If faces look soft, crop tighter to the subject first or start from a smaller source; stuffing a huge landscape into 50 KB forces the encoder to throw away detail.",
+        ],
+        bullets: [
+          "Output is always JPEG (.jpg) under 50 KB.",
+          "Runs locally in your browser — the photo is never uploaded.",
+          "Use this when a form says “JPG only” or “JPEG max 50 KB”.",
+          "For websites that accept modern formats, WebP at 50 KB often looks sharper — see Compress image to 50 KB.",
+        ],
+      },
     ],
     faq: [
       {
         q: "Why keep JPEG instead of converting to WebP?",
         a: "WebP compresses better, but plenty of upload forms validate the file extension and reject anything that isn't .jpg/.jpeg. This page guarantees a genuine JPEG file under your size limit.",
+      },
+      {
+        q: "How do I compress a JPG to 50 KB for free?",
+        a: "Use this page: drop the photo, wait for the preview under 50 KB, and download the .jpg. No account and no upload to a server — compression runs in your browser.",
+      },
+      {
+        q: "My form says compress jpeg to 50kb — is this the right tool?",
+        a: "Yes. That exact requirement (JPEG format + 50 KB max) is what this page targets. The download stays a standard .jpg under the limit.",
       },
       ...SHARED_FAQ(50),
     ],

@@ -42,11 +42,21 @@ export const GUIDES_META: GuideMeta[] = [
     slug: "favicon-sizes-guide",
     title: "Favicon Sizes in 2026: Every File You Actually Need | PixelTools",
     description:
-      "What size should a favicon be? The exact favicon dimensions (16, 32, 48, 180, 192, 512px) modern browsers, iOS, Android, and PWAs need in 2026, the HTML to add, and common mistakes.",
+      "What size should a favicon be? The exact favicon dimensions (16, 32, 48, 180, 192, 512px) modern browsers, iOS, Android, WordPress, and Wix need in 2026 — plus ICO vs PNG vs SVG.",
     excerpt:
-      "favicon.ico, apple-touch-icon, Android and PWA icons — a sizes table of the favicon dimensions that matter today and the exact <head> markup to install them.",
-    updated: "2026-07-24",
-    readingMinutes: 6,
+      "favicon.ico, apple-touch-icon, Android and PWA icons — a sizes table of the favicon dimensions that matter today, plus WordPress/Wix tips and format advice.",
+    updated: "2026-07-30",
+    readingMinutes: 8,
+  },
+  {
+    slug: "how-to-compress-jpg-to-50kb",
+    title: "How to Compress a JPG to 50 KB Without Ruining It | PixelTools",
+    description:
+      "Step-by-step: compress a JPEG to under 50 KB for email signatures and JPG-only upload forms. Keep it sharp, stay in .jpg format, and do it privately in your browser.",
+    excerpt:
+      "Forms that demand a JPEG under 50 KB are common. Here's how to hit the limit without turning the photo to mush — and when to use WebP instead.",
+    updated: "2026-07-30",
+    readingMinutes: 5,
   },
   {
     slug: "reduce-image-file-size-for-email-and-web",

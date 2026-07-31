@@ -1,17 +1,15 @@
+import { ADS_SLOTS_ENABLED } from "../lib/adsConfig";
+
 interface AdSlotProps {
   variant: "banner" | "box";
 }
 
 /**
- * Ad container. While the site is pending ad-network approval this renders
- * nothing, so no empty "Ad" placeholders are shown to reviewers or visitors.
- * AdSense auto-ads (and networks like Ezoic) place their own units, so no
- * manual slot markup is required here yet. Flip ADS_ENABLED to true and drop
- * in the network snippet once a manual placement is wanted.
+ * Manual ad containers. Hidden while ADS_SLOTS_ENABLED is false so reviewers
+ * never see empty "Ad" boxes. Ezoic/AdSense auto placements usually don't need
+ * these; turn on and drop in unit markup when you want fixed slots.
  */
-const ADS_ENABLED = false;
-
 export function AdSlot({ variant }: AdSlotProps) {
-  if (!ADS_ENABLED) return null;
+  if (!ADS_SLOTS_ENABLED) return null;
   return <div className={`adslot adslot--${variant}`} aria-hidden="true" />;
 }

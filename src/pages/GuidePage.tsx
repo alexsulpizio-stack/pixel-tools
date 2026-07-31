@@ -16,11 +16,13 @@ import WhatIsHeicGuide from "../content/guides/what-is-heic-and-how-to-convert-i
 import WatermarkGuide from "../content/guides/how-to-watermark-your-photos";
 import BlurGuide from "../content/guides/how-to-blur-part-of-an-image";
 import ConvertPngToWebpGuide from "../content/guides/convert-png-to-webp";
+import CompressJpgTo50kbGuide from "../content/guides/how-to-compress-jpg-to-50kb";
 
 const ARTICLES: Record<string, ComponentType> = {
   "how-to-compress-images-without-losing-quality": HowToCompress,
   "jpeg-vs-png-vs-webp": Formats,
   "favicon-sizes-guide": FaviconSizes,
+  "how-to-compress-jpg-to-50kb": CompressJpgTo50kbGuide,
   "reduce-image-file-size-for-email-and-web": ReduceFileSize,
   "qr-codes-explained": QrCodes,
   "resize-image-to-exact-dimensions": ResizeGuide,

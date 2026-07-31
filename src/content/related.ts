@@ -20,8 +20,8 @@ export const RELATED: Record<string, Relation> = {
     tools: ["/resize-image", "/image-converter", "/image-to-pdf", "/remove-exif"],
     guides: [
       g("how-to-compress-images-without-losing-quality"),
+      g("how-to-compress-jpg-to-50kb"),
       g("reduce-image-file-size-for-email-and-web"),
-      g("jpeg-vs-png-vs-webp"),
     ],
   },
   "/heic-to-jpg": {
@@ -84,7 +84,11 @@ export const RELATED: Record<string, Relation> = {
   // ---- Guides ----
   [g("how-to-compress-images-without-losing-quality")]: {
     tools: ["/", "/image-converter", "/resize-image"],
-    guides: [g("jpeg-vs-png-vs-webp"), g("reduce-image-file-size-for-email-and-web"), g("convert-png-to-webp")],
+    guides: [g("how-to-compress-jpg-to-50kb"), g("jpeg-vs-png-vs-webp"), g("reduce-image-file-size-for-email-and-web")],
+  },
+  [g("how-to-compress-jpg-to-50kb")]: {
+    tools: ["/", "/resize-image", "/image-converter"],
+    guides: [g("how-to-compress-images-without-losing-quality"), g("reduce-image-file-size-for-email-and-web"), g("jpeg-vs-png-vs-webp")],
   },
   [g("jpeg-vs-png-vs-webp")]: {
     tools: ["/image-converter", "/", "/heic-to-jpg"],
@@ -140,8 +144,8 @@ export const RELATED: Record<string, Relation> = {
 export const TARGET_RELATED: Relation = {
   tools: ["/", "/resize-image", "/image-converter", "/image-to-pdf"],
   guides: [
+    g("how-to-compress-jpg-to-50kb"),
     g("how-to-compress-images-without-losing-quality"),
     g("reduce-image-file-size-for-email-and-web"),
-    g("jpeg-vs-png-vs-webp"),
   ],
 };

@@ -19,9 +19,9 @@ export const STATIC_ROUTE_META: RouteMeta[] = [
   },
   {
     path: "/favicon-generator",
-    title: "Free Favicon Generator — Create favicon.ico from Image, Text or Emoji | PixelTools",
+    title: "Free Favicon Generator — All Sizes (16–512px) from Image, Text or Emoji | PixelTools",
     description:
-      "Generate a complete favicon set (favicon.ico, apple-touch-icon, Android icons) from any image, letter, or emoji. Free, private, in-browser — no uploads.",
+      "Create the right favicon size set: favicon.ico (16/32/48), apple-touch-icon 180px, Android 192 & 512. From image, letter, or emoji — free, private, in-browser.",
   },
   {
     path: "/qr-code-generator",

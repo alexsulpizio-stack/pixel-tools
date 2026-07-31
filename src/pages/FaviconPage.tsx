@@ -25,12 +25,24 @@ const SHAPES: { value: IconShape; label: string }[] = [
 
 const FAQ: { q: string; a: string }[] = [
   {
+    q: "What size should a favicon be?",
+    a: "For browser tabs, 32×32 is the key size (with 16×16 for older displays), packed into one favicon.ico. Also add a 180px Apple touch icon and 192/512px PNGs for Android and PWAs. This generator exports all of them.",
+  },
+  {
     q: "What sizes does a website favicon need?",
-    a: "A favicon.ico with 16, 32, and 48px versions covers browser tabs and bookmarks. Add a 180px apple-touch-icon for iOS home screens and 192/512px PNGs for Android and PWAs. This generator produces all of them.",
+    a: "A favicon.ico with 16, 32, and 48px versions covers browser tabs and bookmarks. Add a 180px apple-touch-icon for iOS home screens and 192/512px PNGs for Android and PWAs.",
+  },
+  {
+    q: "What format should I use — ICO, PNG, or SVG?",
+    a: "Use all three when you can: ICO for maximum tab compatibility, PNG for Apple/Android icons, and SVG for crisp modern browsers. Relying on a single PNG named favicon.png is the most common mistake.",
   },
   {
     q: "Is the .ico file a real multi-size icon?",
     a: "Yes — the favicon.ico contains 16, 32, and 48 pixel versions in one file, so browsers pick the sharpest size for the context.",
+  },
+  {
+    q: "What size should I upload for WordPress or Wix?",
+    a: "Start with a square 512×512 PNG. WordPress's Site Icon and Wix's favicon uploader both resize from a large master; a tiny source file is what makes the tab icon look blurry.",
   },
   {
     q: "Is my logo uploaded anywhere?",
@@ -255,10 +267,43 @@ export default function FaviconPage() {
           <li><strong>2.</strong> Pick a shape and colors, and watch the live tab preview.</li>
           <li><strong>3.</strong> Download the ZIP, drop the files in your site root, and paste the snippet into your <code>&lt;head&gt;</code>.</li>
         </ul>
+
+        <h2>Favicon sizes included in every download</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>File</th>
+              <th>Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>16 / 32 / 48px</td>
+              <td><code>favicon.ico</code></td>
+              <td>Browser tabs, bookmarks, Windows shortcuts</td>
+            </tr>
+            <tr>
+              <td>180×180</td>
+              <td><code>apple-touch-icon.png</code></td>
+              <td>iOS home screen</td>
+            </tr>
+            <tr>
+              <td>192×192</td>
+              <td><code>android-chrome-192x192.png</code></td>
+              <td>Android / PWA</td>
+            </tr>
+            <tr>
+              <td>512×512</td>
+              <td><code>android-chrome-512x512.png</code></td>
+              <td>PWA splash / install</td>
+            </tr>
+          </tbody>
+        </table>
         <p>
-          Want to know exactly which sizes matter and how to design an icon that stays legible at
-          16px? Read our{" "}
-          <Link to="/guides/favicon-sizes-guide">complete guide to favicon sizes in 2026</Link>.
+          Not sure which dimensions you need, or what WordPress and Wix expect? Read the{" "}
+          <Link to="/guides/favicon-sizes-guide">favicon sizes guide</Link> — it covers the exact
+          pixel sizes, formats (ICO vs PNG vs SVG), and platform quirks.
         </p>
       </section>
 

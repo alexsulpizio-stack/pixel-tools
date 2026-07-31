@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects.
+# After you connect Ezoic, uncomment the next line so ads.txt is managed by
+# Ezoic (replace is already correct for this domain). Keep AdSense-only ads.txt
+# in /ads.txt until then.
+# /ads.txt https://srv.adstxtmanager.com/19390/usepixeltools.com 301
