@@ -7,7 +7,7 @@ export default function PrivacyPage() {
   return (
     <article className="prose">
       <h1>Privacy Policy</h1>
-      <p>Last updated: June 11, 2026</p>
+      <p>Last updated: August 3, 2026</p>
 
       <h2>Your files never leave your device</h2>
       <p>
@@ -25,10 +25,9 @@ export default function PrivacyPage() {
 
       <h2>Advertising and cookies</h2>
       <p>
-        PixelTools is free and supported by advertising. We use Google AdSense to display ads. Google and its partners
-        may use cookies and similar technologies to serve ads based on your prior visits to this and other websites.
-        Google's use of advertising cookies enables it and its partners to serve ads based on your visits to this site
-        and/or other sites on the Internet.
+        PixelTools is free and supported by advertising. We may use Google AdSense or other ad partners to display ads.
+        Those partners may use cookies and similar technologies to serve ads based on your prior visits to this and
+        other websites.
       </p>
       <p>
         You may opt out of personalized advertising by visiting{" "}
@@ -40,6 +39,13 @@ export default function PrivacyPage() {
           www.aboutads.info
         </a>
         .
+      </p>
+
+      <h2>Affiliate links</h2>
+      <p>
+        Some guides include links to products or services we recommend. Those links may be affiliate links — if you
+        buy through them, we may earn a commission at no extra cost to you. Recommendations are chosen because they
+        fit the topic; we do not sell your data to affiliates.
       </p>
 
       <h2>Analytics</h2>

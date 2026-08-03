@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { AffiliateLink } from "../../components/AffiliateLink";
+import { AffiliateNote } from "../../components/AffiliateNote";
 
 export default function FaviconSizesGuide() {
   return (
@@ -123,6 +125,11 @@ export default function FaviconSizesGuide() {
         If you don't have a logo yet, a single letter or emoji on a colored background makes a perfectly
         good favicon — the generator can build one in seconds.
       </p>
+      <AffiliateNote>
+        Designing a simple mark first? A free{" "}
+        <AffiliateLink id="canva">Canva</AffiliateLink> square (512×512) is enough — export PNG, then
+        run it through our <Link to="/favicon-generator">favicon generator</Link>.
+      </AffiliateNote>
 
       <h2>What format should a favicon be?</h2>
       <p>
@@ -197,6 +204,11 @@ export default function FaviconSizesGuide() {
         <Link to="/favicon-generator">online favicon generator</Link> — it builds the ICO, Apple icon,
         Android icons, manifest, and HTML snippet in your browser.
       </p>
+      <AffiliateNote>
+        Still need a domain for the site that gets the favicon?{" "}
+        <AffiliateLink id="namecheap">Namecheap</AffiliateLink> is a straightforward place to register
+        one, then point DNS and drop the icon files in your site root.
+      </AffiliateNote>
     </>
   );
 }

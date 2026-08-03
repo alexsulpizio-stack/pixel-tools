@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { AffiliateLink } from "../../components/AffiliateLink";
+import { AffiliateNote } from "../../components/AffiliateNote";
 
 export default function HowToCompressJpgTo50kb() {
   return (
@@ -36,6 +38,12 @@ export default function HowToCompressJpgTo50kb() {
         <Link to="/compress-image-to-50kb">compress image to 50 KB</Link> instead — WebP usually looks
         sharper at the same size.
       </p>
+      <AffiliateNote>
+        Building pages that need lots of small images? Keep originals in cloud storage and only serve
+        compressed copies — a cheap{" "}
+        <AffiliateLink id="namecheap">Namecheap hosting</AffiliateLink> plan is enough for a personal
+        site or portfolio while you stay under upload limits.
+      </AffiliateNote>
 
       <h2>How to keep quality at 50 KB</h2>
       <ul>
@@ -126,6 +134,10 @@ export default function HowToCompressJpgTo50kb() {
         . When you’re ready, jump straight to the{" "}
         <Link to="/compress-jpeg-to-50kb">JPEG → 50 KB compressor</Link>.
       </p>
+      <AffiliateNote>
+        Need a quick graphic for an email signature or form photo before you compress it? Sketch one in{" "}
+        <AffiliateLink id="canva">Canva</AffiliateLink>, export JPG, then hit the 50 KB tool above.
+      </AffiliateNote>
     </>
   );
 }
