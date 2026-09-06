@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { usePageMeta } from "../lib/usePageMeta";
 import { ROUTE_META } from "../lib/routeMeta";
 
-const CONTACT_EMAIL = "alex.sulpizio@gmail.com";
-
 export default function ContactPage() {
   usePageMeta(ROUTE_META["/contact"].title, ROUTE_META["/contact"].description);
 
@@ -16,17 +14,10 @@ export default function ContactPage() {
         new tool, or just want to say hello, we read every message.
       </p>
 
-      <h2>Email</h2>
-      <p>
-        The best way to reach us is by email:{" "}
-        <a href={`mailto:${CONTACT_EMAIL}?subject=PixelTools%20feedback`}>{CONTACT_EMAIL}</a>. We aim to respond within a
-        few business days.
-      </p>
-
       <h2>Report a bug or request a feature</h2>
       <p>
-        PixelTools is open source. If you're comfortable with GitHub, the fastest way to report a bug or request a
-        feature is to open an issue on our{" "}
+        PixelTools is open source. The public support channel is GitHub: open an issue to report a bug or request a
+        feature on our{" "}
         <a href="https://github.com/alexsulpizio-stack/pixel-tools/issues" target="_blank" rel="noreferrer">
           GitHub repository
         </a>
