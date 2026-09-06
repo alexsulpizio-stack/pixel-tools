@@ -25,6 +25,7 @@ import { RelatedLinks } from "./components/RelatedLinks";
 import { AdsInit } from "./components/AdsInit";
 import { ConsentBanner } from "./components/ConsentBanner";
 import { IntegrationsInit } from "./components/IntegrationsInit";
+import { ToolDetails } from "./components/ToolDetails";
 import { TARGET_PAGES } from "./lib/targetPages";
 import "./App.css";
 
@@ -90,6 +91,7 @@ export default function App() {
             <Route key={p.slug} path={`/${p.slug}`} element={<TargetSizePage config={p} />} />
           ))}
         </Routes>
+        <ToolDetails />
         <RelatedLinks />
       </main>
 

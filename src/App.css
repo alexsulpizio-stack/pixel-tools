@@ -676,6 +676,13 @@
   margin-top: 28px;
 }
 
+.prose h3 {
+  color: var(--text);
+  font-size: 1.05rem;
+  margin-top: 20px;
+  margin-bottom: 6px;
+}
+
 .prose p {
   color: var(--text-dim);
 }
@@ -764,6 +771,11 @@
 
 .tool-prose {
   margin-top: 44px;
+  border-top: 1px solid var(--border);
+}
+
+.tool-details {
+  margin-top: 32px;
   border-top: 1px solid var(--border);
 }
 
