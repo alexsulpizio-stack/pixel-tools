@@ -18,6 +18,10 @@ interface TargetSizePageProps {
 }
 
 export default function TargetSizePage({ config }: TargetSizePageProps) {
+  return <TargetSizeTool key={config.slug} config={config} />;
+}
+
+function TargetSizeTool({ config }: TargetSizePageProps) {
   usePageMeta(config.title, config.description);
 
   const [output, setOutput] = useState<TargetOutput>(config.output);
@@ -25,21 +29,25 @@ export default function TargetSizePage({ config }: TargetSizePageProps) {
   const [busy, setBusy] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
   const resultsRef = useRef<TargetResult[]>([]);
-  resultsRef.current = results;
+  const generation = useRef(0);
+  const processing = useRef(false);
 
   const targetBytes = config.targetKB * 1024;
 
-  // Reset state when navigating between size pages (same component instance).
-  useEffect(() => {
+  // Each target gets its own component; invalidate unfinished work when it leaves.
+  useEffect(() => () => {
+    generation.current++;
     resultsRef.current.forEach((r) => URL.revokeObjectURL(r.previewUrl));
-    setResults([]);
-    setErrors([]);
-    setOutput(config.output);
-  }, [config]);
+    resultsRef.current = [];
+  }, []);
 
   const addFiles = useCallback(
     async (files: File[]) => {
+      if (processing.current) return;
+      processing.current = true;
+      const job = generation.current;
       setBusy(true);
+      setErrors([]);
       const next: TargetResult[] = [];
       const failed: string[] = [];
       for (const file of files) {
@@ -48,9 +56,15 @@ export default function TargetSizePage({ config }: TargetSizePageProps) {
         } catch {
           failed.push(file.name);
         }
+        if (job !== generation.current) {
+          next.forEach((r) => URL.revokeObjectURL(r.previewUrl));
+          return;
+        }
       }
-      setResults((prev) => [...prev, ...next]);
+      resultsRef.current = [...resultsRef.current, ...next];
+      setResults(resultsRef.current);
       setErrors(failed);
+      processing.current = false;
       setBusy(false);
     },
     [targetBytes, output]
@@ -87,6 +101,7 @@ export default function TargetSizePage({ config }: TargetSizePageProps) {
             {OUTPUTS.map((o) => (
               <button
                 key={o.value}
+                disabled={busy}
                 className={`segmented__btn ${output === o.value ? "segmented__btn--on" : ""}`}
                 onClick={() => setOutput(o.value)}
               >

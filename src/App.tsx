@@ -23,6 +23,8 @@ import WatermarkPage from "./pages/WatermarkPage";
 import BlurImagePage from "./pages/BlurImagePage";
 import { RelatedLinks } from "./components/RelatedLinks";
 import { AdsInit } from "./components/AdsInit";
+import { ConsentBanner } from "./components/ConsentBanner";
+import { IntegrationsInit } from "./components/IntegrationsInit";
 import { TARGET_PAGES } from "./lib/targetPages";
 import "./App.css";
 
@@ -30,6 +32,8 @@ export default function App() {
   return (
     <div className="page">
       <AdsInit />
+      <IntegrationsInit />
+      <ConsentBanner />
       <header className="header">
         <div className="header__brand">
           <span className="header__logo">▣</span> PixelTools

@@ -18,12 +18,12 @@ export function Dropzone({ onFiles, busy = false, accept, validate, hint }: Drop
 
   const handleFiles = useCallback(
     (list: FileList | null) => {
-      if (!list) return;
+      if (busy || !list) return;
       const check = validate ?? ((f: File) => ACCEPTED_TYPES.includes(f.type));
       const images = Array.from(list).filter(check);
       if (images.length > 0) onFiles(images);
     },
-    [onFiles, validate]
+    [busy, onFiles, validate]
   );
 
   return (
@@ -39,16 +39,22 @@ export function Dropzone({ onFiles, busy = false, accept, validate, hint }: Drop
         setDragging(false);
         handleFiles(e.dataTransfer.files);
       }}
-      onClick={() => inputRef.current?.click()}
+      onClick={() => { if (!busy) inputRef.current?.click(); }}
       role="button"
-      tabIndex={0}
+      aria-disabled={busy}
+      aria-busy={busy}
+      tabIndex={busy ? -1 : 0}
       onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") inputRef.current?.click();
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          if (!busy) inputRef.current?.click();
+        }
       }}
     >
       <input
         ref={inputRef}
         type="file"
+        disabled={busy}
         accept={accept ?? ACCEPTED_TYPES.join(",")}
         multiple
         hidden

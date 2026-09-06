@@ -8,6 +8,7 @@ import { SettingsPanel } from "../components/SettingsPanel";
 import { ResultCard } from "../components/ResultCard";
 import { AdSlot } from "../components/AdSlot";
 import { usePageMeta } from "../lib/usePageMeta";
+import { trackEvent } from "../lib/integrations";
 import {
   formatBytes,
   processImage,
@@ -47,37 +48,50 @@ export default function CompressorPage() {
   const [settings, setSettings] = useState<ProcessSettings>(DEFAULT_SETTINGS);
   const [results, setResults] = useState<ProcessedImage[]>([]);
   const [pendingFiles, setPendingFiles] = useState<File[]>([]);
-  const [busy, setBusy] = useState(false);
+  const [completed, setCompleted] = useState<{ files: File[]; settings: ProcessSettings } | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
   const resultsRef = useRef<ProcessedImage[]>([]);
-  resultsRef.current = results;
+  const busy = pendingFiles.length > 0 && (completed?.files !== pendingFiles || completed?.settings !== settings);
+
+  useEffect(() => () => {
+    resultsRef.current.forEach((r) => URL.revokeObjectURL(r.previewUrl));
+    resultsRef.current = [];
+  }, []);
 
   // Reprocess source files whenever settings change so results always match the controls.
   useEffect(() => {
     if (pendingFiles.length === 0) return;
     let cancelled = false;
-    setBusy(true);
-    setErrors([]);
+    const processed: ProcessedImage[] = [];
 
     (async () => {
-      const processed: ProcessedImage[] = [];
       const failed: string[] = [];
       for (const file of pendingFiles) {
         try {
-          processed.push(await processImage(file, settings));
+          const result = await processImage(file, settings);
+          if (cancelled) {
+            URL.revokeObjectURL(result.previewUrl);
+            return;
+          }
+          processed.push(result);
         } catch {
           failed.push(file.name);
         }
         if (cancelled) return;
       }
       resultsRef.current.forEach((r) => URL.revokeObjectURL(r.previewUrl));
+      resultsRef.current = processed;
       setResults(processed);
       setErrors(failed);
-      setBusy(false);
+      setCompleted({ files: pendingFiles, settings });
     })();
 
     return () => {
       cancelled = true;
+      // Completed results belong to the page; unfinished results belong to this job.
+      if (resultsRef.current !== processed) {
+        processed.forEach((r) => URL.revokeObjectURL(r.previewUrl));
+      }
     };
   }, [pendingFiles, settings]);
 
@@ -89,24 +103,24 @@ export default function CompressorPage() {
   }, []);
 
   const removeResult = useCallback((id: string) => {
-    setResults((prev) => {
-      const target = prev.find((r) => r.id === id);
-      if (target) {
-        URL.revokeObjectURL(target.previewUrl);
-        setPendingFiles((files) => files.filter((f) => f !== target.originalFile));
-      }
-      return prev.filter((r) => r.id !== id);
-    });
+    const target = resultsRef.current.find((r) => r.id === id);
+    if (!target) return;
+    URL.revokeObjectURL(target.previewUrl);
+    resultsRef.current = resultsRef.current.filter((r) => r.id !== id);
+    setResults(resultsRef.current);
+    setPendingFiles((files) => files.filter((f) => f !== target.originalFile));
   }, []);
 
   const clearAll = useCallback(() => {
     resultsRef.current.forEach((r) => URL.revokeObjectURL(r.previewUrl));
+    resultsRef.current = [];
     setResults([]);
     setPendingFiles([]);
     setErrors([]);
   }, []);
 
   const downloadAll = useCallback(async () => {
+    trackEvent("download_zip", { image_count: resultsRef.current.length });
     const zip = new JSZip();
     const usedNames = new Set<string>();
     for (const r of resultsRef.current) {
@@ -145,7 +159,9 @@ export default function CompressorPage() {
 
       <SettingsPanel settings={settings} onChange={setSettings} />
 
-      {errors.length > 0 && <p className="error">Couldn't process: {errors.join(", ")}</p>}
+      {!busy && errors.length > 0 && <p className="error">Couldn't process: {errors.join(", ")}</p>}
+
+      {busy && results.length === 0 && <button className="btn btn--ghost" onClick={clearAll}>Clear</button>}
 
       {results.length > 0 && (
         <section className="results">

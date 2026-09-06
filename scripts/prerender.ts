@@ -35,6 +35,8 @@ function buildJsonLd(meta: RouteMeta): string {
       name: "PixelTools",
       url: `${ORIGIN}/`,
       logo: `${ORIGIN}/favicon.svg`,
+      sameAs: ["https://github.com/alexsulpizio-stack/pixel-tools"],
+      founder: { "@type": "Person", name: "Alex Sulpizio" },
     },
     {
       "@type": "WebSite",
@@ -131,7 +133,7 @@ function buildJsonLd(meta: RouteMeta): string {
 const template = readFileSync(join(DIST, "index.html"), "utf8");
 
 // Server-render function, produced by the SSR build (vite build --ssr).
-const { render } = (await import(
+  const { render } = (await import(
   pathToFileURL(join("dist-server", "entry-server.js")).href
 )) as { render: (url: string) => string };
 
@@ -157,7 +159,7 @@ function escapeHtml(value: string): string {
   return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function renderPage(meta: RouteMeta): string {
+async function renderPage(meta: RouteMeta): Promise<string> {
   const canonical = `${ORIGIN}${meta.path}`;
   const title = escapeHtml(meta.title);
   const desc = escapeAttr(meta.description);
@@ -188,7 +190,7 @@ function renderPage(meta: RouteMeta): string {
 
   // Inject the server-rendered app so crawlers receive real, unique content
   // in the initial HTML (not an empty <div id="root">).
-  const body = render(meta.path);
+  const body = await render(meta.path);
   return withHead.replace(
     /<div id="root">\s*<\/div>/,
     `<div id="root">${body}</div>`
@@ -197,7 +199,7 @@ function renderPage(meta: RouteMeta): string {
 
 let count = 0;
 for (const meta of routes) {
-  const html = renderPage(meta);
+  const html = await renderPage(meta);
   if (meta.path === "/") {
     writeFileSync(join(DIST, "index.html"), html);
   } else {

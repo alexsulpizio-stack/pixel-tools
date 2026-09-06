@@ -30,6 +30,11 @@ export default function PrivacyPage() {
         other websites.
       </p>
       <p>
+        When advertising or optional analytics are enabled, PixelTools asks for your consent before loading those
+        services. You can decline optional measurement and personalized advertising in the consent prompt. Essential
+        site functionality does not depend on accepting them.
+      </p>
+      <p>
         You may opt out of personalized advertising by visiting{" "}
         <a href="https://www.google.com/settings/ads" target="_blank" rel="noreferrer">
           Google Ads Settings
@@ -50,8 +55,9 @@ export default function PrivacyPage() {
 
       <h2>Analytics</h2>
       <p>
-        We may use privacy-respecting, aggregate analytics (such as page view counts) to understand which tools are
-        useful. This data is not tied to your identity.
+        We may use consented, privacy-respecting aggregate analytics (such as page view counts and tool downloads) to
+        understand which tools are useful. This data is not used to identify you, and analytics are not loaded when you
+        decline optional measurement.
       </p>
 
       <h2>Changes to this policy</h2>
