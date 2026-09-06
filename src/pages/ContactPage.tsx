@@ -19,9 +19,9 @@ export default function ContactPage() {
         PixelTools is open source. The public support channel is GitHub: open an issue to report a bug or request a
         feature on our{" "}
         <a href="https://github.com/alexsulpizio-stack/pixel-tools/issues" target="_blank" rel="noreferrer">
-          GitHub repository
+        GitHub repository
         </a>
-        . Otherwise, just email us the details and we'll take it from there.
+        . Include the tool, browser, device, and steps that caused the problem so it can be reproduced.
       </p>
 
       <h2>A note on your files</h2>
