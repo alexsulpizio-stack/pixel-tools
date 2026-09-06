@@ -32,7 +32,7 @@ export async function extractPalette(file: File, colorCount: number): Promise<Pa
   }
   if (pixels.length === 0) throw new Error("Image has no opaque pixels");
 
-  let buckets: Pixel[][] = [pixels];
+  const buckets: Pixel[][] = [pixels];
   while (buckets.length < colorCount) {
     // Split the largest bucket along its widest channel.
     buckets.sort((a, b) => b.length - a.length);
