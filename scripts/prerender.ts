@@ -36,7 +36,6 @@ function buildJsonLd(meta: RouteMeta): string {
       url: `${ORIGIN}/`,
       logo: `${ORIGIN}/favicon.svg`,
       sameAs: ["https://github.com/alexsulpizio-stack/pixel-tools"],
-      founder: { "@type": "Person", name: "Alex Sulpizio" },
     },
     {
       "@type": "WebSite",

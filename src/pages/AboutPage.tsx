@@ -52,7 +52,7 @@ export default function AboutPage() {
 
       <h2>Who runs it</h2>
       <p>
-        PixelTools is an independent project built and maintained by Alex Sulpizio. It is funded by unobtrusive
+        PixelTools is an independent project built and maintained by a small independent team. It is funded by unobtrusive
         advertising so that every tool can stay completely free to use. The source code is openly available on{" "}
         <a href="https://github.com/alexsulpizio-stack/pixel-tools" target="_blank" rel="noreferrer">
           GitHub
