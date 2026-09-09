@@ -53,6 +53,10 @@ export default function CompressorPage() {
   const resultsRef = useRef<ProcessedImage[]>([]);
   const busy = pendingFiles.length > 0 && (completed?.files !== pendingFiles || completed?.settings !== settings);
 
+  useEffect(() => {
+    trackEvent("tool_view", { tool: "compressor" });
+  }, []);
+
   useEffect(() => () => {
     resultsRef.current.forEach((r) => URL.revokeObjectURL(r.previewUrl));
     resultsRef.current = [];
@@ -63,6 +67,12 @@ export default function CompressorPage() {
     if (pendingFiles.length === 0) return;
     let cancelled = false;
     const processed: ProcessedImage[] = [];
+
+    trackEvent("processing_started", {
+      tool: "compressor",
+      file_count: pendingFiles.length,
+      output_format: settings.format,
+    });
 
     (async () => {
       const failed: string[] = [];
@@ -84,6 +94,13 @@ export default function CompressorPage() {
       setResults(processed);
       setErrors(failed);
       setCompleted({ files: pendingFiles, settings });
+      trackEvent("processing_completed", {
+        tool: "compressor",
+        file_count: pendingFiles.length,
+        success_count: processed.length,
+        failed_count: failed.length,
+        output_format: settings.format,
+      });
     })();
 
     return () => {
@@ -96,6 +113,11 @@ export default function CompressorPage() {
   }, [pendingFiles, settings]);
 
   const addFiles = useCallback((files: File[]) => {
+    trackEvent("file_selected", {
+      tool: "compressor",
+      file_count: files.length,
+      total_bytes: files.reduce((sum, file) => sum + file.size, 0),
+    });
     setPendingFiles((prev) => {
       const known = new Set(prev.map((f) => `${f.name}:${f.size}`));
       return [...prev, ...files.filter((f) => !known.has(`${f.name}:${f.size}`))];
@@ -120,7 +142,11 @@ export default function CompressorPage() {
   }, []);
 
   const downloadAll = useCallback(async () => {
-    trackEvent("download_zip", { image_count: resultsRef.current.length });
+    trackEvent("download_clicked", {
+      tool: "compressor",
+      download_type: "zip",
+      file_count: resultsRef.current.length,
+    });
     const zip = new JSZip();
     const usedNames = new Set<string>();
     for (const r of resultsRef.current) {
