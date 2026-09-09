@@ -7,6 +7,7 @@ import PdfPage from "./pages/PdfPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
+import SupportPage from "./pages/SupportPage";
 import TargetSizePage from "./pages/TargetSizePage";
 import GuidesIndexPage from "./pages/GuidesIndexPage";
 import GuidePage from "./pages/GuidePage";
@@ -58,6 +59,9 @@ export default function App() {
           <NavLink to="/guides" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
             Guides
           </NavLink>
+          <NavLink to="/support" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
+            Support
+          </NavLink>
         </nav>
       </header>
 
@@ -82,6 +86,7 @@ export default function App() {
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/support" element={<SupportPage />} />
           <Route path="/guides" element={<GuidesIndexPage />} />
           <Route path="/guides/:slug" element={<GuidePage />} />
           {TARGET_PAGES.map((p) => (
@@ -97,6 +102,7 @@ export default function App() {
         <p className="footer__links">
           <NavLink to="/tools">All tools</NavLink>
           <NavLink to="/guides">Guides</NavLink>
+          <NavLink to="/support">Support</NavLink>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/contact">Contact</NavLink>
           <NavLink to="/privacy">Privacy</NavLink>
