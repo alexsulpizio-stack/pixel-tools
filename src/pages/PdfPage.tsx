@@ -128,10 +128,10 @@ export default function PdfPage() {
   return (
     <>
       <section className="hero">
-        <h1>Image to PDF — combine JPG & PNG into one PDF</h1>
+        <h1>Convert JPG to PDF free — combine images into one PDF</h1>
         <p>
-          Each image becomes a page. Reorder freely, pick a page size, and download — assembled privately in your
-          browser, nothing uploaded.
+          Turn JPG, PNG, and WebP images into a single PDF for free. Reorder pages, choose a page size and margins,
+          then download instantly — everything stays private in your browser.
         </p>
       </section>
 
@@ -224,7 +224,7 @@ export default function PdfPage() {
       {error && <p className="error">{error}</p>}
 
       <section className="prose tool-prose">
-        <h2>Combine images into a single PDF</h2>
+        <h2>Convert JPG and other images to one PDF</h2>
         <p>
           Turning images into a PDF is the easiest way to share a set of photos, scans, or screenshots
           as one tidy document — for a job application, an expense report, a portfolio, or printing.
