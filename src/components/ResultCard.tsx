@@ -1,4 +1,5 @@
 import { formatBytes, savingsPercent, type ProcessedImage } from "../lib/imageProcessor";
+import { trackEvent } from "../lib/integrations";
 
 interface ResultCardProps {
   image: ProcessedImage;
@@ -10,6 +11,11 @@ export function ResultCard({ image, onRemove }: ResultCardProps) {
   const grew = savings < 0;
 
   const download = () => {
+    trackEvent("download_clicked", {
+      tool: "compressor",
+      download_type: "single_image",
+      output_bytes: image.outputSize,
+    });
     const a = document.createElement("a");
     a.href = image.previewUrl;
     a.download = image.outputName;
