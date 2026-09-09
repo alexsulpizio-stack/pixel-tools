@@ -6,6 +6,7 @@ import { usePageMeta } from "../lib/usePageMeta";
 import { ROUTE_META } from "../lib/routeMeta";
 import type { PageFormat } from "../lib/pdfBuilder";
 import { formatBytes } from "../lib/imageProcessor";
+import { trackEvent } from "../lib/integrations";
 
 const FORMATS: { value: PageFormat; label: string }[] = [
   { value: "fit", label: "Fit to image" },
@@ -53,9 +54,18 @@ export default function PdfPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    trackEvent("tool_view", { tool: "image_to_pdf" });
+  }, []);
+
   useEffect(() => () => items.forEach((i) => URL.revokeObjectURL(i.url)), [items]);
 
   const addFiles = useCallback((files: File[]) => {
+    trackEvent("file_selected", {
+      tool: "image_to_pdf",
+      file_count: files.length,
+      total_bytes: files.reduce((sum, file) => sum + file.size, 0),
+    });
     setItems((prev) => [...prev, ...files.map((file) => ({ file, url: URL.createObjectURL(file) }))]);
   }, []);
 
@@ -77,6 +87,11 @@ export default function PdfPage() {
   }, []);
 
   const download = useCallback(async () => {
+    trackEvent("processing_started", {
+      tool: "image_to_pdf",
+      file_count: items.length,
+      page_format: format,
+    });
     setBusy(true);
     setError("");
     try {
@@ -86,6 +101,17 @@ export default function PdfPage() {
         items.map((i) => i.file),
         { format, margin: format === "fit" ? 0 : margin }
       );
+      trackEvent("processing_completed", {
+        tool: "image_to_pdf",
+        file_count: items.length,
+        page_format: format,
+        output_bytes: blob.size,
+      });
+      trackEvent("download_clicked", {
+        tool: "image_to_pdf",
+        download_type: "pdf",
+        file_count: items.length,
+      });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
