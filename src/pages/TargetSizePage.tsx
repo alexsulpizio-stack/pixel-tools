@@ -6,6 +6,7 @@ import { usePageMeta } from "../lib/usePageMeta";
 import { compressToTarget, type TargetOutput, type TargetResult } from "../lib/targetCompress";
 import { formatBytes } from "../lib/imageProcessor";
 import { TARGET_PAGES, formatTargetLabel, type TargetPageConfig } from "../lib/targetPages";
+import { trackEvent } from "../lib/integrations";
 
 const OUTPUTS: { value: TargetOutput; label: string }[] = [
   { value: "webp", label: "WebP (smallest)" },
@@ -34,6 +35,14 @@ function TargetSizeTool({ config }: TargetSizePageProps) {
 
   const targetBytes = config.targetKB * 1024;
 
+  useEffect(() => {
+    trackEvent("tool_view", {
+      tool: "target_size",
+      target_kb: config.targetKB,
+      target_slug: config.slug,
+    });
+  }, [config.slug, config.targetKB]);
+
   // Each target gets its own component; invalidate unfinished work when it leaves.
   useEffect(() => () => {
     generation.current++;
@@ -44,6 +53,20 @@ function TargetSizeTool({ config }: TargetSizePageProps) {
   const addFiles = useCallback(
     async (files: File[]) => {
       if (processing.current) return;
+      trackEvent("file_selected", {
+        tool: "target_size",
+        target_kb: config.targetKB,
+        target_slug: config.slug,
+        file_count: files.length,
+        total_bytes: files.reduce((sum, file) => sum + file.size, 0),
+      });
+      trackEvent("processing_started", {
+        tool: "target_size",
+        target_kb: config.targetKB,
+        target_slug: config.slug,
+        file_count: files.length,
+        output_format: output,
+      });
       processing.current = true;
       const job = generation.current;
       setBusy(true);
@@ -66,16 +89,33 @@ function TargetSizeTool({ config }: TargetSizePageProps) {
       setErrors(failed);
       processing.current = false;
       setBusy(false);
+      trackEvent("processing_completed", {
+        tool: "target_size",
+        target_kb: config.targetKB,
+        target_slug: config.slug,
+        file_count: files.length,
+        success_count: next.length,
+        failed_count: failed.length,
+        output_format: output,
+      });
     },
-    [targetBytes, output]
+    [config.slug, config.targetKB, targetBytes, output]
   );
 
   const download = useCallback((r: TargetResult) => {
+    trackEvent("download_clicked", {
+      tool: "target_size",
+      target_kb: config.targetKB,
+      target_slug: config.slug,
+      download_type: "single_image",
+      output_bytes: r.blob.size,
+      hit_target: r.hitTarget,
+    });
     const a = document.createElement("a");
     a.href = r.previewUrl;
     a.download = r.name;
     a.click();
-  }, []);
+  }, [config.slug, config.targetKB]);
 
   const label = formatTargetLabel(config.targetKB);
 
