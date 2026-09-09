@@ -60,6 +60,12 @@ export const STATIC_ROUTE_META: RouteMeta[] = [
       "Get in touch with PixelTools. Send questions, feedback, feature requests, or bug reports by email or via GitHub.",
   },
   {
+    path: "/support",
+    title: "PixelTools Help & Support — Troubleshooting & FAQs",
+    description:
+      "Get help with PixelTools: troubleshooting for uploads, processing and downloads, privacy answers, and instructions for reporting bugs or requesting features.",
+  },
+  {
     path: "/guides",
     title: "Image & QR Code Guides — Tips, Formats & How-tos | PixelTools",
     description:
