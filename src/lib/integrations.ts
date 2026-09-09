@@ -1,5 +1,5 @@
 export const GSC_VERIFICATION = "";
-export const GA4_MEASUREMENT_ID = "";
+export const GA4_MEASUREMENT_ID = "G-YCF479SQGQ";
 export const CLOUDFLARE_ANALYTICS_TOKEN = "";
 export const CONSENT_STORAGE_KEY = "pixeltools-consent-v1";
 export type ConsentChoice = "accepted" | "declined";
