@@ -58,9 +58,6 @@ export default function App() {
           <NavLink to="/guides" className={({ isActive }) => (isActive ? "nav-link nav-link--on" : "nav-link")}>
             Guides
           </NavLink>
-          <a href="https://www.buymeacoffee.com/" target="_blank" rel="noreferrer" className="btn btn--ghost btn--sm">
-            ☕ Support
-          </a>
         </nav>
       </header>
 
