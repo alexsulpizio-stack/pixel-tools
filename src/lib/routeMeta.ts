@@ -37,9 +37,9 @@ export const STATIC_ROUTE_META: RouteMeta[] = [
   },
   {
     path: "/image-to-pdf",
-    title: "Image to PDF Converter — JPG & PNG to PDF Free | PixelTools",
+    title: "Convert JPG to PDF Free — Image to PDF Converter | PixelTools",
     description:
-      "Convert JPG, PNG, and WebP images to PDF for free. Combine multiple images into one PDF, choose page size and margins. Private — runs entirely in your browser.",
+      "Convert JPG to PDF free in your browser. Combine JPG, PNG, and WebP images into one PDF, reorder pages, and choose page size and margins. No uploads or sign-up.",
   },
   {
     path: "/privacy",
