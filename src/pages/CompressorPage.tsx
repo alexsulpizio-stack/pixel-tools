@@ -7,6 +7,7 @@ import { Dropzone } from "../components/Dropzone";
 import { SettingsPanel } from "../components/SettingsPanel";
 import { ResultCard } from "../components/ResultCard";
 import { AdSlot } from "../components/AdSlot";
+import { TrackedToolLink } from "../components/TrackedToolLink";
 import { usePageMeta } from "../lib/usePageMeta";
 import { trackEvent } from "../lib/integrations";
 import {
@@ -237,9 +238,16 @@ export default function CompressorPage() {
         <h2>Need an exact file size?</h2>
         <div className="size-links__row">
           {TARGET_PAGES.map((p) => (
-            <Link key={p.slug} to={`/${p.slug}`} className="size-links__chip">
+            <TrackedToolLink
+              key={p.slug}
+              to={`/${p.slug}`}
+              className="size-links__chip"
+              fromTool="compressor"
+              toTool="target_size"
+              destinationSlug={p.slug}
+            >
               {p.output === "webp" ? "Image" : p.output.toUpperCase()} → {formatTargetLabel(p.targetKB)}
-            </Link>
+            </TrackedToolLink>
           ))}
         </div>
       </section>
