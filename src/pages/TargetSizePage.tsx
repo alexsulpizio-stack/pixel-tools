@@ -32,6 +32,8 @@ function TargetSizeTool({ config }: TargetSizePageProps) {
   const resultsRef = useRef<TargetResult[]>([]);
   const generation = useRef(0);
   const processing = useRef(false);
+  const activeFileCount = useRef(0);
+  const activeOutput = useRef<TargetOutput>(config.output);
 
   const targetBytes = config.targetKB * 1024;
 
@@ -45,10 +47,20 @@ function TargetSizeTool({ config }: TargetSizePageProps) {
 
   // Each target gets its own component; invalidate unfinished work when it leaves.
   useEffect(() => () => {
+    if (processing.current) {
+      trackEvent("processing_cancelled", {
+        tool: "target_size",
+        target_kb: config.targetKB,
+        target_slug: config.slug,
+        file_count: activeFileCount.current,
+        output_format: activeOutput.current,
+      });
+      processing.current = false;
+    }
     generation.current++;
     resultsRef.current.forEach((r) => URL.revokeObjectURL(r.previewUrl));
     resultsRef.current = [];
-  }, []);
+  }, [config.slug, config.targetKB]);
 
   const addFiles = useCallback(
     async (files: File[]) => {
@@ -68,6 +80,8 @@ function TargetSizeTool({ config }: TargetSizePageProps) {
         output_format: output,
       });
       processing.current = true;
+      activeFileCount.current = files.length;
+      activeOutput.current = output;
       const job = generation.current;
       setBusy(true);
       setErrors([]);
@@ -89,6 +103,17 @@ function TargetSizeTool({ config }: TargetSizePageProps) {
       setErrors(failed);
       processing.current = false;
       setBusy(false);
+      if (failed.length > 0) {
+        trackEvent("processing_failed", {
+          tool: "target_size",
+          target_kb: config.targetKB,
+          target_slug: config.slug,
+          file_count: files.length,
+          failed_count: failed.length,
+          success_count: next.length,
+          output_format: output,
+        });
+      }
       trackEvent("processing_completed", {
         tool: "target_size",
         target_kb: config.targetKB,
