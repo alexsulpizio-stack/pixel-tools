@@ -48,6 +48,12 @@ export const STATIC_ROUTE_META: RouteMeta[] = [
       "PixelTools privacy policy: your files are processed locally in your browser and never uploaded. Details on cookies and advertising.",
   },
   {
+    path: "/terms",
+    title: "Terms of Use | PixelTools",
+    description:
+      "Read the PixelTools Terms of Use covering acceptable use, browser-based file processing, service availability, third-party services, advertising, and liability.",
+  },
+  {
     path: "/about",
     title: "About PixelTools — Free, Private, In-Browser Image Tools",
     description:
@@ -57,7 +63,7 @@ export const STATIC_ROUTE_META: RouteMeta[] = [
     path: "/contact",
     title: "Contact PixelTools — Questions, Feedback & Bug Reports",
     description:
-      "Get in touch with PixelTools. Send questions, feedback, feature requests, or bug reports by email or via GitHub.",
+      "Contact PixelTools through our official GitHub Issues channel for questions, feedback, feature requests, and bug reports.",
   },
   {
     path: "/support",
