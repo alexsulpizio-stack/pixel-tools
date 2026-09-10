@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Dropzone } from "../components/Dropzone";
 import { AdSlot } from "../components/AdSlot";
+import { TrackedToolLink } from "../components/TrackedToolLink";
 import { usePageMeta } from "../lib/usePageMeta";
 import { ROUTE_META } from "../lib/routeMeta";
 import type { PageFormat } from "../lib/pdfBuilder";
@@ -112,7 +113,6 @@ export default function PdfPage() {
     setBusy(true);
     setError("");
     try {
-      // jspdf is heavy; load it only when actually building a PDF.
       const { buildPdf } = await import("../lib/pdfBuilder");
       const blob = await buildPdf(
         items.map((i) => i.file),
@@ -263,8 +263,15 @@ export default function PdfPage() {
         </ul>
         <p>
           If the source photos are large, it's worth{" "}
-          <Link to="/">compressing them first</Link> to keep the PDF small and easy to email — see our
-          guide on{" "}
+          <TrackedToolLink
+            to="/"
+            fromTool="image_to_pdf"
+            toTool="compressor"
+            destinationSlug="compressor"
+          >
+            compressing them first
+          </TrackedToolLink>{" "}
+          to keep the PDF small and easy to email — see our guide on{" "}
           <Link to="/guides/reduce-image-file-size-for-email-and-web">
             reducing image file size for email and web
           </Link>
