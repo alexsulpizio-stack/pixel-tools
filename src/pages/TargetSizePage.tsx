@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import { Dropzone } from "../components/Dropzone";
 import { AdSlot } from "../components/AdSlot";
+import { TrackedToolLink } from "../components/TrackedToolLink";
 import { usePageMeta } from "../lib/usePageMeta";
 import { compressToTarget, type TargetOutput, type TargetResult } from "../lib/targetCompress";
 import { formatBytes } from "../lib/imageProcessor";
@@ -45,7 +45,6 @@ function TargetSizeTool({ config }: TargetSizePageProps) {
     });
   }, [config.slug, config.targetKB]);
 
-  // Each target gets its own component; invalidate unfinished work when it leaves.
   useEffect(() => () => {
     if (processing.current) {
       trackEvent("processing_cancelled", {
@@ -229,13 +228,26 @@ function TargetSizeTool({ config }: TargetSizePageProps) {
         <h2>Other target sizes</h2>
         <div className="size-links__row">
           {TARGET_PAGES.filter((p) => p.slug !== config.slug).map((p) => (
-            <Link key={p.slug} to={`/${p.slug}`} className="size-links__chip">
+            <TrackedToolLink
+              key={p.slug}
+              to={`/${p.slug}`}
+              className="size-links__chip"
+              fromTool="target_size"
+              toTool="target_size"
+              destinationSlug={p.slug}
+            >
               {p.h1.replace("Compress ", "").replace(" to ", " → ")}
-            </Link>
+            </TrackedToolLink>
           ))}
-          <Link to="/" className="size-links__chip">
+          <TrackedToolLink
+            to="/"
+            className="size-links__chip"
+            fromTool="target_size"
+            toTool="compressor"
+            destinationSlug="compressor"
+          >
             Full compressor →
-          </Link>
+          </TrackedToolLink>
         </div>
       </section>
 
