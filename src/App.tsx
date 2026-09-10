@@ -5,6 +5,7 @@ import QrPage from "./pages/QrPage";
 import PalettePage from "./pages/PalettePage";
 import PdfPage from "./pages/PdfPage";
 import PrivacyPage from "./pages/PrivacyPage";
+import TermsPage from "./pages/TermsPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import SupportPage from "./pages/SupportPage";
@@ -84,6 +85,7 @@ export default function App() {
           <Route path="/watermark-image" element={<WatermarkPage />} />
           <Route path="/blur-image" element={<BlurImagePage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/support" element={<SupportPage />} />
@@ -106,6 +108,7 @@ export default function App() {
           <NavLink to="/about">About</NavLink>
           <NavLink to="/contact">Contact</NavLink>
           <NavLink to="/privacy">Privacy</NavLink>
+          <NavLink to="/terms">Terms</NavLink>
         </p>
       </footer>
     </div>
