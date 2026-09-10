@@ -7,35 +7,43 @@ export default function ContactPage() {
 
   return (
     <article className="prose">
-      <h1>Contact Us</h1>
+      <h1>Contact PixelTools</h1>
 
       <p>
-        We're glad you're here. Whether you've found a bug, have a question about how a tool works, want to suggest a
-        new tool, or just want to say hello, we read every message.
+        GitHub Issues is the official public contact channel for PixelTools. Use it for support questions, bug reports,
+        feature requests, feedback, or general questions about the site.
       </p>
 
-      <h2>Report a bug or request a feature</h2>
       <p>
-        PixelTools is open source. The public support channel is GitHub: open an issue to report a bug or request a
-        feature on our{" "}
-        <a href="https://github.com/alexsulpizio-stack/pixel-tools/issues" target="_blank" rel="noreferrer">
-        GitHub repository
+        <a
+          href="https://github.com/alexsulpizio-stack/pixel-tools/issues/new"
+          target="_blank"
+          rel="noreferrer"
+          className="btn btn--primary"
+        >
+          Contact PixelTools on GitHub
         </a>
-        . Include the tool, browser, device, and steps that caused the problem so it can be reproduced.
       </p>
 
-      <h2>A note on your files</h2>
+      <h2>What to include</h2>
       <p>
-        Because every PixelTools utility runs entirely in your browser, we never receive or store the images you
-        process — so if something isn't working, we can't see your files on our end. When reporting a problem, it helps
-        to tell us which tool you were using, your browser and device, and what you expected to happen. You can learn
-        more on our <Link to="/privacy">Privacy page</Link>.
+        For a technical problem, include the PixelTools tool you were using, your browser and device, what you expected
+        to happen, what actually happened, and the steps that reproduce the problem. For a feature request or general
+        question, just describe what you need as clearly as you can.
       </p>
 
-      <h2>More about us</h2>
+      <h2>Please protect your privacy</h2>
       <p>
-        Curious who's behind PixelTools and why it works the way it does? Read more on our{" "}
-        <Link to="/about">About page</Link>.
+        GitHub Issues are public. Do not post private photos, personal documents, passwords, account information, or
+        other sensitive material. PixelTools processes images locally in your browser, so we normally do not need a
+        copy of your original file to investigate a problem. See our <Link to="/privacy">Privacy Policy</Link> for more
+        information.
+      </p>
+
+      <h2>Need help using a tool?</h2>
+      <p>
+        Start with the <Link to="/support">Help &amp; Support page</Link> for common troubleshooting. You can also browse
+        <Link to="/tools"> all PixelTools tools</Link> or learn more about the project on the <Link to="/about">About page</Link>.
       </p>
     </article>
   );
