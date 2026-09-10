@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Dropzone } from "../components/Dropzone";
 import { AdSlot } from "../components/AdSlot";
@@ -53,9 +53,23 @@ export default function PdfPage() {
   const [margin, setMargin] = useState(24);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const processingRef = useRef(false);
+  const activeFileCount = useRef(0);
+  const activeFormat = useRef<PageFormat>("fit");
 
   useEffect(() => {
     trackEvent("tool_view", { tool: "image_to_pdf" });
+  }, []);
+
+  useEffect(() => () => {
+    if (processingRef.current) {
+      trackEvent("processing_cancelled", {
+        tool: "image_to_pdf",
+        file_count: activeFileCount.current,
+        page_format: activeFormat.current,
+      });
+      processingRef.current = false;
+    }
   }, []);
 
   useEffect(() => () => items.forEach((i) => URL.revokeObjectURL(i.url)), [items]);
@@ -92,6 +106,9 @@ export default function PdfPage() {
       file_count: items.length,
       page_format: format,
     });
+    processingRef.current = true;
+    activeFileCount.current = items.length;
+    activeFormat.current = format;
     setBusy(true);
     setError("");
     try {
@@ -101,6 +118,7 @@ export default function PdfPage() {
         items.map((i) => i.file),
         { format, margin: format === "fit" ? 0 : margin }
       );
+      processingRef.current = false;
       trackEvent("processing_completed", {
         tool: "image_to_pdf",
         file_count: items.length,
@@ -119,6 +137,12 @@ export default function PdfPage() {
       a.click();
       URL.revokeObjectURL(url);
     } catch {
+      processingRef.current = false;
+      trackEvent("processing_failed", {
+        tool: "image_to_pdf",
+        file_count: items.length,
+        page_format: format,
+      });
       setError("Couldn't build the PDF from those images.");
     } finally {
       setBusy(false);
