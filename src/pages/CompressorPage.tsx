@@ -66,6 +66,7 @@ export default function CompressorPage() {
   useEffect(() => {
     if (pendingFiles.length === 0) return;
     let cancelled = false;
+    let finished = false;
     const processed: ProcessedImage[] = [];
 
     trackEvent("processing_started", {
@@ -94,6 +95,15 @@ export default function CompressorPage() {
       setResults(processed);
       setErrors(failed);
       setCompleted({ files: pendingFiles, settings });
+      if (failed.length > 0) {
+        trackEvent("processing_failed", {
+          tool: "compressor",
+          file_count: pendingFiles.length,
+          failed_count: failed.length,
+          success_count: processed.length,
+          output_format: settings.format,
+        });
+      }
       trackEvent("processing_completed", {
         tool: "compressor",
         file_count: pendingFiles.length,
@@ -101,10 +111,19 @@ export default function CompressorPage() {
         failed_count: failed.length,
         output_format: settings.format,
       });
+      finished = true;
     })();
 
     return () => {
       cancelled = true;
+      if (!finished) {
+        trackEvent("processing_cancelled", {
+          tool: "compressor",
+          file_count: pendingFiles.length,
+          processed_count: processed.length,
+          output_format: settings.format,
+        });
+      }
       // Completed results belong to the page; unfinished results belong to this job.
       if (resultsRef.current !== processed) {
         processed.forEach((r) => URL.revokeObjectURL(r.previewUrl));
