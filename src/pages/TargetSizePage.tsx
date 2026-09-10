@@ -22,6 +22,55 @@ export default function TargetSizePage({ config }: TargetSizePageProps) {
   return <TargetSizeTool key={config.slug} config={config} />;
 }
 
+function ResultRequirementHelper({
+  config,
+  result,
+  output,
+}: {
+  config: TargetPageConfig;
+  result: TargetResult;
+  output: TargetOutput;
+}) {
+  if (config.targetKB === 100) {
+    return (
+      <section className="prose tool-prose" aria-label="100 KB upload requirement check">
+        <h2>{result.hitTarget ? "Ready for a 100 KB upload" : "100 KB upload check"}</h2>
+        <p>
+          <strong>File size:</strong> {formatBytes(result.blob.size)} {result.hitTarget ? "✓" : "— still above 100 KB"}<br />
+          <strong>Format:</strong> {output === "jpeg" ? "JPEG" : output.toUpperCase()}<br />
+          <strong>Dimensions:</strong> {result.width}×{result.height}
+        </p>
+        {output !== "jpeg" && (
+          <p>
+            <strong>Does your form require JPG?</strong> Some upload forms accept only .jpg or .jpeg files even when the
+            size is correct. Switch the output format to JPEG above and recompress before submitting.
+          </p>
+        )}
+      </section>
+    );
+  }
+
+  if (config.targetKB === 200) {
+    return (
+      <section className="prose tool-prose" aria-label="200 KB document upload check">
+        <h2>200 KB check</h2>
+        <p>
+          <strong>File size:</strong> {formatBytes(result.blob.size)} {result.hitTarget ? "✓" : "— still above 200 KB"}<br />
+          <strong>Dimensions:</strong> {result.width}×{result.height}<br />
+          <strong>Format:</strong> {output === "jpeg" ? "JPEG" : output.toUpperCase()}
+        </p>
+        <p>
+          Before submitting an ID, passport, visa, exam, or other official photo, compare these dimensions and the file
+          type with the requirements from the organization receiving it. A 200 KB file-size limit does not guarantee
+          that the image also meets that organization's dimension, aspect-ratio, background, or format rules.
+        </p>
+      </section>
+    );
+  }
+
+  return null;
+}
+
 function TargetSizeTool({ config }: TargetSizePageProps) {
   usePageMeta(config.title, config.description);
 
@@ -203,6 +252,7 @@ function TargetSizeTool({ config }: TargetSizePageProps) {
               </div>
             ))}
           </div>
+          <ResultRequirementHelper config={config} result={results[results.length - 1]} output={output} />
         </section>
       )}
 
