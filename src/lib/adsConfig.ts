@@ -8,7 +8,7 @@
  */
 export type AdsProvider = "none" | "adsense" | "ezoic";
 
-export const ADS_PROVIDER: AdsProvider = "none";
+export const ADS_PROVIDER: AdsProvider = "adsense";
 export const ADSENSE_CLIENT = "ca-pub-1156683206333132";
 
 /** From Ezoic → EzoicAds → Ad Tester / privacy scripts (e.g. "########"). */
