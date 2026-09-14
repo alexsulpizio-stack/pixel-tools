@@ -21,6 +21,18 @@ export default function AboutPage() {
         sending the result back. That means your personal photos, ID documents, and screenshots pass through — and are
         often stored on — someone else's computer. We think that's unnecessary.
       </p>
+
+      <h2>How we build the tools</h2>
+      <p>
+        Each utility is designed around a specific job: preparing an image for a form, making a page load faster,
+        fixing a format mismatch, or protecting private information before sharing. We keep the controls explicit and
+        show the output details that matter for that job, including file size, dimensions, format, ordering, or metadata.
+      </p>
+      <p>
+        The tools use standard browser capabilities such as the Canvas API and local file handling. That design keeps
+        the workflow useful without an upload account, while the guides explain when
+        a particular format or setting is appropriate and what it cannot do.
+      </p>
       <p>
         PixelTools does all of its work locally, inside your browser, using modern web technology (the Canvas API and
         related standards). Your files never leave your device. There are no uploads, no accounts, no watermarks, and

@@ -166,6 +166,18 @@ export function ToolDetails() {
       <h3>Good to know</h3>
       <p><strong>Limitations:</strong> {copy.limits}</p>
       <p><strong>Privacy:</strong> {copy.privacy}</p>
+      <h3>How PixelTools makes this decision</h3>
+      <p>
+        PixelTools shows the settings and the result side by side so you can make an informed choice before downloading.
+        File size is measured from the actual browser-generated output, while dimensions, format, and visual preview are
+        kept visible because a smaller file is not automatically a better file. The original is never overwritten.
+      </p>
+      <p>
+        These tools are maintained as practical, browser-first utilities rather than upload forms. We document the
+        trade-offs for each task, test the output in the browser, and link to related guides when a different format or
+        workflow may be a better fit. For troubleshooting, see <a href="/support">Help &amp; Support</a>; for the full
+        data-handling explanation, read the <a href="/privacy">Privacy Policy</a>.
+      </p>
     </section>
   );
 }
