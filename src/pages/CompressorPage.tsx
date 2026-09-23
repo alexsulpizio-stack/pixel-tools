@@ -52,6 +52,7 @@ export default function CompressorPage() {
   const [completed, setCompleted] = useState<{ files: File[]; settings: ProcessSettings } | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
   const resultsRef = useRef<ProcessedImage[]>([]);
+  const jobGeneration = useRef(0);
   const busy = pendingFiles.length > 0 && (completed?.files !== pendingFiles || completed?.settings !== settings);
 
   useEffect(() => {
@@ -68,6 +69,7 @@ export default function CompressorPage() {
     if (pendingFiles.length === 0) return;
     let cancelled = false;
     let finished = false;
+    const job = ++jobGeneration.current;
     const processed: ProcessedImage[] = [];
 
     trackEvent("processing_started", {
@@ -81,7 +83,7 @@ export default function CompressorPage() {
       for (const file of pendingFiles) {
         try {
           const result = await processImage(file, settings);
-          if (cancelled) {
+          if (cancelled || job !== jobGeneration.current) {
             URL.revokeObjectURL(result.previewUrl);
             return;
           }
@@ -89,7 +91,7 @@ export default function CompressorPage() {
         } catch {
           failed.push(file.name);
         }
-        if (cancelled) return;
+        if (cancelled || job !== jobGeneration.current) return;
       }
       resultsRef.current.forEach((r) => URL.revokeObjectURL(r.previewUrl));
       resultsRef.current = processed;
@@ -154,11 +156,14 @@ export default function CompressorPage() {
   }, []);
 
   const clearAll = useCallback(() => {
+    // Invalidate the current batch immediately, before React runs the effect cleanup.
+    jobGeneration.current++;
     resultsRef.current.forEach((r) => URL.revokeObjectURL(r.previewUrl));
     resultsRef.current = [];
     setResults([]);
     setPendingFiles([]);
     setErrors([]);
+    setCompleted(null);
   }, []);
 
   const downloadAll = useCallback(async () => {
@@ -237,7 +242,7 @@ export default function CompressorPage() {
       <section className="size-links">
         <h2>Need an exact file size?</h2>
         <div className="size-links__row">
-          {TARGET_PAGES.map((p) => (
+          {TARGET_PAGES.filter((p) => p.indexable).map((p) => (
             <TrackedToolLink
               key={p.slug}
               to={`/${p.slug}`}

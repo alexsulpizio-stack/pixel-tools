@@ -72,7 +72,7 @@ function ResultRequirementHelper({
 }
 
 function TargetSizeTool({ config }: TargetSizePageProps) {
-  usePageMeta(config.title, config.description);
+  usePageMeta(config.title, config.description, !config.indexable);
 
   const [output, setOutput] = useState<TargetOutput>(config.output);
   const [results, setResults] = useState<TargetResult[]>([]);
@@ -277,7 +277,7 @@ function TargetSizeTool({ config }: TargetSizePageProps) {
       <section className="size-links">
         <h2>Other target sizes</h2>
         <div className="size-links__row">
-          {TARGET_PAGES.filter((p) => p.slug !== config.slug).map((p) => (
+          {TARGET_PAGES.filter((p) => p.indexable && p.slug !== config.slug).map((p) => (
             <TrackedToolLink
               key={p.slug}
               to={`/${p.slug}`}

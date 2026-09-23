@@ -277,6 +277,31 @@ export default function PdfPage() {
           </Link>
           .
         </p>
+        <h2>Choose the right PDF page size</h2>
+        <p>
+          <strong>Fit to image</strong> makes a page match each image's pixel dimensions and is useful for
+          screenshots, receipts, and digital records you will view on screen. Choose <strong>A4</strong> or
+          <strong> Letter</strong> when the document will be printed or uploaded to a form that expects paper-sized
+          pages. Landscape images get landscape pages automatically; portrait images stay portrait.
+        </p>
+        <p>
+          A4 is common internationally, while US office printers and many US forms use Letter. The margin setting
+          applies only to those standard page sizes: larger margins leave more white space around a photo and can
+          help avoid printer edge clipping. “Fit to image” has no page margin because the page already follows the
+          image boundary.
+        </p>
+        <h2>Before you turn JPG photos into one PDF</h2>
+        <ul>
+          <li>Arrange the thumbnails in reading order; every image becomes a separate PDF page.</li>
+          <li>Remove accidental duplicates or blank scans before downloading.</li>
+          <li>For a smaller attachment, resize or compress large photos first, then rebuild the PDF.</li>
+          <li>Open the downloaded PDF once to check page order, orientation, and legibility before sending it.</li>
+        </ul>
+        <p>
+          Transparent pixels in PNG or WebP images appear white in the PDF. The PDF builder converts page images
+          to JPEG while assembling the document, so a transparent logo is flattened onto white. If you need a
+          transparent graphic, keep the original image file as well as the PDF.
+        </p>
       </section>
 
       <section className="faq" id="faq">

@@ -34,6 +34,19 @@ Site ownership is verified. Status is **"Needs attention — your site isn't rea
 
 Then let Google recrawl before resubmitting.
 
+### Remediation branch — 2026-09-23
+
+Branch `fix/adsense-low-value-remediation` implements the first content/SEO pass; it is not deployed yet.
+
+- Kept indexable and in the sitemap: `/compress-image-to-1mb`, `/compress-image-to-50kb`, and `/compress-jpeg-to-50kb`.
+- Kept the other seven target-size tools usable but marked their pages `noindex,follow` and removed them from the sitemap: 20 KB, 100 KB, 200 KB, and 500 KB general image routes; 100 KB and 200 KB JPEG routes; and 100 KB PNG route.
+- Added useful detail to the 1 MB compressor, JPG-to-PDF tool, 50 KB JPG guide, and JPEG/PNG/WebP comparison guide, based on the 2026-09-18 Search Console report.
+- Removed the unconditional AdSense script from `index.html`. The client loader now needs consent, a configured provider, an eligible tool/guide route, and the production domain. It retains script-ID guards to avoid duplicate loading.
+- Added immediate compressor job invalidation when Clear is pressed and prerendered `noindex` tags for excluded target-size routes.
+- Do not request another AdSense review as part of this branch.
+
+Validation so far: production build passes; edited files pass ESLint; generated route HTML and sitemap checks pass. Whole-repo lint still has 49 existing errors. Browser interaction QA could not run in this workspace because no browser executable is installed and its preview server is not reachable over loopback. Recheck interaction flows in CI or a browser-capable environment before merging/deploying, then allow Google to recrawl before considering another review.
+
 ### Explicitly ruled out as a fix
 
 Generic SEO filler. Hundreds of AI-generated articles. Dozens of near-identical target-size pages (`/compress-image-to-100kb`, `/compress-image-to-200kb`, …). Keyword variations with no independent value. A dedicated page has to solve a distinct problem.
@@ -49,6 +62,8 @@ Generic SEO filler. Hundreds of AI-generated articles. Dozens of near-identical 
 | `src/pages/CompressorPage.tsx` (~line 57) | Clearing a running batch leaves "Processing…" stuck — cancellation doesn't reset busy state |
 | `src/pages/TargetSizePage.tsx` (~line 33) | Switching target-size pages mid-process lets the old operation finish and render results for the wrong target |
 | `index.html` (~line 20) | AdSense script loads unconditionally, so the advertising-off setting doesn't actually disable ads |
+
+The three issues above have code changes on `fix/adsense-low-value-remediation`; treat them as pending deployment and browser verification until that branch is merged and shipped.
 
 The third is a consent and correctness problem independent of approval — fix it on its own track. The rule should be `adsEnabled = consent && configuration && eligiblePage`. Also check for duplicate initialization, dev/staging behavior, layout shift from ad slots, accidental-click risk, and ads inside tool interaction areas.
 

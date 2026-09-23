@@ -9,6 +9,8 @@ export interface TargetSection {
 export interface TargetPageConfig {
   slug: string;
   targetKB: number;
+  /** Whether this size-specific landing page has enough distinct search value to index. */
+  indexable: boolean;
   /** Default output format for this page */
   output: TargetOutput;
   /** Accept hint shown in UI, e.g. "JPG, PNG, WebP" */
@@ -40,6 +42,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
   {
     slug: "compress-image-to-20kb",
     targetKB: 20,
+    indexable: false,
     output: "webp",
     title: "Compress Image to 20KB Online Free — Exact Size | PixelTools",
     description: "Reduce any image to under 20KB for free, right in your browser. Perfect for avatars, forum profile pictures, and app icons. No upload, no watermark.",
@@ -78,6 +81,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
   {
     slug: "compress-image-to-50kb",
     targetKB: 50,
+    indexable: true,
     output: "webp",
     title: "Compress Image to 50KB Online Free — Exact Size | PixelTools",
     description: "Shrink any photo to under 50KB free in your browser. Great for email signatures, web thumbnails, and online application forms. No upload required.",
@@ -125,6 +129,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
   {
     slug: "compress-image-to-100kb",
     targetKB: 100,
+    indexable: false,
     output: "webp",
     title: "Compress Image to 100KB Online Free — Exact Size | PixelTools",
     description: "Compress any image to under 100KB for free — in your browser, no upload. Ideal for job portals, government forms, and website images.",
@@ -163,6 +168,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
   {
     slug: "compress-image-to-200kb",
     targetKB: 200,
+    indexable: false,
     output: "webp",
     title: "Compress Image to 200KB Online Free — Exact Size | PixelTools",
     description: "Reduce any photo to under 200KB free, in your browser. Common requirement for passport, visa, and ID photo uploads. No upload to servers, fully private.",
@@ -200,6 +206,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
   {
     slug: "compress-image-to-500kb",
     targetKB: 500,
+    indexable: false,
     output: "webp",
     title: "Compress Image to 500KB Online Free — Exact Size | PixelTools",
     description: "Compress photos to under 500KB free in your browser. Fits real-estate listings, classifieds, and CMS upload limits while keeping high quality.",
@@ -237,6 +244,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
   {
     slug: "compress-image-to-1mb",
     targetKB: 1024,
+    indexable: true,
     output: "webp",
     title: "Compress Image to 1MB Online Free — Exact Size | PixelTools",
     description: "Shrink any image to under 1MB for free in your browser. Perfect for email attachments, Discord uploads, and forum limits. Private — no upload.",
@@ -262,6 +270,20 @@ export const TARGET_PAGES: TargetPageConfig[] = [
           "Recompressing to 1 MB keeps what your eyes actually see and discards the rest, so the result looks the same in a message or document while being a fraction of the size. At this generous target you can keep large dimensions (1920–2560 px) and still fit comfortably.",
         ],
       },
+      {
+        heading: "Choose the format that fits where you are sending it",
+        paragraphs: [
+          "For email, messaging, and most modern websites, WebP usually reaches the 1 MB ceiling with the most detail left intact. If the recipient or upload form asks for JPG/JPEG, choose JPEG in the format controls before processing. PNG is useful for screenshots, diagrams, and transparent graphics, but a photographic PNG may remain much larger or need reduced dimensions to meet the same limit.",
+          "A 1 MB file-size limit is separate from pixel dimensions. Some services still require a maximum width, a specific aspect ratio, or a particular color format. Check those requirements too; this tool reports the output dimensions so you can compare them before uploading.",
+        ],
+      },
+      {
+        heading: "What the size guarantee means",
+        paragraphs: [
+          "The target is a maximum, not a request to make every image exactly 1 MB. If a photo can stay smaller without visible damage, the tool keeps it smaller. When compression alone cannot fit the image, it reduces dimensions gradually and shows the resulting preview and dimensions before you download.",
+          "For an email attachment, compare the final file size shown here with the limit in your mail service. Mail providers may encode attachments during sending, so a file close to a service's maximum can still be rejected; leaving a little room below that service limit is a safer choice.",
+        ],
+      },
     ],
     faq: [
       {
@@ -274,6 +296,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
   {
     slug: "compress-jpeg-to-50kb",
     targetKB: 50,
+    indexable: true,
     output: "jpeg",
     title: "Compress JPEG to 50KB Online Free — Exact Size | PixelTools",
     description: "Compress JPG/JPEG photos to under 50KB free, in your browser. Output stays JPEG for maximum compatibility. No upload, no watermark.",
@@ -332,6 +355,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
   {
     slug: "compress-jpeg-to-100kb",
     targetKB: 100,
+    indexable: false,
     output: "jpeg",
     title: "Compress JPEG to 100KB Online Free — Exact Size | PixelTools",
     description: "Reduce JPG/JPEG file size to under 100KB free in your browser. Stays in JPEG format for picky upload forms. Private — never uploaded.",
@@ -369,6 +393,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
   {
     slug: "compress-jpeg-to-200kb",
     targetKB: 200,
+    indexable: false,
     output: "jpeg",
     title: "Compress JPEG to 200KB Online Free — Exact Size | PixelTools",
     description: "Compress JPG photos to under 200KB free — in your browser, output stays JPEG. Common for visa applications and document uploads. Fully private.",
@@ -406,6 +431,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
   {
     slug: "compress-png-to-100kb",
     targetKB: 100,
+    indexable: false,
     output: "png",
     title: "Compress PNG to 100KB Online Free — Keep PNG Format | PixelTools",
     description: "Reduce PNG file size to under 100KB free in your browser. Keeps PNG format and transparency, or convert to WebP for smaller files. No upload.",

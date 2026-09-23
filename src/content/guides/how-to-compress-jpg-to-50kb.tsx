@@ -97,6 +97,12 @@ export default function HowToCompressJpgTo50kb() {
           </tr>
         </tbody>
       </table>
+      <p>
+        “50 KB” can mean 50,000 bytes on a strict decimal-size form or 50 × 1,024 bytes on a form using the
+        computer-storage convention. This tool uses 50 × 1,024 bytes as its maximum. If the receiving form rejects
+        a result that appears to be under 50 KB, check its stated byte limit and reduce the target or dimensions
+        slightly before trying again.
+      </p>
 
       <h2>JPG vs WebP for a 50 KB limit</h2>
       <p>

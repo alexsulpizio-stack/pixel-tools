@@ -2,6 +2,7 @@ export interface RouteMeta {
   path: string;
   title: string;
   description: string;
+  noindex?: boolean;
 }
 
 /**
