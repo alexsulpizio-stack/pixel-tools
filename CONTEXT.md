@@ -71,7 +71,7 @@ Ad loading is a consent and correctness concern independent of approval. The bra
 
 ## Build quality
 
-At last inspection: production build passed, lint reported **51 errors**, no automated test suite, no full browser interaction testing. The 51 are a maintainability signal, not 51 runtime bugs — triage them, prioritizing React lifecycle, async state, stale state, correctness, and resource cleanup.
+At last inspection: production build passed, full-repo lint reported **49 errors**, and the remediation branch had no automated browser suite. A Playwright suite now covers the compressor Clear regression, switching from 50 KB to 1 MB while processing, and no AdSense request on localhost, at desktop and mobile-sized viewports. Run `npx playwright install chromium` once, then `npm run test:e2e`. The suite has not been executed in this environment because the Chromium download returned an invalid empty archive. Lint passes for the new Playwright config and test file. The full-repo lint errors are unrelated to this remediation; prioritize React lifecycle, async state, stale state, correctness, and resource cleanup when triaging them.
 
 ---
 
@@ -112,7 +112,7 @@ GA4, Google Tag Manager, Search Console verification, consent management, Cloudf
 ## Next steps
 
 1. Review and merge/deploy the remediation branch when ready.
-2. Complete mobile QA and add automated browser tests for the important tool flows.
+2. Run the Playwright suite locally after installing Chromium, then complete visual mobile QA.
 3. Triage the 49 unrelated lint errors and continue the trust-layer review.
 4. Let Google recrawl the deployed changes; only consider another AdSense review after materially more content has been crawled.
 

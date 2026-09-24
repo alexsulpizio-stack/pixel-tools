@@ -10,6 +10,18 @@ npm run dev      # local dev server
 npm run build    # production build in dist/
 ```
 
+## Browser interaction checks
+
+Install the Playwright Chromium browser once, then run the checks on desktop and a mobile-sized viewport:
+
+```bash
+npx playwright install chromium
+npm run test:e2e
+```
+
+The suite starts the Vite dev server automatically. It checks clearing a running compression, switching from the 50 KB
+tool to the 1 MB tool while a file is processing, and that localhost does not load AdSense after consent is present.
+
 ## Stack
 
 - Vite + React + TypeScript

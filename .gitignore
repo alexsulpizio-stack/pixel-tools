@@ -12,6 +12,8 @@ dist
 dist-ssr
 dist-server
 *.local
+playwright-report
+test-results
 
 # Google service-account keys & OAuth secrets — NEVER commit credentials
 gsc-key.json
