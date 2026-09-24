@@ -34,6 +34,19 @@ Site ownership is verified. Status is **"Needs attention — your site isn't rea
 
 Then let Google recrawl before resubmitting.
 
+### Remediation branch — 2026-09-23
+
+Branch `fix/adsense-low-value-remediation` implements the first content/SEO pass; it is not deployed yet.
+
+- Kept indexable and in the sitemap: `/compress-image-to-1mb`, `/compress-image-to-50kb`, and `/compress-jpeg-to-50kb`.
+- Kept the other seven target-size tools usable but marked their pages `noindex,follow` and removed them from the sitemap: 20 KB, 100 KB, 200 KB, and 500 KB general image routes; 100 KB and 200 KB JPEG routes; and 100 KB PNG route.
+- Added useful detail to the 1 MB compressor, JPG-to-PDF tool, 50 KB JPG guide, and JPEG/PNG/WebP comparison guide, based on the 2026-09-18 Search Console report.
+- Removed the unconditional AdSense script from `index.html`. The client loader now needs consent, a configured provider, an eligible tool/guide route, and the production domain. It retains script-ID guards to avoid duplicate loading.
+- Added immediate compressor job invalidation when Clear is pressed and prerendered `noindex` tags for excluded target-size routes.
+- Do not request another AdSense review as part of this branch.
+
+Validation: production build passes; edited files pass ESLint; generated route HTML and sitemap checks pass. Whole-repo lint still has 49 existing errors. Manual Chrome QA on Windows passed for clearing during processing, switching from the 1 MB target page to 50 KB mid-process, and confirming no AdSense request on localhost. This is a desktop smoke check, not a full automated or mobile test suite.
+
 ### Explicitly ruled out as a fix
 
 Generic SEO filler. Hundreds of AI-generated articles. Dozens of near-identical target-size pages (`/compress-image-to-100kb`, `/compress-image-to-200kb`, …). Keyword variations with no independent value. A dedicated page has to solve a distinct problem.
@@ -50,13 +63,15 @@ Generic SEO filler. Hundreds of AI-generated articles. Dozens of near-identical 
 | `src/pages/TargetSizePage.tsx` (~line 33) | Switching target-size pages mid-process lets the old operation finish and render results for the wrong target |
 | `index.html` (~line 20) | AdSense script loads unconditionally, so the advertising-off setting doesn't actually disable ads |
 
-The third is a consent and correctness problem independent of approval — fix it on its own track. The rule should be `adsEnabled = consent && configuration && eligiblePage`. Also check for duplicate initialization, dev/staging behavior, layout shift from ad slots, accidental-click risk, and ads inside tool interaction areas.
+The three issues above have code changes on `fix/adsense-low-value-remediation`; the user manually verified the three key desktop flows. Treat the fixes as pending deployment until that branch is merged and shipped.
+
+Ad loading is a consent and correctness concern independent of approval. The branch gates it on `consent && configuration && eligiblePage` and limits it to the production domain; localhost was manually verified not to request AdSense. Still review layout shift, accidental-click risk, and ad placement before enabling monetization.
 
 ---
 
 ## Build quality
 
-At last inspection: production build passed, lint reported **51 errors**, no automated test suite, no full browser interaction testing. The 51 are a maintainability signal, not 51 runtime bugs — triage them, prioritizing React lifecycle, async state, stale state, correctness, and resource cleanup.
+Production build passed; full-repo lint reports **49 existing errors**. The Playwright suite covers clearing during compression, switching from 50 KB to 1 MB mid-process, and no AdSense request on localhost, at desktop and mobile-sized viewports. The user ran it on Windows on 2026-09-24: all six checks passed. Run `npx playwright install chromium` once, then `npm run test:e2e`. Lint and TypeScript checks pass for the Playwright config and test file. The full-repo lint errors are unrelated to this remediation; prioritize React lifecycle, async state, stale state, correctness, and resource cleanup when triaging them.
 
 ---
 
@@ -96,13 +111,9 @@ GA4, Google Tag Manager, Search Console verification, consent management, Cloudf
 
 ## Next steps
 
-1. Confirm current `main`; inventory all routes and tools.
-2. Fix the three known defects.
-3. Re-run lint and triage the errors.
-4. Audit what analytics/SEO/AdSense/consent code actually exists.
-5. Inventory indexable URLs and their current content.
-6. Ship the content, thin-page, and trust work in small releases rather than one large one.
-7. Browser QA on desktop and mobile.
-8. Let Google recrawl, then resubmit to AdSense.
+1. Review and merge/deploy the remediation branch when ready.
+2. Optionally check the layout on a physical phone; the mobile-sized Playwright interaction checks pass.
+3. Triage the 49 unrelated lint errors and continue the trust-layer review.
+4. Let Google recrawl the deployed changes; only consider another AdSense review after materially more content has been crawled.
 
 Note: at ~10K monthly pageviews, approval is worth roughly $30/month. It's a gate to clear, not income. Traffic growth is where the leverage is.

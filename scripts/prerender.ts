@@ -140,6 +140,7 @@ const targetMeta: RouteMeta[] = TARGET_PAGES.map((p) => ({
   path: `/${p.slug}`,
   title: p.title,
   description: p.description,
+  noindex: !p.indexable,
 }));
 
 const guideMeta: RouteMeta[] = GUIDES_META.map((g) => ({
@@ -184,6 +185,11 @@ async function renderPage(meta: RouteMeta): Promise<string> {
     .replace(
       /<link rel="canonical" href="[\s\S]*?" \/>/,
       `<link rel="canonical" href="${canonical}" />`
+    )
+    .replace(/<meta name="robots" content="[^"]*" \/>\n?/, "")
+    .replace(
+      /<\/head>/,
+      `${meta.noindex ? '  <meta name="robots" content="noindex,follow" />\n' : ""}</head>`
     )
     .replace(/<\/head>/, `  ${buildJsonLd(meta)}\n  </head>`);
 

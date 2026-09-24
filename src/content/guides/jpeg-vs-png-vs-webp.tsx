@@ -51,6 +51,34 @@ export default function JpegVsPngVsWebp() {
         <li><strong>Needs animation?</strong> → WebP (or keep an existing GIF).</li>
       </ul>
 
+      <h2>Format choice when a website has upload rules</h2>
+      <p>
+        The best-looking format is not always the format the receiving website accepts. Check both the file type
+        and the file-size limit in the form before converting. A smaller WebP still fails if the form only accepts
+        JPEG, and changing the filename extension does not change the file's actual format.
+      </p>
+      <table>
+        <thead>
+          <tr><th>What the upload asks for</th><th>Good starting choice</th><th>Check before sending</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>JPG or JPEG photo</td><td>JPEG</td><td>Some forms reject WebP even when it is smaller.</td></tr>
+          <tr><td>Transparent logo or icon</td><td>PNG or WebP</td><td>JPEG removes transparency and uses a solid background.</td></tr>
+          <tr><td>Screenshot with small text</td><td>PNG</td><td>Lossy compression can blur fine text and sharp edges.</td></tr>
+          <tr><td>Website photo, format flexible</td><td>WebP</td><td>Keep a JPEG copy for tools that do not accept WebP.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Why the same photo has different file sizes</h2>
+      <p>
+        Pixel dimensions, image detail, noise, and transparency all affect the final size. Two photos saved at the
+        same quality setting can differ substantially: foliage, hair, and textured backgrounds are harder to
+        encode compactly than a plain wall. A format comparison is meaningful only when you compare the same image
+        at similar visual quality and dimensions. For a practical file-size target, use the dedicated{" "}
+        <Link to="/compress-image-to-50kb">50 KB image compressor</Link> or the{" "}
+        <Link to="/compress-jpeg-to-50kb">50 KB JPEG compressor</Link> when the extension must stay .jpg.
+      </p>
+
       <h2>A note on file extensions and "converting"</h2>
       <p>
         Renaming a file from <code>.png</code> to <code>.jpg</code> does <strong>not</strong> convert
