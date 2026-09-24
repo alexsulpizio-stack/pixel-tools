@@ -45,7 +45,7 @@ Branch `fix/adsense-low-value-remediation` implements the first content/SEO pass
 - Added immediate compressor job invalidation when Clear is pressed and prerendered `noindex` tags for excluded target-size routes.
 - Do not request another AdSense review as part of this branch.
 
-Validation so far: production build passes; edited files pass ESLint; generated route HTML and sitemap checks pass. Whole-repo lint still has 49 existing errors. Browser interaction QA could not run in this workspace because no browser executable is installed and its preview server is not reachable over loopback. Recheck interaction flows in CI or a browser-capable environment before merging/deploying, then allow Google to recrawl before considering another review.
+Validation: production build passes; edited files pass ESLint; generated route HTML and sitemap checks pass. Whole-repo lint still has 49 existing errors. Manual Chrome QA on Windows passed for clearing during processing, switching from the 1 MB target page to 50 KB mid-process, and confirming no AdSense request on localhost. This is a desktop smoke check, not a full automated or mobile test suite.
 
 ### Explicitly ruled out as a fix
 
@@ -63,9 +63,9 @@ Generic SEO filler. Hundreds of AI-generated articles. Dozens of near-identical 
 | `src/pages/TargetSizePage.tsx` (~line 33) | Switching target-size pages mid-process lets the old operation finish and render results for the wrong target |
 | `index.html` (~line 20) | AdSense script loads unconditionally, so the advertising-off setting doesn't actually disable ads |
 
-The three issues above have code changes on `fix/adsense-low-value-remediation`; treat them as pending deployment and browser verification until that branch is merged and shipped.
+The three issues above have code changes on `fix/adsense-low-value-remediation`; the user manually verified the three key desktop flows. Treat the fixes as pending deployment until that branch is merged and shipped.
 
-The third is a consent and correctness problem independent of approval — fix it on its own track. The rule should be `adsEnabled = consent && configuration && eligiblePage`. Also check for duplicate initialization, dev/staging behavior, layout shift from ad slots, accidental-click risk, and ads inside tool interaction areas.
+Ad loading is a consent and correctness concern independent of approval. The branch gates it on `consent && configuration && eligiblePage` and limits it to the production domain; localhost was manually verified not to request AdSense. Still review layout shift, accidental-click risk, and ad placement before enabling monetization.
 
 ---
 
@@ -111,13 +111,9 @@ GA4, Google Tag Manager, Search Console verification, consent management, Cloudf
 
 ## Next steps
 
-1. Confirm current `main`; inventory all routes and tools.
-2. Fix the three known defects.
-3. Re-run lint and triage the errors.
-4. Audit what analytics/SEO/AdSense/consent code actually exists.
-5. Inventory indexable URLs and their current content.
-6. Ship the content, thin-page, and trust work in small releases rather than one large one.
-7. Browser QA on desktop and mobile.
-8. Let Google recrawl, then resubmit to AdSense.
+1. Review and merge/deploy the remediation branch when ready.
+2. Complete mobile QA and add automated browser tests for the important tool flows.
+3. Triage the 49 unrelated lint errors and continue the trust-layer review.
+4. Let Google recrawl the deployed changes; only consider another AdSense review after materially more content has been crawled.
 
 Note: at ~10K monthly pageviews, approval is worth roughly $30/month. It's a gate to clear, not income. Traffic growth is where the leverage is.
