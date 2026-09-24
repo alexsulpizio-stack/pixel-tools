@@ -1,5 +1,14 @@
 import { expect, test } from "@playwright/test";
 
+declare global {
+  interface Window {
+    __pixelToolsQa?: {
+      bitmapCalls: number;
+      releaseBitmap: (() => void) | null;
+    };
+  }
+}
+
 const onePixelPng = Buffer.from(
   "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/FyoAAAAASUVORK5CYII=",
   "base64"
@@ -9,14 +18,8 @@ test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem("pixeltools-consent-v1", "accepted");
 
-    const qaWindow = window as Window & {
-      __pixelToolsQa: {
-        bitmapCalls: number;
-        releaseBitmap: (() => void) | null;
-      };
-    };
     const qaState = { bitmapCalls: 0, releaseBitmap: null as (() => void) | null };
-    qaWindow.__pixelToolsQa = qaState;
+    window.__pixelToolsQa = qaState;
 
     const nativeCreateImageBitmap = window.createImageBitmap.bind(window);
     window.createImageBitmap = ((...args: Parameters<typeof createImageBitmap>) => {
