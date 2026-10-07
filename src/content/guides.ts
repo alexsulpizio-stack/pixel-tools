@@ -30,13 +30,13 @@ export const GUIDES_META: GuideMeta[] = [
   },
   {
     slug: "jpeg-vs-png-vs-webp",
-    title: "JPEG vs PNG vs WebP: Which Image Format Should You Use? | PixelTools",
+    title: "JPG vs PNG: What’s the Difference? | PixelTools",
     description:
-      "A clear comparison of JPEG, PNG, and WebP — how each compresses, when to use it, transparency and browser support, and a simple decision checklist for the web.",
+      "JPG and JPEG are the same format. Compare JPG, PNG, and WebP for image quality, file size, transparency, and the best uses for photos, logos, and screenshots.",
     excerpt:
-      "Photos, logos, screenshots, transparency, animation — a side-by-side breakdown of the three formats that matter, with a quick decision rule for each case.",
-    updated: "2026-06-21",
-    readingMinutes: 6,
+      "JPG and JPEG are the same format. Compare JPG, PNG, and WebP for photos, logos, screenshots, transparency, file size, and compatibility.",
+    updated: "2026-10-06",
+    readingMinutes: 7,
   },
   {
     slug: "favicon-sizes-guide",

@@ -3,12 +3,26 @@ import { Link } from "react-router-dom";
 export default function JpegVsPngVsWebp() {
   return (
     <>
-      <h1>JPEG vs PNG vs WebP: Which Image Format Should You Use?</h1>
+      <h1>JPG vs PNG: What’s the Difference?</h1>
       <p>
-        Three formats cover almost every image you'll deal with on the web. Choosing the right one is
-        the difference between a crisp 40&nbsp;KB image and a blurry 2&nbsp;MB one. Here's how they
-        differ and a simple rule for each situation.
+        JPG and JPEG are two filename extensions for the same image format. JPG/JPEG uses lossy
+        compression, which usually makes it a good fit for photos. PNG uses lossless compression and
+        supports transparency, so it is often better for logos, screenshots, and graphics with sharp
+        edges. WebP also supports lossy and lossless compression, plus transparency, and can be smaller
+        when the destination accepts it.
       </p>
+
+      <h2>JPG vs PNG vs WebP at a glance</h2>
+      <table>
+        <thead>
+          <tr><th>Format</th><th>Best for</th><th>Transparency</th><th>Compression</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>JPG/JPEG</td><td>Photos and broad compatibility</td><td>No</td><td>Lossy</td></tr>
+          <tr><td>PNG</td><td>Logos, screenshots, and crisp graphics</td><td>Yes</td><td>Lossless</td></tr>
+          <tr><td>WebP</td><td>Smaller web images when supported</td><td>Yes</td><td>Lossy or lossless</td></tr>
+        </tbody>
+      </table>
 
       <h2>JPEG — the photo workhorse</h2>
       <p>
