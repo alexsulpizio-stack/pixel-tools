@@ -1,4 +1,4 @@
-# Search Console report — 2026-09-25
+# Search Console report — 2026-10-09
 
 Property: `sc-domain:usepixeltools.com`
 
@@ -9,84 +9,84 @@ Property: `sc-domain:usepixeltools.com`
 
 ## Sitemap health
 
-- ✅ `https://usepixeltools.com/sitemap.xml` — 39 URLs submitted · last downloaded 4 days ago
+- ✅ `https://usepixeltools.com/sitemap.xml` — 39 URLs submitted · last downloaded 9 days ago
 
 ## Index coverage
 
-🟢 **Indexed: 34 / 39** — AdSense-review green light at 15+ indexed
+🟢 **Indexed: 31 / 39** — AdSense-review green light at 15+ indexed
+- Crawled - currently not indexed: **4**
 - Discovered - currently not indexed: **3**
-- Crawled - currently not indexed: **1**
 - URL is unknown to Google: **1**
 
 _Still unknown to Google — request indexing on these first:_
-- `/watermark-image`
+- `/privacy`
 
 ## Totals
 
 | Window | Clicks | Impressions | CTR | Avg position |
 | --- | ---: | ---: | ---: | ---: |
-| Last 7 days | 0 | 314 | 0.0% | 57.5 |
-| Last 28 days | 3 | 5,942 | 0.1% | 29.7 |
+| Last 7 days | 0 | 163 | 0.0% | 33.7 |
+| Last 28 days | 1 | 1,503 | 0.1% | 51.4 |
 
 ## Top queries (last 28 days, by impressions)
 
 | Query | Impr. | Clicks | CTR | Avg pos |
 | --- | ---: | ---: | ---: | ---: |
-| convert jpg to pdf free | 333 | 0 | 0.0% | 8.6 |
-| crop image online | 42 | 0 | 0.0% | 77.0 |
-| crop photo | 38 | 0 | 0.0% | 92.1 |
-| crop photo online | 35 | 0 | 0.0% | 86.7 |
-| crop picture | 28 | 0 | 0.0% | 90.6 |
-| crop image | 26 | 0 | 0.0% | 88.3 |
-| combine images into pdf | 25 | 0 | 0.0% | 5.5 |
-| crop pictures online | 22 | 0 | 0.0% | 74.3 |
-| compress jpeg to 50kb | 21 | 0 | 0.0% | 79.5 |
-| crop picture online | 19 | 0 | 0.0% | 72.0 |
-| crop an image | 18 | 0 | 0.0% | 82.0 |
-| crop online | 18 | 0 | 0.0% | 84.1 |
-| crop a photo | 17 | 0 | 0.0% | 85.2 |
-| crop a picture online | 17 | 0 | 0.0% | 77.3 |
-| free crop | 17 | 0 | 0.0% | 88.4 |
-| crop a picture | 16 | 0 | 0.0% | 82.2 |
-| compress image to 1mb | 14 | 0 | 0.0% | 53.0 |
-| crop pictures | 14 | 0 | 0.0% | 92.0 |
-| compress image to 50kb | 13 | 0 | 0.0% | 52.8 |
-| crop an image online | 13 | 0 | 0.0% | 75.6 |
-| crop a photo online | 12 | 0 | 0.0% | 78.7 |
-| difference between jpeg and png | 11 | 0 | 0.0% | 4.8 |
-| compress image without losing quality | 10 | 0 | 0.0% | 88.3 |
-| crop images | 10 | 0 | 0.0% | 94.4 |
-| image compressor to 1mb | 9 | 1 | 11.1% | 61.3 |
+| combine images into pdf | 85 | 0 | 0.0% | 6.9 |
+| crop image online | 40 | 0 | 0.0% | 77.1 |
+| combine image to pdf | 39 | 0 | 0.0% | 6.7 |
+| crop photo | 34 | 0 | 0.0% | 91.7 |
+| crop photo online | 32 | 0 | 0.0% | 86.8 |
+| favicon size | 29 | 0 | 0.0% | 10.6 |
+| crop picture | 26 | 0 | 0.0% | 90.5 |
+| crop image | 24 | 0 | 0.0% | 88.4 |
+| crop pictures online | 23 | 0 | 0.0% | 58.7 |
+| favicon generator from image | 23 | 0 | 0.0% | 6.0 |
+| crop picture online | 21 | 0 | 0.0% | 58.6 |
+| image crop online | 19 | 0 | 0.0% | 89.2 |
+| crop an image | 17 | 0 | 0.0% | 81.8 |
+| image crop | 17 | 0 | 0.0% | 86.2 |
+| crop online | 16 | 0 | 0.0% | 84.1 |
+| crop a photo | 15 | 0 | 0.0% | 85.2 |
+| crop a picture | 14 | 0 | 0.0% | 82.2 |
+| free crop | 14 | 0 | 0.0% | 89.1 |
+| circle crop image online free | 13 | 0 | 0.0% | 8.3 |
+| crop a picture online | 13 | 0 | 0.0% | 77.5 |
+| favicon dimensions | 13 | 0 | 0.0% | 7.3 |
+| crop pictures | 12 | 0 | 0.0% | 91.3 |
+| crop a photo online | 11 | 0 | 0.0% | 80.5 |
+| crop an image online | 11 | 0 | 0.0% | 75.6 |
+| favicon sizes | 11 | 0 | 0.0% | 25.4 |
 
 ## Top pages (last 28 days, by impressions)
 
 | Page | Impr. | Clicks | CTR | Avg pos |
 | --- | ---: | ---: | ---: | ---: |
-| /guides/jpeg-vs-png-vs-webp | 3,524 | 0 | 0.0% | 8.8 |
-| /crop-image | 665 | 0 | 0.0% | 82.2 |
-| /compress-image-to-1mb | 454 | 1 | 0.2% | 59.2 |
-| /image-to-pdf | 412 | 1 | 0.2% | 8.6 |
-| /guides/how-to-compress-images-without-losing-quality | 153 | 0 | 0.0% | 74.7 |
-| /guides/how-to-compress-jpg-to-50kb | 147 | 0 | 0.0% | 68.6 |
-| /guides/reduce-image-file-size-for-email-and-web | 138 | 0 | 0.0% | 66.4 |
-| /remove-exif | 91 | 0 | 0.0% | 69.2 |
-| /guides | 70 | 0 | 0.0% | 78.0 |
-| /resize-image | 67 | 0 | 0.0% | 75.8 |
-| /compress-jpeg-to-50kb | 45 | 0 | 0.0% | 73.7 |
-| /favicon-generator | 42 | 0 | 0.0% | 51.6 |
-| /guides/resize-image-to-exact-dimensions | 39 | 0 | 0.0% | 68.3 |
-| / | 28 | 0 | 0.0% | 73.0 |
-| /blur-image | 12 | 0 | 0.0% | 57.8 |
-| /guides/crop-photo-into-a-circle | 10 | 0 | 0.0% | 78.6 |
-| /guides/how-to-watermark-your-photos | 10 | 0 | 0.0% | 7.0 |
-| /about | 8 | 0 | 0.0% | 6.4 |
-| /contact | 8 | 0 | 0.0% | 18.3 |
-| /heic-to-jpg | 8 | 0 | 0.0% | 13.6 |
-| /compress-image-to-50kb | 5 | 0 | 0.0% | 17.8 |
-| /guides/favicon-sizes-guide | 5 | 0 | 0.0% | 42.0 |
-| /image-converter | 5 | 0 | 0.0% | 78.6 |
-| /tools | 5 | 0 | 0.0% | 56.6 |
-| /circle-crop | 4 | 0 | 0.0% | 29.3 |
+| /crop-image | 621 | 0 | 0.0% | 79.9 |
+| /image-to-pdf | 212 | 0 | 0.0% | 7.8 |
+| /favicon-generator | 180 | 0 | 0.0% | 13.3 |
+| /guides/reduce-image-file-size-for-email-and-web | 102 | 0 | 0.0% | 33.6 |
+| /compress-image-to-1mb | 89 | 0 | 0.0% | 48.6 |
+| /guides/how-to-compress-jpg-to-50kb | 78 | 0 | 0.0% | 59.0 |
+| /guides/how-to-compress-images-without-losing-quality | 51 | 0 | 0.0% | 77.8 |
+| /remove-exif | 42 | 0 | 0.0% | 53.6 |
+| /compress-jpeg-to-50kb | 31 | 0 | 0.0% | 76.3 |
+| /compress-image-to-50kb | 25 | 0 | 0.0% | 11.5 |
+| /guides/how-to-watermark-your-photos | 21 | 0 | 0.0% | 7.2 |
+| / | 17 | 0 | 0.0% | 58.4 |
+| /guides/resize-image-to-exact-dimensions | 10 | 0 | 0.0% | 47.9 |
+| /heic-to-jpg | 7 | 0 | 0.0% | 4.0 |
+| /about | 6 | 0 | 0.0% | 8.3 |
+| /guides/jpeg-vs-png-vs-webp | 5 | 0 | 0.0% | 102.2 |
+| /guides/how-to-blur-part-of-an-image | 3 | 1 | 33.3% | 6.0 |
+| /blur-image | 3 | 0 | 0.0% | 6.0 |
+| /resize-image | 3 | 0 | 0.0% | 8.7 |
+| /guides/convert-png-to-webp | 2 | 0 | 0.0% | 2.0 |
+| /guides/favicon-sizes-guide | 2 | 0 | 0.0% | 5.0 |
+| /guides/what-is-heic-and-how-to-convert-it | 2 | 0 | 0.0% | 5.0 |
+| /image-converter | 2 | 0 | 0.0% | 44.5 |
+| /rotate-image | 2 | 0 | 0.0% | 4.0 |
+| /contact | 1 | 0 | 0.0% | 10.0 |
 
 ## Opportunities — almost ranking (position 6–25)
 
@@ -94,9 +94,20 @@ These queries already show your site but sit just below page 1. A dedicated or s
 
 | Query | Impr. | Avg pos | CTR |
 | --- | ---: | ---: | ---: |
-| convert jpg to pdf free | 333 | 8.6 | 0.0% |
-| circle crop image online free | 9 | 8.0 | 0.0% |
-| combine images into a pdf | 5 | 6.2 | 0.0% |
+| combine images into pdf | 85 | 6.9 | 0.0% |
+| combine image to pdf | 39 | 6.7 | 0.0% |
+| favicon size | 29 | 10.6 | 0.0% |
+| circle crop image online free | 13 | 8.3 | 0.0% |
+| favicon dimensions | 13 | 7.3 | 0.0% |
+| combine images into a pdf | 9 | 6.1 | 0.0% |
+| favicon generator from text | 9 | 6.2 | 0.0% |
+| image favicon | 9 | 10.2 | 0.0% |
+| favicon image size | 8 | 24.9 | 0.0% |
+| image to pdf combine | 8 | 6.9 | 0.0% |
+| compress image for email | 7 | 24.3 | 0.0% |
+| image combine to pdf | 7 | 7.3 | 0.0% |
+| 50 kb photo size | 6 | 15.2 | 0.0% |
+| combine images to pdf | 5 | 10.6 | 0.0% |
 
 ---
-_Generated 2026-09-28T20:02:12.657Z • window 2026-08-29 → 2026-09-25 (data lags ~3 days)._
+_Generated 2026-10-12T21:37:20.645Z • window 2026-09-12 → 2026-10-09 (data lags ~3 days)._
