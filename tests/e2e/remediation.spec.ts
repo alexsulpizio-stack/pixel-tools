@@ -88,6 +88,34 @@ test("1 MB compressor checks the actual output against upload form rules", async
   await expect(checker.getByText(/outside the entered range/)).toBeVisible();
 });
 
+test("format guide recommends an image format from the visitor's choices", async ({ page }) => {
+  await page.goto("/guides/jpeg-vs-png-vs-webp");
+  const advisor = page.getByRole("region", { name: "Choose a format for your image" });
+
+  await advisor.getByLabel("Image type").selectOption("screenshot");
+  await expect(advisor.getByText(/PNG for the clearest text/)).toBeVisible();
+
+  await advisor.getByLabel("Where will it go?").selectOption("upload");
+  await expect(advisor.getByText(/Use the required format; choose PNG/)).toBeVisible();
+
+  await advisor.getByLabel("The background must stay transparent").check();
+  await expect(advisor.getByText(/PNG is the safest fallback/)).toBeVisible();
+});
+
+test("PDF page planner reports measured image dimensions and placement", async ({ page }) => {
+  await page.goto("/image-to-pdf");
+  await page.locator('input[type="file"]').setInputFiles({
+    name: "one-pixel.png",
+    mimeType: "image/png",
+    buffer: onePixelPng,
+  });
+
+  await expect(page.locator(".pdf-page__specs")).toContainText("1 × 1 px");
+  await expect(page.locator(".pdf-page__specs")).toContainText("Placed at about 0.01 × 0.01 in");
+  await page.getByRole("button", { name: "Letter" }).click();
+  await expect(page.locator(".pdf-page__specs")).toContainText("Placed at about");
+});
+
 test("localhost does not request or inject AdSense after consent", async ({ page }) => {
   const adRequests: string[] = [];
   page.on("request", (request) => {
