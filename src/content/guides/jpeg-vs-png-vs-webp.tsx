@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FormatAdvisor } from "../../components/FormatAdvisor";
 
 export default function JpegVsPngVsWebp() {
   return (
@@ -64,6 +65,8 @@ export default function JpegVsPngVsWebp() {
         <li><strong>Needs transparency?</strong> → WebP or PNG.</li>
         <li><strong>Needs animation?</strong> → WebP (or keep an existing GIF).</li>
       </ul>
+
+      <FormatAdvisor />
 
       <h2>Format choice when a website has upload rules</h2>
       <p>
