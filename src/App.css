@@ -151,6 +151,68 @@
   color: var(--text-dim);
 }
 
+/* Upload requirements checker */
+.upload-checker {
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+}
+
+.upload-checker h2 { margin-top: 0; }
+.upload-checker > p { color: var(--text-dim); }
+
+.upload-checker__fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.upload-checker__fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--text-dim);
+  font-size: 0.88rem;
+}
+
+.upload-checker__fields input,
+.upload-checker__fields select {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.upload-checker__result {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.upload-checker__result-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.upload-checker__result-head strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.upload-checker__result ul { margin-bottom: 0; }
+.upload-checker__pass { color: var(--good); }
+.upload-checker__fail { color: var(--bad); }
+.upload-checker__note { margin-bottom: 0; font-size: 0.86rem; }
+
 .settings input[type="range"] {
   accent-color: var(--accent);
   width: 100%;
