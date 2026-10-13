@@ -46,10 +46,42 @@ interface Item {
   url: string;
 }
 
+interface ImageDimensions {
+  width: number;
+  height: number;
+}
+
+const PAPER_POINTS: Record<"a4" | "letter", [number, number]> = {
+  a4: [595.28, 841.89],
+  letter: [612, 792],
+};
+
+function getPlacement(dimensions: ImageDimensions, format: PageFormat, margin: number) {
+  const { width, height } = dimensions;
+  if (format === "fit") {
+    return { widthIn: width / 72, heightIn: height / 72, ppi: 72 };
+  }
+
+  const [portraitWidth, portraitHeight] = PAPER_POINTS[format];
+  const pageWidth = width > height ? portraitHeight : portraitWidth;
+  const pageHeight = width > height ? portraitWidth : portraitHeight;
+  const scale = Math.min((pageWidth - margin * 2) / width, (pageHeight - margin * 2) / height);
+  return {
+    widthIn: (width * scale) / 72,
+    heightIn: (height * scale) / 72,
+    ppi: 72 / scale,
+  };
+}
+
+function formatNumber(value: number) {
+  return new Intl.NumberFormat("en-US").format(value);
+}
+
 export default function PdfPage() {
   usePageMeta(ROUTE_META["/image-to-pdf"].title, ROUTE_META["/image-to-pdf"].description);
 
   const [items, setItems] = useState<Item[]>([]);
+  const [imageDimensions, setImageDimensions] = useState<Record<string, ImageDimensions>>({});
   const [format, setFormat] = useState<PageFormat>("fit");
   const [margin, setMargin] = useState(24);
   const [busy, setBusy] = useState(false);
@@ -208,7 +240,7 @@ export default function PdfPage() {
                 <button className="btn btn--primary" onClick={download} disabled={busy}>
                   {busy ? "Building…" : "⬇ Download PDF"}
                 </button>
-                <button className="btn btn--ghost" onClick={() => setItems([])}>
+                <button className="btn btn--ghost" onClick={() => { setItems([]); setImageDimensions({}); }}>
                   Clear
                 </button>
               </div>
@@ -218,10 +250,31 @@ export default function PdfPage() {
               {items.map((item, i) => (
                 <div className="pdf-page" key={item.url}>
                   <span className="pdf-page__num">{i + 1}</span>
-                  <img src={item.url} alt={item.file.name} />
+                  <img
+                    src={item.url}
+                    alt={item.file.name}
+                    onLoad={(event) => {
+                      const image = event.currentTarget;
+                      setImageDimensions((previous) => ({
+                        ...previous,
+                        [item.url]: { width: image.naturalWidth, height: image.naturalHeight },
+                      }));
+                    }}
+                  />
                   <p className="pdf-page__name" title={item.file.name}>
                     {item.file.name}
                   </p>
+                  {imageDimensions[item.url] && (() => {
+                    const dimensions = imageDimensions[item.url];
+                    const placement = getPlacement(dimensions, format, format === "fit" ? 0 : margin);
+                    return (
+                      <p className="pdf-page__specs">
+                        {formatNumber(dimensions.width)} × {formatNumber(dimensions.height)} px
+                        <br />
+                        Placed at about {placement.widthIn.toFixed(2)} × {placement.heightIn.toFixed(2)} in · {Math.round(placement.ppi)} ppi
+                      </p>
+                    );
+                  })()}
                   <div className="pdf-page__actions">
                     <button className="btn btn--ghost btn--sm" onClick={() => move(i, -1)} disabled={i === 0} aria-label="Move up">
                       ←
@@ -241,6 +294,9 @@ export default function PdfPage() {
                 </div>
               ))}
             </div>
+            <p className="pdf-preflight-note">
+              Page placement is calculated from each image’s actual pixel dimensions. “Fit to image” creates a page sized to those pixels; A4 and Letter scale the image to the selected paper and margins. Check fine text in the downloaded PDF before submitting or printing.
+            </p>
           </section>
         </>
       )}
