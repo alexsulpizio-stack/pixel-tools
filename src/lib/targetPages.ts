@@ -247,9 +247,9 @@ export const TARGET_PAGES: TargetPageConfig[] = [
     indexable: true,
     output: "webp",
     title: "Compress Image to 1MB Online Free — Exact Size | PixelTools",
-    description: "Shrink any image to under 1MB for free in your browser. Perfect for email attachments, Discord uploads, and forum limits. Private — no upload.",
+    description: "Compress an image to under 1 MB, then check its file size, format, and pixel dimensions against an upload form. Private, browser-based, and free.",
     h1: "Compress image to 1 MB",
-    intro: "Email providers, chat apps, and many forums cap uploads around 1 MB or a few MB. One modern phone photo can blow past that on its own. This tool brings any image under 1 MB with virtually no visible quality loss.",
+    intro: "Email providers, chat apps, and many forums cap uploads around 1 MB. Compress a photo, then check the actual file against the size, format, and pixel-dimension rules shown by the receiving form.",
     body: [
       {
         heading: "When 1 MB is the limit",
@@ -289,6 +289,10 @@ export const TARGET_PAGES: TargetPageConfig[] = [
       {
         q: "Why is my phone photo so much bigger than 1 MB?",
         a: "Modern phone cameras shoot 12–50 megapixels and store extra data like depth maps. Most of that is invisible on screen — recompressing to 1 MB keeps what your eyes see and drops the rest.",
+      },
+      {
+        q: "Will a file under 1 MB always pass an upload form?",
+        a: "No. A form can also require a specific format or pixel dimensions. After processing, use the upload requirements checker to compare the generated file with those limits. Some forms may also enforce aspect ratio, color profile, or other rules that the checker does not test.",
       },
       ...SHARED_FAQ(1024),
     ],
