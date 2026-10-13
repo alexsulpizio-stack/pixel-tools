@@ -71,6 +71,146 @@ function ResultRequirementHelper({
   return null;
 }
 
+function UploadRequirementsChecker({
+  results,
+  defaultMaxKB,
+}: {
+  results: TargetResult[];
+  defaultMaxKB: number;
+}) {
+  const [maxKB, setMaxKB] = useState(String(defaultMaxKB));
+  const [requiredFormat, setRequiredFormat] = useState<"any" | TargetOutput>("any");
+  const [minWidth, setMinWidth] = useState("");
+  const [maxWidth, setMaxWidth] = useState("");
+  const [minHeight, setMinHeight] = useState("");
+  const [maxHeight, setMaxHeight] = useState("");
+
+  const numberOrNull = (value: string) => {
+    if (value.trim() === "") return null;
+    const number = Number(value);
+    return Number.isFinite(number) && number > 0 ? number : null;
+  };
+  const maxBytes = numberOrNull(maxKB) === null ? null : Number(maxKB) * 1024;
+  const minW = numberOrNull(minWidth);
+  const maxW = numberOrNull(maxWidth);
+  const minH = numberOrNull(minHeight);
+  const maxH = numberOrNull(maxHeight);
+  const hasDimensionRule = minW !== null || maxW !== null || minH !== null || maxH !== null;
+  const hasAnyRule = maxBytes !== null || requiredFormat !== "any" || hasDimensionRule;
+
+  const formatName = (mime: string) => {
+    if (mime === "image/jpeg") return "JPEG (.jpg)";
+    if (mime === "image/png") return "PNG (.png)";
+    if (mime === "image/webp") return "WebP (.webp)";
+    return mime || "Unknown format";
+  };
+
+  return (
+    <section className="upload-checker" aria-label="Upload requirements checker">
+      <h2>Check your image against an upload form</h2>
+      <p>
+        Enter the limits shown by the receiving site. This checks the actual files produced above; it does not upload
+        your images or change the receiving site's rules.
+      </p>
+
+      <div className="upload-checker__fields">
+        <label>
+          Maximum file size (KB)
+          <input
+            aria-label="Maximum file size (KB)"
+            type="number"
+            min="1"
+            step="1"
+            value={maxKB}
+            onChange={(event) => setMaxKB(event.target.value)}
+          />
+        </label>
+        <label>
+          Required file format
+          <select
+            aria-label="Required file format"
+            value={requiredFormat}
+            onChange={(event) => setRequiredFormat(event.target.value as "any" | TargetOutput)}
+          >
+            <option value="any">No format restriction</option>
+            <option value="jpeg">JPEG (.jpg or .jpeg)</option>
+            <option value="png">PNG (.png)</option>
+            <option value="webp">WebP (.webp)</option>
+          </select>
+        </label>
+        <label>
+          Minimum width (px)
+          <input aria-label="Minimum width (px)" type="number" min="1" step="1" value={minWidth} onChange={(event) => setMinWidth(event.target.value)} />
+        </label>
+        <label>
+          Maximum width (px)
+          <input aria-label="Maximum width (px)" type="number" min="1" step="1" value={maxWidth} onChange={(event) => setMaxWidth(event.target.value)} />
+        </label>
+        <label>
+          Minimum height (px)
+          <input aria-label="Minimum height (px)" type="number" min="1" step="1" value={minHeight} onChange={(event) => setMinHeight(event.target.value)} />
+        </label>
+        <label>
+          Maximum height (px)
+          <input aria-label="Maximum height (px)" type="number" min="1" step="1" value={maxHeight} onChange={(event) => setMaxHeight(event.target.value)} />
+        </label>
+      </div>
+
+      <div className="upload-checker__results" aria-live="polite">
+        {results.map((result) => {
+          const actualFormat = formatName(result.blob.type);
+          const sizePass = maxBytes === null || result.blob.size <= maxBytes;
+          const formatPass = requiredFormat === "any" || result.blob.type === `image/${requiredFormat}`;
+          const dimensionsPass =
+            (minW === null || result.width >= minW) &&
+            (maxW === null || result.width <= maxW) &&
+            (minH === null || result.height >= minH) &&
+            (maxH === null || result.height <= maxH);
+          const allPass = hasAnyRule && sizePass && formatPass && dimensionsPass;
+
+          return (
+            <article className="upload-checker__result" key={result.previewUrl}>
+              <div className="upload-checker__result-head">
+                <strong title={result.name}>{result.name}</strong>
+                <span className={`badge ${allPass ? "badge--good" : "badge--bad"}`}>
+                  {!hasAnyRule ? "Enter a limit to check" : allPass ? "Meets entered limits" : "Does not meet all limits"}
+                </span>
+              </div>
+              <ul>
+                {maxBytes !== null && (
+                  <li className={sizePass ? "upload-checker__pass" : "upload-checker__fail"}>
+                    File size: {formatBytes(result.blob.size)} / {maxKB} KB maximum {sizePass ? "✓" : "— too large"}
+                  </li>
+                )}
+                {requiredFormat !== "any" && (
+                  <li className={formatPass ? "upload-checker__pass" : "upload-checker__fail"}>
+                    Format: {actualFormat}; required {requiredFormat.toUpperCase()} {formatPass ? "✓" : "— change the output format and process again"}
+                  </li>
+                )}
+                {hasDimensionRule && (
+                  <li className={dimensionsPass ? "upload-checker__pass" : "upload-checker__fail"}>
+                    Dimensions: {result.width}×{result.height} px
+                    {minW !== null && ` · width at least ${minW}px`}
+                    {maxW !== null && ` · width at most ${maxW}px`}
+                    {minH !== null && ` · height at least ${minH}px`}
+                    {maxH !== null && ` · height at most ${maxH}px`}
+                    {dimensionsPass ? " ✓" : " — outside the entered range"}
+                  </li>
+                )}
+                {!hasAnyRule && <li>Enter the file size, format, or pixel-dimension limits from the upload form.</li>}
+              </ul>
+            </article>
+          );
+        })}
+      </div>
+      <p className="upload-checker__note">
+        A passing check only confirms the limits entered here. The receiving site may also require an aspect ratio,
+        color profile, background, or other rules that are not checked here.
+      </p>
+    </section>
+  );
+}
+
 function TargetSizeTool({ config }: TargetSizePageProps) {
   usePageMeta(config.title, config.description, !config.indexable);
 
@@ -253,6 +393,7 @@ function TargetSizeTool({ config }: TargetSizePageProps) {
             ))}
           </div>
           <ResultRequirementHelper config={config} result={results[results.length - 1]} output={output} />
+          {config.targetKB === 1024 && <UploadRequirementsChecker results={results} defaultMaxKB={config.targetKB} />}
         </section>
       )}
 

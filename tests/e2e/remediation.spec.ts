@@ -71,6 +71,23 @@ test("changing target size during processing does not show the old result", asyn
   await expect(page.locator(".results")).toHaveCount(0);
 });
 
+test("1 MB compressor checks the actual output against upload form rules", async ({ page }) => {
+  await page.goto("/compress-image-to-1mb");
+  await uploadAndWaitUntilImageDecodeIsPending(page);
+  await page.evaluate(() => window.__pixelToolsQa?.releaseBitmap?.());
+
+  const checker = page.getByRole("region", { name: "Upload requirements checker" });
+  await expect(checker.getByText("Meets entered limits")).toBeVisible();
+  await expect(checker.getByText(/File size:/)).toBeVisible();
+
+  await checker.getByLabel("Required file format").selectOption("jpeg");
+  await expect(checker.getByText("Does not meet all limits")).toBeVisible();
+  await expect(checker.getByText(/required JPEG — change the output format and process again/)).toBeVisible();
+
+  await checker.getByLabel("Minimum width (px)").fill("2");
+  await expect(checker.getByText(/outside the entered range/)).toBeVisible();
+});
+
 test("localhost does not request or inject AdSense after consent", async ({ page }) => {
   const adRequests: string[] = [];
   page.on("request", (request) => {
