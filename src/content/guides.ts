@@ -35,7 +35,7 @@ export const GUIDES_META: GuideMeta[] = [
       "JPG and JPEG are the same format. Compare JPG, PNG, and WebP for image quality, file size, transparency, and the best uses for photos, logos, and screenshots.",
     excerpt:
       "JPG and JPEG are the same format. Compare JPG, PNG, and WebP for photos, logos, screenshots, transparency, file size, and compatibility.",
-    updated: "2026-10-06",
+    updated: "2026-10-12",
     readingMinutes: 7,
   },
   {
