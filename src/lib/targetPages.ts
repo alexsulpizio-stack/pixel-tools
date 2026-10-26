@@ -30,7 +30,7 @@ const SHARED_FAQ = (kb: number): { q: string; a: string }[] => [
   },
   {
     q: `What if my image can't reach ${kb} KB?`,
-    a: `The tool first lowers the compression quality, and if that's not enough it gradually reduces the dimensions until the file fits under ${kb} KB. Extremely detailed images may lose visible quality at very small targets — the preview shows you exactly what you'll get.`,
+    a: `For JPEG and WebP, the tool tries lower quality and then smaller dimensions. PNG uses dimension reduction. Attempts are limited, so an output can remain above ${kb} KB; check the reported file size and target status before downloading. Inspect the preview for lost detail.`,
   },
   {
     q: "Is this free? Is there a watermark?",
@@ -211,12 +211,12 @@ export const TARGET_PAGES: TargetPageConfig[] = [
     title: "Compress Image to 500KB Online Free — Exact Size | PixelTools",
     description: "Compress photos to under 500KB free in your browser. Fits real-estate listings, classifieds, and CMS upload limits while keeping high quality.",
     h1: "Compress image to 500 KB",
-    intro: "At 500 KB you can keep a photo looking essentially perfect on screen — this is the generous tier used by real-estate listings, classifieds sites, and most CMS platforms. Modern phone photos are typically 3–8 MB, so they still need a 90% reduction to fit.",
+    intro: "Use this page when a listing, gallery, or upload form specifies a 500 KB maximum. The quality and dimensions you can retain depend on the source image, so compare the output before submitting it.",
     body: [
       {
         heading: "A high-quality tier for larger photos",
         paragraphs: [
-          "500 KB is the comfortable end of the compression scale. There's enough room to keep a full-width, detailed photo looking crisp, which is why it's favoured by platforms that care about how images look rather than squeezing every last kilobyte.",
+          "A 500 KB budget gives more room than smaller targets, but does not guarantee a crisp full-width photo. Check the receiving site’s actual limit and compare the result at its intended display size.",
         ],
         bullets: [
           "Real-estate and property listing photos.",
@@ -229,7 +229,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
         heading: "How much quality do you actually lose?",
         paragraphs: [
           "A 500 KB result may be sufficient for an on-screen photo, but visible quality depends on dimensions, image detail, and format. Compare edges, textures, and text in the preview rather than assuming the smaller file is indistinguishable from the original.",
-          "The only time you'd notice is with heavy cropping afterwards or a large print, where the missing detail finally becomes visible. For web and on-screen use, 500 KB is effectively lossless in practice.",
+          "Lossy compression can change visible detail at any display size. Keep the original if you expect to crop, edit, or print the photo later; a smaller output cannot recover detail already discarded.",
         ],
       },
     ],
@@ -278,9 +278,9 @@ export const TARGET_PAGES: TargetPageConfig[] = [
         ],
       },
       {
-        heading: "What the size guarantee means",
+        heading: "How to check the target size",
         paragraphs: [
-          "The target is a maximum, not a request to make every image exactly 1 MB. If a photo can stay smaller without visible damage, the tool keeps it smaller. When compression alone cannot fit the image, it reduces dimensions gradually and shows the resulting preview and dimensions before you download.",
+          "The target is a maximum, not a request to make every image exactly 1 MB. The tool tries compression and dimension reduction, but the number of attempts is limited. Check the actual output size and target status; if it remains too large, use smaller source dimensions or another accepted format.",
           "For an email attachment, compare the final file size shown here with the limit in your mail service. Mail providers may encode attachments during sending, so a file close to a service's maximum can still be rejected; leaving a little room below that service limit is a safer choice.",
         ],
       },
@@ -288,7 +288,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
     faq: [
       {
         q: "Why is my phone photo so much bigger than 1 MB?",
-        a: "Modern phone cameras shoot 12–50 megapixels and store extra data like depth maps. Most of that is invisible on screen — recompressing to 1 MB keeps what your eyes see and drops the rest.",
+        a: "Phone photos can contain millions of pixels and detailed textures. Reducing dimensions or re-encoding can reduce file size but may remove visible detail. Compare the output rather than assuming a 1 MB version looks identical.",
       },
       {
         q: "Will a file under 1 MB always pass an upload form?",
