@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const onePixelPng = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/FyoAAAAASUVORK5CYII=", "base64");
+const onePixelPng = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGP4DwQACfsD/fteaysAAAAASUVORK5CYII=", "base64");
 const image = (name: string) => ({ name, mimeType: "image/png", buffer: onePixelPng });
 
 test("sample receipt workflow produces a real three-page Letter PDF", async ({ page }) => {
