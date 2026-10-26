@@ -77,11 +77,11 @@ const DETAILS: Record<string, ToolDetailsCopy> = {
   "/remove-exif": {
     problem: "Photos can contain hidden GPS coordinates, camera details, timestamps, and editing history.",
     when: "Use this before sharing a photo publicly or sending it to someone who does not need its capture metadata.",
-    steps: ["Add the photo.", "Review the metadata summary when available.", "Download the cleaned copy and share that version."],
+    steps: ["Add the photo.", "Review the re-encoded preview; this tool does not show a metadata inspection report.", "Download the cleaned copy and share that version."],
     example: "Remove a home's location from a listing photo before posting it publicly.",
     output: "The image pixels remain visually similar while common EXIF metadata is removed from the new file.",
-    limits: "No tool can guarantee removal of every proprietary metadata block in every format. Check the destination app if privacy is critical.",
-    privacy: "The original file is inspected locally and never uploaded.",
+    limits: "No tool can guarantee removal of every proprietary metadata block in every format. Independently inspect the downloaded metadata if privacy is critical; visible details in the picture remain.",
+    privacy: "The image is decoded and re-encoded locally, without uploading it.",
   },
   "/watermark-image": {
     problem: "A visible label can identify ownership or discourage casual reuse when an image is shared.",
@@ -113,7 +113,7 @@ const DETAILS: Record<string, ToolDetailsCopy> = {
   "/qr-code-generator": {
     problem: "A QR code provides a fast phone-friendly path to a URL, Wi-Fi network, text, or contact detail.",
     when: "Use it for printed signs, menus, event materials, packaging, or a link shared from a screen.",
-    steps: ["Choose the data type and enter the content.", "Set contrast and size, then scan-test the preview with a phone.", "Download PNG for most uses or SVG for scalable print artwork."],
+    steps: ["Enter a URL, text, or a correctly formatted Wi-Fi/contact string.", "Set contrast and size, then scan-test the preview with a phone.", "Download PNG for most uses or SVG for scalable print artwork."],
     example: "Create a QR code for a signup page and test it from the final printed distance before publishing.",
     output: "The code stores the entered data directly; this generator does not create a tracking redirect or expiry date.",
     limits: "A QR code cannot fix an invalid URL. Low contrast, blur, or insufficient print size can make scanning fail.",
@@ -151,7 +151,7 @@ const DETAILS: Record<string, ToolDetailsCopy> = {
 export function ToolDetails() {
   const { pathname } = useLocation();
   const copy = DETAILS[pathname];
-  if (!copy) return null;
+  if (!copy || pathname === "/image-to-pdf") return null;
 
   return (
     <section className="prose tool-details" aria-label="About this tool">

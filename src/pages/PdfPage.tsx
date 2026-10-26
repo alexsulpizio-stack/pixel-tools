@@ -29,7 +29,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Can I combine multiple images into one PDF?",
-    a: "Yes — add as many images as you like; each becomes its own page in the order shown. Use the arrows to reorder pages before downloading.",
+    a: "Yes. Each image becomes a page in the order shown. Use the arrow buttons to reorder pages. There is no fixed page-count limit, but large batches can exceed your browser’s memory; start with a few images on a phone.",
   },
   {
     q: "What do the page size options mean?",
@@ -85,8 +85,12 @@ export default function PdfPage() {
   const [format, setFormat] = useState<PageFormat>("fit");
   const [margin, setMargin] = useState(24);
   const [busy, setBusy] = useState(false);
+  const [loadingSample, setLoadingSample] = useState(false);
   const [error, setError] = useState("");
   const processingRef = useRef(false);
+  const jobRef = useRef(0);
+  const urlsRef = useRef(new Set<string>());
+  const [output, setOutput] = useState<{ url: string; size: number; pages: number } | null>(null);
   const activeFileCount = useRef(0);
   const activeFormat = useRef<PageFormat>("fit");
 
@@ -95,6 +99,9 @@ export default function PdfPage() {
   }, []);
 
   useEffect(() => () => {
+    jobRef.current++;
+    urlsRef.current.forEach((url) => URL.revokeObjectURL(url));
+    urlsRef.current.clear();
     if (processingRef.current) {
       trackEvent("processing_cancelled", {
         tool: "image_to_pdf",
@@ -105,18 +112,48 @@ export default function PdfPage() {
     }
   }, []);
 
-  useEffect(() => () => items.forEach((i) => URL.revokeObjectURL(i.url)), [items]);
+  const resetOutput = useCallback(() => {
+    setOutput((previous) => {
+      if (previous) { URL.revokeObjectURL(previous.url); urlsRef.current.delete(previous.url); }
+      return null;
+    });
+  }, []);
+
+  const clear = useCallback(() => {
+    jobRef.current++;
+    if (processingRef.current) {
+      trackEvent("processing_cancelled", { tool: "image_to_pdf", file_count: activeFileCount.current, page_format: activeFormat.current });
+    }
+    processingRef.current = false;
+    urlsRef.current.forEach((url) => URL.revokeObjectURL(url));
+    urlsRef.current.clear();
+    setItems([]);
+    setImageDimensions({});
+    setOutput(null);
+    setError("");
+    setBusy(false);
+    setLoadingSample(false);
+  }, []);
 
   const addFiles = useCallback((files: File[]) => {
+    if (processingRef.current) return;
     trackEvent("file_selected", {
       tool: "image_to_pdf",
       file_count: files.length,
       total_bytes: files.reduce((sum, file) => sum + file.size, 0),
     });
-    setItems((prev) => [...prev, ...files.map((file) => ({ file, url: URL.createObjectURL(file) }))]);
-  }, []);
+    resetOutput();
+    setError("");
+    const added = files.map((file) => {
+      const url = URL.createObjectURL(file);
+      urlsRef.current.add(url);
+      return { file, url };
+    });
+    setItems((prev) => [...prev, ...added]);
+  }, [resetOutput]);
 
   const move = useCallback((index: number, dir: -1 | 1) => {
+    resetOutput();
     setItems((prev) => {
       const next = [...prev];
       const target = index + dir;
@@ -124,16 +161,21 @@ export default function PdfPage() {
       [next[index], next[target]] = [next[target], next[index]];
       return next;
     });
-  }, []);
+  }, [resetOutput]);
 
   const remove = useCallback((index: number) => {
+    resetOutput();
     setItems((prev) => {
       URL.revokeObjectURL(prev[index].url);
+      urlsRef.current.delete(prev[index].url);
       return prev.filter((_, i) => i !== index);
     });
-  }, []);
+  }, [resetOutput]);
 
   const download = useCallback(async () => {
+    if (processingRef.current || loadingSample || items.length === 0) return;
+    const job = ++jobRef.current;
+    resetOutput();
     trackEvent("processing_started", {
       tool: "image_to_pdf",
       file_count: items.length,
@@ -150,6 +192,7 @@ export default function PdfPage() {
         items.map((i) => i.file),
         { format, margin: format === "fit" ? 0 : margin }
       );
+      if (job !== jobRef.current) return;
       processingRef.current = false;
       trackEvent("processing_completed", {
         tool: "image_to_pdf",
@@ -163,23 +206,25 @@ export default function PdfPage() {
         file_count: items.length,
       });
       const url = URL.createObjectURL(blob);
+      urlsRef.current.add(url);
+      setOutput({ url, size: blob.size, pages: items.length });
       const a = document.createElement("a");
       a.href = url;
       a.download = "images.pdf";
       a.click();
-      URL.revokeObjectURL(url);
     } catch {
+      if (job !== jobRef.current) return;
       processingRef.current = false;
       trackEvent("processing_failed", {
         tool: "image_to_pdf",
         file_count: items.length,
         page_format: format,
       });
-      setError("Couldn't build the PDF from those images.");
+      setError("Couldn't build the PDF. Remove any damaged or unsupported image, or try fewer/smaller files, then download again.");
     } finally {
-      setBusy(false);
+      if (job === jobRef.current) setBusy(false);
     }
-  }, [items, format, margin]);
+  }, [items, format, margin, resetOutput, loadingSample]);
 
   return (
     <>
@@ -193,7 +238,7 @@ export default function PdfPage() {
 
       <AdSlot variant="banner" />
 
-      <Dropzone onFiles={addFiles} busy={busy} />
+      <Dropzone onFiles={addFiles} busy={busy || loadingSample} />
 
       {items.length > 0 && (
         <>
@@ -205,7 +250,8 @@ export default function PdfPage() {
                   <button
                     key={f.value}
                     className={`segmented__btn ${format === f.value ? "segmented__btn--on" : ""}`}
-                    onClick={() => setFormat(f.value)}
+                    disabled={busy || loadingSample}
+                    onClick={() => { resetOutput(); setFormat(f.value); }}
                   >
                     {f.label}
                   </button>
@@ -219,9 +265,9 @@ export default function PdfPage() {
                 {MARGINS.map((m) => (
                   <button
                     key={m.value}
-                    disabled={format === "fit"}
+                    disabled={busy || format === "fit"}
                     className={`segmented__btn ${margin === m.value ? "segmented__btn--on" : ""}`}
-                    onClick={() => setMargin(m.value)}
+                    onClick={() => { resetOutput(); setMargin(m.value); }}
                   >
                     {m.label}
                   </button>
@@ -237,10 +283,10 @@ export default function PdfPage() {
                 {formatBytes(items.reduce((s, i) => s + i.file.size, 0))} of images
               </p>
               <div className="results__actions">
-                <button className="btn btn--primary" onClick={download} disabled={busy}>
+                <button className="btn btn--primary" onClick={download} disabled={busy || loadingSample}>
                   {busy ? "Building…" : "⬇ Download PDF"}
                 </button>
-                <button className="btn btn--ghost" onClick={() => { setItems([]); setImageDimensions({}); }}>
+                <button className="btn btn--ghost" onClick={clear}>
                   Clear
                 </button>
               </div>
@@ -276,18 +322,18 @@ export default function PdfPage() {
                     );
                   })()}
                   <div className="pdf-page__actions">
-                    <button className="btn btn--ghost btn--sm" onClick={() => move(i, -1)} disabled={i === 0} aria-label="Move up">
+                    <button className="btn btn--ghost btn--sm" onClick={() => move(i, -1)} disabled={busy || i === 0} aria-label="Move up">
                       ←
                     </button>
                     <button
                       className="btn btn--ghost btn--sm"
                       onClick={() => move(i, 1)}
-                      disabled={i === items.length - 1}
+                      disabled={busy || i === items.length - 1}
                       aria-label="Move down"
                     >
                       →
                     </button>
-                    <button className="btn btn--ghost btn--sm" onClick={() => remove(i)} aria-label="Remove">
+                    <button className="btn btn--ghost btn--sm" onClick={() => remove(i)} disabled={busy || loadingSample} aria-label="Remove">
                       ✕
                     </button>
                   </div>
@@ -301,7 +347,44 @@ export default function PdfPage() {
         </>
       )}
 
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error" role="alert">{error}</p>}
+      {output && <p className="pdf-output" role="status">
+        PDF ready: {output.pages} pages · {formatBytes(output.size)}. <a href={output.url} download="images.pdf">Save PDF again</a>
+        {" "}If your phone opens a preview, use its Share or download menu to save the file. Keep this page open until saving finishes.
+      </p>}
+
+      <section className="prose tool-prose" aria-label="Try a sample PDF">
+        <h2>Try it: combine three sample receipts into one PDF</h2>
+        <p>Use our three clearly marked fictional receipts to try the full workflow without selecting personal files.
+          Each sample is 600 × 800 pixels. They are demonstration images, not real purchases.</p>
+        <button className="btn btn--ghost" disabled={busy || loadingSample} onClick={async () => {
+          if (processingRef.current) return;
+          const job = ++jobRef.current;
+          setLoadingSample(true);
+          try {
+            const { createReceiptSamples } = await import("../lib/pdfSamples");
+            const files = await createReceiptSamples();
+            if (job !== jobRef.current) return;
+            clear();
+            setFormat("letter");
+            setMargin(24);
+            addFiles(files);
+          } catch {
+            if (job === jobRef.current) setError("Could not create the sample images. You can still choose your own JPG or PNG files.");
+          } finally {
+            if (job === jobRef.current) setLoadingSample(false);
+          }
+        }}>Load three sample receipts</button>
+        <ol>
+          <li>Load the samples. The example selects Letter paper with Small margins.</li>
+          <li>Use the arrow buttons to put the receipts in your preferred order. Each becomes its own page.</li>
+          <li>Choose Download PDF. The result shows the actual file size generated by your browser, not an estimated saving.</li>
+          <li>Open images.pdf and check all three pages. The samples are deliberately low-resolution; use your original photos for important text.</li>
+        </ol>
+        <p>No account, payment, or added watermark is required. Real files stay on your device.
+          The PDF contains images, not searchable text: this tool does not perform OCR. Output size depends on the input,
+          and a larger source can produce a larger PDF. Device memory limits still apply.</p>
+      </section>
 
       <section className="prose tool-prose">
         <h2>Convert JPG and other images to one PDF</h2>
@@ -313,7 +396,7 @@ export default function PdfPage() {
         </p>
         <ul>
           <li><strong>1.</strong> Add your images — each one becomes a page.</li>
-          <li><strong>2.</strong> Drag the arrows to reorder pages into the sequence you want.</li>
+          <li><strong>2.</strong> Click or tap the arrow buttons to reorder pages into the sequence you want.</li>
           <li><strong>3.</strong> Choose a page size: "Fit to image" matches each page to its image (ideal for screenshots), while A4 and Letter center images on a standard page for printing.</li>
           <li><strong>4.</strong> Download the finished PDF.</li>
         </ul>

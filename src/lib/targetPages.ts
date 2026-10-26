@@ -26,7 +26,7 @@ export interface TargetPageConfig {
 const SHARED_FAQ = (kb: number): { q: string; a: string }[] => [
   {
     q: "Is my image uploaded to a server?",
-    a: "No. Compression happens entirely in your browser using the Canvas API — your image never leaves your device, which is also why it's instant.",
+    a: "No. Compression happens entirely in your browser using the Canvas API — your image is not uploaded. Processing time depends on the image and your device.",
   },
   {
     q: `What if my image can't reach ${kb} KB?`,
@@ -34,7 +34,7 @@ const SHARED_FAQ = (kb: number): { q: string; a: string }[] => [
   },
   {
     q: "Is this free? Is there a watermark?",
-    a: "Completely free, no watermark, no sign-up, no file limit. The site is supported by ads.",
+    a: "Free to use, with no watermark or sign-up. Large files and batches are limited by your browser and available memory. Advertising may help support the site.",
   },
 ];
 
@@ -86,12 +86,12 @@ export const TARGET_PAGES: TargetPageConfig[] = [
     title: "Compress Image to 50KB Online Free — Exact Size | PixelTools",
     description: "Shrink any photo to under 50KB free in your browser. Great for email signatures, web thumbnails, and online application forms. No upload required.",
     h1: "Compress image to 50 KB",
-    intro: "50 KB is the classic limit for email signature images, web thumbnails, and many government or job application portals. A photo straight off your phone is often 100× larger — this tool gets it under the limit in one step while keeping it as sharp as possible.",
+    intro: "Use this page when your upload form specifies a 50 KB maximum, or when you need a small thumbnail. Check the receiving site’s accepted format and minimum dimensions too: meeting the byte limit alone does not guarantee acceptance.",
     body: [
       {
         heading: "Common places you'll see a 50 KB cap",
         paragraphs: [
-          "50 KB is a sweet spot for small on-screen images: big enough to look crisp at thumbnail and signature sizes, small enough that a page full of them still loads instantly. That's why it turns up so often on forms and content systems.",
+          "A 50 KB budget can be useful for thumbnails or signature images. The appropriate dimensions and quality depend on the picture: fine text and detailed textures are harder to preserve than simple shapes.",
         ],
         bullets: [
           "Email signature logos and headshots.",
@@ -103,7 +103,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
       {
         heading: "Will a 50 KB image still look good?",
         paragraphs: [
-          "For anything shown small to medium on screen, yes. 50 KB in WebP comfortably holds a sharp image around 600–800 px wide — plenty for a signature, thumbnail, or profile photo. What it won't do is survive being blown up to full-screen or sent to print, because there simply isn't enough data for that.",
+          "Quality depends on the source and viewing size. A small thumbnail may remain useful at 50 KB, while text, hair, and detailed backgrounds can become blurred or blocky. Inspect the preview at the size it will be displayed, and check the output dimensions before downloading.",
           "If your result looks soft, it usually means the source was very large or highly detailed. Cropping to just the important part before compressing, or accepting slightly smaller dimensions, will sharpen things up. The live preview shows the exact result before you download, so you can judge it yourself.",
         ],
       },
@@ -117,7 +117,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
     faq: [
       {
         q: "Will a 50 KB photo still look good?",
-        a: "For on-screen use at small-to-medium sizes, yes — 50 KB is plenty for a sharp thumbnail or signature image. It won't hold print quality or full-screen detail.",
+        a: "It depends on the image and display size. Inspect faces, edges, and text in the preview; a thumbnail may be acceptable while a full-screen view reveals compression artifacts.",
       },
       {
         q: "How do I compress an image to 50kb online?",
@@ -228,7 +228,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
       {
         heading: "How much quality do you actually lose?",
         paragraphs: [
-          "Usually none that you can see. 500 KB in WebP holds a sharp 1920 px photo with room to spare, so on any screen the compressed version is essentially indistinguishable from the original. The savings come almost entirely from throwing away data your eyes can't perceive — not from visible degradation.",
+          "A 500 KB result may be sufficient for an on-screen photo, but visible quality depends on dimensions, image detail, and format. Compare edges, textures, and text in the preview rather than assuming the smaller file is indistinguishable from the original.",
           "The only time you'd notice is with heavy cropping afterwards or a large print, where the missing detail finally becomes visible. For web and on-screen use, 500 KB is effectively lossless in practice.",
         ],
       },
@@ -236,7 +236,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
     faq: [
       {
         q: "How much quality do I lose at 500 KB?",
-        a: "Usually none that you can see on screen. 500 KB in WebP comfortably holds a sharp 1920px photo. Only large prints or heavy cropping would reveal the difference.",
+        a: "Compression can change fine detail even on screen. Inspect the output at its intended display size, particularly faces, text, and textures.",
       },
       ...SHARED_FAQ(500),
     ],
@@ -249,7 +249,7 @@ export const TARGET_PAGES: TargetPageConfig[] = [
     title: "Compress Image to 1MB Online Free — Exact Size | PixelTools",
     description: "Compress an image to under 1 MB, then check its file size, format, and pixel dimensions against an upload form. Private, browser-based, and free.",
     h1: "Compress image to 1 MB",
-    intro: "Email providers, chat apps, and many forums cap uploads around 1 MB. Compress a photo, then check the actual file against the size, format, and pixel-dimension rules shown by the receiving form.",
+    intro: "Use this page when a form or attachment workflow specifies a 1 MB maximum. Compress a photo, then check the actual file against the size, format, and pixel-dimension rules shown by the receiving form.",
     body: [
       {
         heading: "When 1 MB is the limit",
@@ -266,8 +266,8 @@ export const TARGET_PAGES: TargetPageConfig[] = [
       {
         heading: "Why your phone photo is so much bigger than 1 MB",
         paragraphs: [
-          "Modern phone cameras capture 12–50 megapixels and often store extra data like HDR layers and depth maps. A single shot can easily be 3–8 MB. Almost none of that extra weight is visible once the image is viewed on a screen at normal size.",
-          "Recompressing to 1 MB keeps what your eyes actually see and discards the rest, so the result looks the same in a message or document while being a fraction of the size. At this generous target you can keep large dimensions (1920–2560 px) and still fit comfortably.",
+          "A high-resolution phone photo can be several megabytes. Reducing its dimensions and re-encoding can save space, but it also discards detail that may matter for reading text, cropping, or printing.",
+          "A 1 MB result is not guaranteed to look identical to the original. Compare the preview at its intended display size and check fine detail. If the receiving form also requires minimum pixel dimensions, verify those separately before submitting.",
         ],
       },
       {

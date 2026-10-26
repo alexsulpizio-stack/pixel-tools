@@ -19,7 +19,7 @@ const SIZES = [256, 512, 1024];
 const FAQ: { q: string; a: string }[] = [
   {
     q: "Do these QR codes expire?",
-    a: "Never. The QR code encodes your text directly — there's no shortener or tracking service in between, so it works forever and can't be taken down.",
+    a: "The code has no built-in expiry: it stores your text directly, without a PixelTools redirect. A linked website can still move, expire, or become unavailable. Test the destination before sharing.",
   },
   {
     q: "What can I encode?",
@@ -27,7 +27,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Which error correction level should I use?",
-    a: "M (15%) is a good default. Use H (30%) if the code will be printed small, displayed in poor conditions, or have a logo placed over the center.",
+    a: "M (15%) is a useful starting point. Higher correction adds redundancy but also makes the pattern denser. Keep a clear border and strong contrast, and scan-test the actual print size; higher correction does not guarantee a small or obscured code will scan.",
   },
   {
     q: "PNG or SVG?",
@@ -94,7 +94,7 @@ export default function QrPage() {
         <h1>QR code generator — free, no expiry, no tracking</h1>
         <p>
           Encode URLs, Wi-Fi credentials, or any text. Custom colors, print-ready SVG and high-res PNG. Generated
-          locally — nothing is sent to a server, and codes never expire.
+          locally — nothing is sent to a server, and codes have no built-in expiry (linked destinations can still change).
         </p>
       </section>
 
@@ -177,12 +177,12 @@ export default function QrPage() {
         <p>
           This generator creates <strong>static</strong> QR codes: your text or URL is encoded directly
           into the pattern, with no link shortener or tracking service in between. That means the code
-          works forever and can never be disabled by a third party — unlike "dynamic" codes from many
-          online services, which stop working if the service shuts down or you stop paying.
+          does not depend on a PixelTools subscription or redirect. If it contains a URL, the destination
+          still needs to remain available; changing a website address does not update an already printed code.
         </p>
         <ul>
           <li><strong>Content:</strong> paste a URL, or use prefixes for other types — <code>tel:</code> for phone, <code>mailto:</code> for email, or a <code>WIFI:</code> string to share network credentials.</li>
-          <li><strong>Error correction:</strong> M (15%) is a good default; choose H (30%) if the code will be printed small or have a logo over it.</li>
+          <li><strong>Error correction:</strong> start with M (15%). Higher correction makes a denser pattern; test the final size and keep the border clear.</li>
           <li><strong>Format:</strong> download PNG for screens and documents, or SVG for print, since it scales to any size without blurring.</li>
         </ul>
         <p>
