@@ -1,4 +1,4 @@
-# Search Console report — 2026-10-16
+# Search Console report — 2026-10-23
 
 Property: `sc-domain:usepixeltools.com`
 
@@ -10,84 +10,83 @@ Property: `sc-domain:usepixeltools.com`
 
 ## Sitemap health
 
-- ✅ `https://usepixeltools.com/sitemap.xml` — 39 URLs submitted · last downloaded 5 days ago
+- ✅ `https://usepixeltools.com/sitemap.xml` — 39 URLs submitted · last downloaded 3 days ago
 
 ## Index coverage
 
-🟢 **Indexed: 26 / 39** — AdSense-review green light at 15+ indexed
-- Crawled - currently not indexed: **9**
-- Discovered - currently not indexed: **3**
+🟢 **Indexed: 37 / 39** — AdSense-review green light at 15+ indexed
+- Discovered - currently not indexed: **1**
 - URL is unknown to Google: **1**
 
 _Still unknown to Google — request indexing on these first:_
-- `/guides/remove-exif-location-data-from-photos`
+- `/privacy`
 
 ## Totals
 
 | Window | Clicks | Impressions | CTR | Avg position |
 | --- | ---: | ---: | ---: | ---: |
-| Last 7 days | 0 | 166 | 0.0% | 54.1 |
-| Last 28 days | 0 | 1,097 | 0.0% | 37.0 |
+| Last 7 days | 0 | 169 | 0.0% | 57.8 |
+| Last 28 days | 0 | 952 | 0.0% | 34.0 |
 
 ## Top queries (last 28 days, by impressions)
 
 | Query | Impr. | Clicks | CTR | Avg pos |
 | --- | ---: | ---: | ---: | ---: |
-| combine images into pdf | 85 | 0 | 0.0% | 6.9 |
-| combine image to pdf | 39 | 0 | 0.0% | 6.7 |
-| favicon size | 29 | 0 | 0.0% | 10.6 |
+| combine images into pdf | 73 | 0 | 0.0% | 7.0 |
+| combine image to pdf | 33 | 0 | 0.0% | 7.0 |
+| favicon size | 28 | 0 | 0.0% | 10.0 |
 | favicon generator from image | 23 | 0 | 0.0% | 6.0 |
-| circle crop image online free | 13 | 0 | 0.0% | 8.3 |
-| crop image online | 13 | 0 | 0.0% | 78.3 |
+| remove location data from photos | 17 | 0 | 0.0% | 44.7 |
+| compress jpeg to 50kb | 13 | 0 | 0.0% | 78.5 |
 | favicon dimensions | 13 | 0 | 0.0% | 7.3 |
-| crop photo online | 12 | 0 | 0.0% | 84.9 |
-| favicon sizes | 11 | 0 | 0.0% | 25.4 |
-| crop image | 10 | 0 | 0.0% | 89.4 |
-| crop photo | 10 | 0 | 0.0% | 92.2 |
-| combine images into a pdf | 9 | 0 | 0.0% | 6.1 |
-| crop picture online | 9 | 0 | 0.0% | 32.2 |
+| hide faces remove metadata photos | 11 | 0 | 0.0% | 14.2 |
+| qr size reducer | 11 | 0 | 0.0% | 80.9 |
 | favicon generator from text | 9 | 0 | 0.0% | 6.2 |
 | image favicon | 9 | 0 | 0.0% | 10.2 |
 | compress image for email | 8 | 0 | 0.0% | 30.9 |
-| crop pictures online | 8 | 0 | 0.0% | 18.8 |
+| compress jpg to 50kb | 8 | 0 | 0.0% | 66.9 |
 | favicon image size | 8 | 0 | 0.0% | 24.9 |
-| image to pdf combine | 8 | 0 | 0.0% | 6.9 |
-| compress image to 1mb | 7 | 0 | 0.0% | 49.6 |
-| compress jpeg to 50kb | 7 | 0 | 0.0% | 77.4 |
-| crop picture | 7 | 0 | 0.0% | 90.6 |
-| image combine to pdf | 7 | 0 | 0.0% | 7.3 |
-| jpg compress 50 kb | 7 | 0 | 0.0% | 75.4 |
+| favicon sizes | 8 | 0 | 0.0% | 24.6 |
+| jpg compress 50 kb | 8 | 0 | 0.0% | 76.1 |
+| pixel compress | 8 | 0 | 0.0% | 86.8 |
+| reduce image file size without losing quality | 8 | 0 | 0.0% | 14.6 |
 | 50 kb photo size | 6 | 0 | 0.0% | 15.2 |
+| compress image to 50kb | 6 | 0 | 0.0% | 64.2 |
+| jpeg to jpg converter 50 kb | 6 | 0 | 0.0% | 79.8 |
+| jpg to single page pdf | 6 | 0 | 0.0% | 7.0 |
+| remove exif data | 6 | 0 | 0.0% | 57.7 |
+| compress image to 1mb | 5 | 0 | 0.0% | 52.8 |
+| crop pictures online | 5 | 0 | 0.0% | 9.8 |
 
 ## Top pages (last 28 days, by impressions)
 
 | Page | Impr. | Clicks | CTR | Avg pos |
 | --- | ---: | ---: | ---: | ---: |
-| /image-to-pdf | 214 | 0 | 0.0% | 7.8 |
-| /crop-image | 187 | 0 | 0.0% | 69.8 |
-| /favicon-generator | 185 | 0 | 0.0% | 13.5 |
-| /guides/reduce-image-file-size-for-email-and-web | 103 | 0 | 0.0% | 31.7 |
-| /guides/how-to-compress-jpg-to-50kb | 82 | 0 | 0.0% | 59.2 |
-| /compress-image-to-1mb | 66 | 0 | 0.0% | 43.5 |
-| /remove-exif | 63 | 0 | 0.0% | 44.2 |
-| /guides/how-to-compress-images-without-losing-quality | 45 | 0 | 0.0% | 72.0 |
-| /guides/resize-image-to-exact-dimensions | 41 | 0 | 0.0% | 64.9 |
-| /compress-image-to-50kb | 25 | 0 | 0.0% | 11.5 |
-| /compress-jpeg-to-50kb | 22 | 0 | 0.0% | 76.5 |
-| / | 18 | 0 | 0.0% | 51.7 |
+| /image-to-pdf | 175 | 0 | 0.0% | 7.5 |
+| /favicon-generator | 173 | 0 | 0.0% | 13.0 |
+| /guides/reduce-image-file-size-for-email-and-web | 112 | 0 | 0.0% | 36.7 |
+| /guides/how-to-compress-jpg-to-50kb | 102 | 0 | 0.0% | 61.8 |
+| /remove-exif | 97 | 0 | 0.0% | 40.6 |
+| /compress-image-to-1mb | 56 | 0 | 0.0% | 54.2 |
+| /guides/resize-image-to-exact-dimensions | 54 | 0 | 0.0% | 65.4 |
+| /guides/how-to-compress-images-without-losing-quality | 39 | 0 | 0.0% | 70.4 |
+| / | 24 | 0 | 0.0% | 42.9 |
+| /compress-jpeg-to-50kb | 24 | 0 | 0.0% | 75.6 |
+| /crop-image | 24 | 0 | 0.0% | 24.3 |
+| /compress-image-to-50kb | 22 | 0 | 0.0% | 11.0 |
+| /guides | 15 | 0 | 0.0% | 70.2 |
 | /guides/how-to-watermark-your-photos | 12 | 0 | 0.0% | 7.3 |
 | /image-converter | 10 | 0 | 0.0% | 14.6 |
-| /about | 9 | 0 | 0.0% | 6.8 |
-| /heic-to-jpg | 8 | 0 | 0.0% | 12.9 |
-| /guides | 6 | 0 | 0.0% | 56.5 |
-| /guides/jpeg-vs-png-vs-webp | 5 | 0 | 0.0% | 51.8 |
-| /contact | 4 | 0 | 0.0% | 9.5 |
+| /about | 7 | 0 | 0.0% | 5.9 |
+| /guides/jpeg-vs-png-vs-webp | 5 | 0 | 0.0% | 21.2 |
+| /resize-image | 5 | 0 | 0.0% | 16.4 |
+| /blur-image | 4 | 0 | 0.0% | 6.3 |
+| /contact | 4 | 0 | 0.0% | 22.3 |
 | /guides/convert-png-to-webp | 3 | 0 | 0.0% | 33.3 |
-| /resize-image | 3 | 0 | 0.0% | 6.3 |
-| /blur-image | 2 | 0 | 0.0% | 7.5 |
+| /heic-to-jpg | 3 | 0 | 0.0% | 27.7 |
+| /tools | 3 | 0 | 0.0% | 5.7 |
 | /guides/favicon-sizes-guide | 2 | 0 | 0.0% | 5.0 |
-| /guides/how-to-blur-part-of-an-image | 2 | 0 | 0.0% | 8.0 |
-| /guides/what-is-heic-and-how-to-convert-it | 2 | 0 | 0.0% | 5.0 |
+| /rotate-image | 2 | 0 | 0.0% | 4.0 |
 
 ## Opportunities — almost ranking (position 6–25)
 
@@ -95,21 +94,21 @@ These queries already show your site but sit just below page 1. A dedicated or s
 
 | Query | Impr. | Avg pos | CTR |
 | --- | ---: | ---: | ---: |
-| combine images into pdf | 85 | 6.9 | 0.0% |
-| combine image to pdf | 39 | 6.7 | 0.0% |
-| favicon size | 29 | 10.6 | 0.0% |
-| circle crop image online free | 13 | 8.3 | 0.0% |
+| combine images into pdf | 73 | 7.0 | 0.0% |
+| combine image to pdf | 33 | 7.0 | 0.0% |
+| favicon size | 28 | 10.0 | 0.0% |
 | favicon dimensions | 13 | 7.3 | 0.0% |
-| combine images into a pdf | 9 | 6.1 | 0.0% |
+| hide faces remove metadata photos | 11 | 14.2 | 0.0% |
 | favicon generator from text | 9 | 6.2 | 0.0% |
 | image favicon | 9 | 10.2 | 0.0% |
-| crop pictures online | 8 | 18.8 | 0.0% |
 | favicon image size | 8 | 24.9 | 0.0% |
-| image to pdf combine | 8 | 6.9 | 0.0% |
-| image combine to pdf | 7 | 7.3 | 0.0% |
+| favicon sizes | 8 | 24.6 | 0.0% |
+| reduce image file size without losing quality | 8 | 14.6 | 0.0% |
 | 50 kb photo size | 6 | 15.2 | 0.0% |
 | jpg to single page pdf | 6 | 7.0 | 0.0% |
-| photo 50 kb | 6 | 16.5 | 0.0% |
+| crop pictures online | 5 | 9.8 | 0.0% |
+| image combine to pdf | 5 | 7.0 | 0.0% |
+| image to pdf combine | 5 | 6.4 | 0.0% |
 
 ---
-_Generated 2026-10-19T19:06:43.484Z • window 2026-09-19 → 2026-10-16 (data lags ~3 days)._
+_Generated 2026-10-26T19:04:34.853Z • window 2026-09-26 → 2026-10-23 (data lags ~3 days)._
