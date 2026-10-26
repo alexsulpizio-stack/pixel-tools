@@ -7,31 +7,33 @@ export default function PrivacyPage() {
   return (
     <article className="prose">
       <h1>Privacy Policy</h1>
-      <p>Last updated: August 3, 2026</p>
+      <p>Last updated: October 26, 2026</p>
 
       <h2>Your files never leave your device</h2>
       <p>
         Every tool on PixelTools (image compression, favicon generation, QR codes, palette extraction, PDF conversion)
-        runs entirely in your web browser. The images and data you process are never uploaded to, stored on, or seen by
-        our servers — or anyone else's. We could not access your files even if we wanted to, because no file transfer
-        takes place.
+        runs entirely in your web browser. The tools do not upload the files or entered content you process to a processing server.
+        This is separate from the website requests and optional analytics or advertising described below.
+        If you deliberately attach a file to a public support issue, that file is shared with GitHub and anyone who can view it.
       </p>
 
       <h2>What we don't collect</h2>
       <p>
-        We do not require accounts, do not collect names or email addresses, and do not store any content you process
-        with our tools.
+        Our tools do not require an account, name, or email address, and do not store processed file contents on our servers.
+        Information you choose to share when contacting us through GitHub is handled through that service.
+        Do not post private documents or personal information in public issues.
       </p>
 
       <h2>Advertising and cookies</h2>
       <p>
-        PixelTools is free and supported by advertising. We may use Google AdSense or other ad partners to display ads.
-        Those partners may use cookies and similar technologies to serve ads based on your prior visits to this and
-        other websites.
+        PixelTools is free and may use Google AdSense to help support the site. When Google advertising services load,
+        Google and its partners may place or read cookies and use web beacons, IP addresses, and other identifiers
+        to deliver and measure ads, prevent fraud, and, depending on your choices, personalize advertising.
+        Your browser may share information such as the page URL, device/browser information, and IP address with Google.
       </p>
       <p>
         When advertising or optional analytics are enabled, PixelTools asks for your consent before loading those
-        services. You can decline optional measurement and personalized advertising in the consent prompt. Essential
+        services. You can decline these optional services in the consent prompt. Your choice is saved in browser local storage. Essential
         site functionality does not depend on accepting them.
       </p>
       <p>
@@ -46,6 +48,12 @@ export default function PrivacyPage() {
         .
       </p>
 
+      <p>
+        Read <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noreferrer">
+          how Google uses information from sites and apps that use its services
+        </a> for details about Google's data use and available controls.
+      </p>
+
       <h2>Affiliate links</h2>
       <p>
         Some guides include links to products or services we recommend. Those links may be affiliate links — if you
@@ -55,9 +63,10 @@ export default function PrivacyPage() {
 
       <h2>Analytics</h2>
       <p>
-        We may use consented, privacy-respecting aggregate analytics (such as page view counts and tool downloads) to
-        understand which tools are useful. This data is not used to identify you, and analytics are not loaded when you
-        decline optional measurement.
+        With your acceptance of optional services, we load Google Analytics to measure page views and tool events,
+        such as processing and downloads. Events may include file counts, sizes, formats, and tool settings,
+        but not the file contents. Google Analytics can use cookies and browser/device identifiers; this is not
+        a claim that all measurement is anonymous. The analytics script is not loaded when you decline the prompt.
       </p>
 
       <h2>Changes to this policy</h2>

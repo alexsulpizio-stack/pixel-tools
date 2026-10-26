@@ -14,10 +14,10 @@ interface Cleaned {
 }
 
 const FAQ = [
-  { q: "What metadata is removed?", a: "Re-encoding the image through a canvas discards all EXIF data — GPS coordinates, camera make and model, lens, exposure settings, and the original date and time." },
+  { q: "What metadata is removed?", a: "The tool draws the decoded image onto a canvas and exports a new JPEG or PNG without copying the original EXIF fields, such as GPS, camera, and capture-date data. It is not a metadata inspector; independently check the downloaded file if this is privacy-critical." },
   { q: "Why does this matter for privacy?", a: "Photos taken on phones often embed the exact GPS location and timestamp. Sharing them can unintentionally reveal where you live, work, or were at a given moment." },
-  { q: "Does it change how the photo looks?", a: "No visible change. Pixels are preserved; only the hidden metadata is dropped. Output is a clean JPEG or PNG." },
-  { q: "Are my images uploaded?", a: "Never. Stripping metadata happens entirely in your browser, which is exactly why it's safe for sensitive photos." },
+  { q: "Does it change how the photo looks?", a: "The image is re-encoded, not edited losslessly. PNG inputs remain PNG; other supported inputs become JPEG at 95% quality, with transparency flattened onto white. JPEG compression and browser color handling can change the appearance or file size." },
+  { q: "Are my images uploaded?", a: "No. Re-encoding happens in your browser. Removing EXIF does not hide information visible in the image, such as faces, addresses, or documents." },
 ];
 
 export default function RemoveExifPage() {
@@ -97,12 +97,12 @@ export default function RemoveExifPage() {
         </p>
         <ul>
           <li><strong>1.</strong> Drop in one or more photos.</li>
-          <li><strong>2.</strong> Each is instantly re-encoded, discarding all metadata while keeping the picture identical.</li>
+          <li><strong>2.</strong> Each is re-encoded as a new JPEG or PNG without copying the original EXIF fields.</li>
           <li><strong>3.</strong> Download the clean copies.</li>
         </ul>
         <p>
-          Because this runs locally, it's genuinely private — appropriate even for sensitive images. You
-          can also <Link to="/">compress</Link> or <Link to="/resize-image">resize</Link> the cleaned
+          Check the downloaded image for visible private details and use an independent metadata checker when
+          disclosure would be sensitive. Re-encoding is not a guarantee of anonymity. You can also <Link to="/">compress</Link> or <Link to="/resize-image">resize</Link> the cleaned
           photos before sharing.
         </p>
       </section>

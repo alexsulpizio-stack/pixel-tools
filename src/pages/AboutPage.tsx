@@ -17,16 +17,15 @@ export default function AboutPage() {
 
       <h2>Our mission</h2>
       <p>
-        Most "free" online image tools work by uploading your files to a remote server, processing them there, and
-        sending the result back. That means your personal photos, ID documents, and screenshots pass through — and are
-        often stored on — someone else's computer. We think that's unnecessary.
+        Image editing does not always need a server upload. PixelTools processes files locally so you can
+        prepare photos and screenshots without transferring their contents to a processing service.
       </p>
 
       <h2>How we build the tools</h2>
       <p>
         Each utility is designed around a specific job: preparing an image for a form, making a page load faster,
         fixing a format mismatch, or protecting private information before sharing. We keep the controls explicit and
-        show the output details that matter for that job, including file size, dimensions, format, ordering, or metadata.
+        show relevant output details such as file size, dimensions, format, and page ordering.
       </p>
       <p>
         The tools use standard browser capabilities such as the Canvas API and local file handling. That design keeps
@@ -36,8 +35,8 @@ export default function AboutPage() {
       <p>
         PixelTools does all of its work locally, inside your browser, using modern web technology (the Canvas API and
         related standards). Your files never leave your device. There are no uploads, no accounts, no watermarks, and
-        no file-size limits. This makes the tools both more private and noticeably faster, since there's no waiting on a
-        round trip to a server.
+        no processing-server round trip. Large files and batches are still limited by your browser and device memory;
+        processing time depends on the file and device.
       </p>
 
       <h2>What you can do here</h2>
@@ -46,13 +45,13 @@ export default function AboutPage() {
           <Link to="/">Compress, resize &amp; convert images</Link> (JPG, PNG, WebP) with batch processing
         </li>
         <li>
-          Compress an image to an <Link to="/compress-image-to-100kb">exact target file size</Link> for upload forms
+          Compress an image to a <Link to="/compress-image-to-1mb">target file-size limit</Link> for upload forms
         </li>
         <li>
           Generate a complete <Link to="/favicon-generator">favicon package</Link> from an image, letter, or emoji
         </li>
         <li>
-          Create <Link to="/qr-code-generator">QR codes</Link> that never expire and aren't tracked
+          Create <Link to="/qr-code-generator">static QR codes</Link> without a PixelTools tracking redirect or subscription expiry
         </li>
         <li>
           Extract a <Link to="/color-palette">color palette</Link> from any image
@@ -64,8 +63,8 @@ export default function AboutPage() {
 
       <h2>Who runs it</h2>
       <p>
-        PixelTools is an independent project built and maintained by a small independent team. It is funded by unobtrusive
-        advertising so that every tool can stay completely free to use. The source code is openly available on{" "}
+        PixelTools is an independent, open-source project. The tools are free to use, and advertising may help
+        support their maintenance. You can inspect the source, report issues, and follow changes on{" "}
         <a href="https://github.com/alexsulpizio-stack/pixel-tools" target="_blank" rel="noreferrer">
           GitHub
         </a>
